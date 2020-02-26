@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "notice": "/pages/notice/home/home",
+    "information": "/pages/information/home/home",
+    "signIn": "/pages/signIn/home/home",
+    "blog": "/pages/blog/home/home",
+    "mine": "/pages/mine/home/home"
+  }
 }
