@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
   <view slot="content">信息联盟</view>
 </cu-custom>
@@ -80,6 +81,36 @@
       </view>
       <view class="padding-xl">
         {{modelText}}
+=======
+<notice wx:if="{{PageCur=='notice'}}"></notice>
+<information wx:if="{{PageCur=='information'}}"></information>
+<signIn wx:if="{{PageCur=='signIn'}}"></signIn>
+<blog wx:if="{{PageCur=='blog'}}"></blog>
+<mine wx:if="{{PageCur=='mine'}}"></mine>
+
+<view  class="cu-bar tabbar bg-white foot">
+    <view class="action {{PageCur=='notice'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="notice">
+      <view class="cuIcon-noticefill"></view> 
+      公告
+    </view>
+   <view class="action {{PageCur=='information'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="information">
+      <view class="cuIcon-upload"></view> 
+      资料
+    </view>
+    <view class="action add-action {{PageCur=='signIn'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="signIn">
+      <button class="cu-btn cuIcon-locationfill bg-green shadow"></button>
+      签到
+    </view>
+    <view class="action {{PageCur=='blog'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="blog">
+      <view class="cuIcon-share">
+        <view class="cu-tag badge">99</view>
+      </view>
+      博客
+    </view>
+    <view class="action {{PageCur=='mine'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="mine">
+      <view class="cuIcon-my">
+        <view class="cu-tag badge"></view>
+>>>>>>> 5f36c8c0968e05d3d0559e1551ea7de179c74363
       </view>
     </view>
   </view>

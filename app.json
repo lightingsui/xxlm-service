@@ -1,7 +1,15 @@
 {
   "pages": [
     "pages/index/index",
+<<<<<<< HEAD
     "pages/main/main"
+=======
+    "pages/notice/home/home",
+    "pages/information/home/home",
+    "pages/signIn/home/home",
+    "pages/blog/home/home",
+    "pages/mine/home/home"
+>>>>>>> 5f36c8c0968e05d3d0559e1551ea7de179c74363
   ],
   "window": {
     "backgroundTextStyle": "light",
