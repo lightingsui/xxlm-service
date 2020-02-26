@@ -1,9 +1,6 @@
 {
-<<<<<<< HEAD
-  "usingComponents": {},
   "navigationStyle": "custom",
-  "navigationBarTitleText": ""
-=======
+  "navigationBarTitleText": "",
   "usingComponents": {
     "notice": "/pages/notice/home/home",
     "information": "/pages/information/home/home",
@@ -11,5 +8,4 @@
     "blog": "/pages/blog/home/home",
     "mine": "/pages/mine/home/home"
   }
->>>>>>> 5f36c8c0968e05d3d0559e1551ea7de179c74363
 }
