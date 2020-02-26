@@ -1,75 +1,32 @@
-<cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
-  <view slot="content">信息联盟</view>
-</cu-custom>
-<view class="container">
+<notice wx:if="{{PageCur=='notice'}}"></notice>
+<information wx:if="{{PageCur=='information'}}"></information>
+<signIn wx:if="{{PageCur=='signIn'}}"></signIn>
+<blog wx:if="{{PageCur=='blog'}}"></blog>
+<mine wx:if="{{PageCur=='mine'}}"></mine>
 
-  <view class="login-icon">
-    <!-- <image class="login-img" src="../../images/back.jpg"></image> -->
-    <swiper class="login-img" indicator-dots="true" autoplay="true" interval="4000" duration="200">
-      <block wx:for="{{background}}" wx:key="*this">
-        <swiper-item>
-          <image class="img-cls" src="{{item}}"></image>
-        </swiper-item>
-      </block>
-    </swiper>
-
+<view  class="cu-bar tabbar bg-white foot">
+    <view class="action {{PageCur=='notice'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="notice">
+      <view class="cuIcon-noticefill"></view> 
+      公告
+    </view>
+   <view class="action {{PageCur=='information'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="information">
+      <view class="cuIcon-upload"></view> 
+      资料
+    </view>
+    <view class="action add-action {{PageCur=='signIn'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="signIn">
+      <button class="cu-btn cuIcon-locationfill bg-green shadow"></button>
+      签到
+    </view>
+    <view class="action {{PageCur=='blog'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="blog">
+      <view class="cuIcon-share">
+        <view class="cu-tag badge">99</view>
+      </view>
+      博客
+    </view>
+    <view class="action {{PageCur=='mine'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="mine">
+      <view class="cuIcon-my">
+        <view class="cu-tag badge"></view>
+      </view>
+      我的
+    </view>
   </view>
-
-  <view class="login-from">
-
-    <!--账号-->
-    <view class="inputView">
-
-      <image class="nameImage" src="../../icon/username.png"></image>
-
-      <label class="loginLab">账号</label>
-
-      <input class="inputText" placeholder="请输入账号" bindinput="phoneInput" />
-
-    </view>
-    <view class="line"></view>
-
-
-
-    <!--密码-->
-
-    <view class="inputView">
-
-      <image class="keyImage" src="../../icon/password.png"></image>
-
-      <label class="loginLab">密码</label>
-
-      <input class="inputText" password="true" placeholder="请输入密码" bindinput="passwordInput" />
-
-    </view>
-
-
-    <view class="cu-form-group" style="background-color: rgb(242, 242, 242)">
-      <radio-group bindchange="userChange">
-        <text style="font-size: 13px; color:rgb(84, 84, 84)">普通用户</text>
-        <radio class="radio" value="0" style="left: 10rpx" checked></radio>
-
-        <text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-
-        <text decode="{{true}}" style="font-size: 13px; color:rgb(84, 84, 84)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理员&nbsp;&nbsp;&nbsp;</text>
-        <radio class="radio" value="1"></radio>
-      </radio-group>
-
-    </view>
-
-
-
-    <!--按钮-->
-
-    <view class="loginBtnView">
-
-      <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button>
-
-    </view>
-
-  </view>
-</view>
-
-<view class=" text-center">
-  <text>Copyright © 2020 隋亮亮 赵如冰</text>
-</view>

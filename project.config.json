@@ -59,6 +59,13 @@
 					"id": -1,
 					"name": "pages/notice/home/home",
 					"pathName": "pages/notice/home/home",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/nav/nav",
+					"pathName": "pages/nav/nav",
 					"scene": null
 				}
 			]

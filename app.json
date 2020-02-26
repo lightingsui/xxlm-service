@@ -5,7 +5,8 @@
     "pages/information/home/home",
     "pages/signIn/home/home",
     "pages/blog/home/home",
-    "pages/mine/home/home"
+    "pages/mine/home/home",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
