@@ -4,80 +4,58 @@
 
 <scroll-view scroll-x class="bg-white nav">
   <view class="flex text-center">
-    <view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{2}}" wx:key="{{index}}" bindtap="tabSelect" data-id="{{index}}">
-      Tab
+    <view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{tabArray}}" wx:key="{{index}}" bindtap="tabSelect" data-id="{{index}}">
+      {{item.tab}}
     </view>
   </view>
 </scroll-view>
 
-
-<view class="box">
-  <view class="cu-card article {{isCard?'no-card':''}}">
-    <view class="cu-item shadow">
-      <view class="title">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
-      </view>
-      <view class="content">
-        <view class="desc">
-          <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-          <view class="margin-top-sm flex justify-between">
-            <view>发表者</view>
-            <view class="text-gray text-df">2018年12月4日</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view class="cu-card article {{isCard?'no-card':''}}">
-    <view class="cu-item shadow">
-      <view class="title">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
-      </view>
-      <view class="content">
-        <view class="desc">
-          <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-          <view class="margin-top-sm flex justify-between">
-            <view>发表者</view>
-            <view class="text-gray text-df">2018年12月4日</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view class="cu-card article {{isCard?'no-card':''}}">
-    <view class="cu-item shadow">
-      <view class="title">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
-      </view>
-      <view class="content">
-        <view class="desc">
-          <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-          <view class="margin-top-sm flex justify-between">
-            <view>发表者</view>
-            <view class="text-gray text-df">2018年12月4日</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view class="cu-card article {{isCard?'no-card':''}}">
-    <view class="cu-item shadow">
-      <view class="title">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
-      </view>
-      <view class="content">
-        <view class="desc">
-          <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-          <view class="margin-top-sm flex justify-between">
-            <view>发表者</view>
-            <view class="text-gray text-df">2018年12月4日</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
+<view class="flex flex-direction">
+  <button class="cu-btn bg-gradual-pink margin-tb-sm  publish" bindtap="publish">
+  <view class="cuIcon-roundadd" style="font-size:35rpx"></view>
+  发表
+  </button>
 </view>
 
+
+<block wx:if="{{TabCur==0}}">
+  <view class="box">
+    <view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{notice}}">
+      <view class="cu-item shadow" bindtap="noticeDetial"  data-index="{{index}}">
+        <view class="title">
+          <view class="text-cut">{{item.title}}</view>
+        </view>
+        <view class="content">
+          <view class="desc">
+            <view class="text-content">{{item.text}}</view>
+            <view class="margin-top-sm flex justify-between">
+              <view>{{item.author}}</view>
+              <view class="text-gray text-df">{{item.date}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<block wx:else>
+   <view class="box" bindtap="noticeDetial">
+    <view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{homework}}">
+      <view class="cu-item shadow"  bindtap="homeworkDetial"  data-index="{{index}}">
+        <view class="title">
+          <view class="text-cut">{{item.title}}</view>
+        </view>
+        <view class="content">
+          <view class="desc">
+            <view class="text-content">{{item.text}}</view>
+            <view class="margin-top-sm flex justify-between">
+              <view>{{item.author}}</view>
+              <view class="text-gray text-df">{{item.date}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>

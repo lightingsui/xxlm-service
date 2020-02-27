@@ -1,3 +1,36 @@
 <cu-custom bgColor="bg-gradual-pink">
 	<view slot="content">资料</view>
 </cu-custom>
+
+
+<view class="cu-bar search bg-white">
+    <view class="search-form round">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="搜索资料" confirm-type="search"></input>
+    </view>
+   
+</view>
+
+<!-- 
+<view class="grid col-5 padding-sm">
+  <view class="margin-tb-sm text-center">
+    <button class="cu-btn line-pink round">新增</button>
+  </view>
+</view>
+
+
+
+<view class="grid col-5 padding-sm">
+  <view class="margin-tb-sm text-center">
+    <button class="cu-btn line-pink round">新增</button>
+  </view>
+</view>
+
+<button class="padding-sm">新增</button> -->
+
+<!-- 
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{10}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    Tab{{index}}
+  </view>
+</scroll-view> -->
