@@ -17,7 +17,6 @@
   </button>
 </view>
 
-
 <block wx:if="{{TabCur==0}}">
   <view class="box">
     <view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{notice}}">
