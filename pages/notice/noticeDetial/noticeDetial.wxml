@@ -5,18 +5,20 @@
 
 <view class="bg-white">
   <view class="solids-bottom padding-xs flex align-center">
-    <view class="flex-sub text-left">
-      <view class="title solid-bottom text-xxl text-black padding">{{items[0].dTitle}}</view>
-      <view class="margin-top-sm flex justify-between">
-        <view class="text-black padding-left">{{items[0].dAuthor}}</view>
-        <view class="text-gray text-df padding-right">{{items[0].dDate}}</view>
+    <view class="text-left">
+      <view class="padding">
+          <text class="title text-xxl text-black" selectable="true">{{items[0].dTitle}}</text>
       </view>
-      <view class="padding solid-bottom text-xl flex justify-center">
+      <view class=" flex justify-start padding-left">
+        <!-- <text class="text-black padding-left" selectable="true">{{items[0].dAuthor}}</text> -->
+        <text class="text-gray text-df" selectable="true">{{items[0].dDate}}</text>
+      </view>
+      <view class="padding text-xl flex justify-center" style="margin-top:-50rpx">
         <view class="content">
           <view class="desc">
-            <view class="text-content">
+            <text class="text-content" selectable="true">
             {{items[0].dText}}
-            </view>
+            </text>
           </view>
         </view>
       </view>

@@ -10,51 +10,28 @@
   </view>
 </scroll-view>
 
-<view class="flex flex-direction">
+<view class="flex flex-direction" wx:if="{{manager}}">
   <button class="cu-btn bg-gradual-pink margin-tb-sm  publish" bindtap="publish">
   <view class="cuIcon-roundadd" style="font-size:35rpx"></view>
   发表
   </button>
 </view>
 
-<block wx:if="{{TabCur==0}}">
-  <view class="box">
-    <view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{notice}}">
-      <view class="cu-item shadow" bindtap="noticeDetial"  data-index="{{index}}">
-        <view class="title">
-          <view class="text-cut">{{item.title}}</view>
-        </view>
-        <view class="content">
-          <view class="desc">
-            <view class="text-content">{{item.text}}</view>
-            <view class="margin-top-sm flex justify-between">
-              <view>{{item.author}}</view>
-              <view class="text-gray text-df">{{item.date}}</view>
-            </view>
+<view class="box">
+  <view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{notice}}">
+    <view class="cu-item shadow" bindtap="noticeDetial"  data-index="{{index}}">
+      <view class="title">
+        <view class="text-cut">{{item.title}}</view>
+      </view>
+      <view class="content">
+        <view class="desc">
+          <view class="text-content">{{item.text}}</view>
+          <view class="margin-top-sm flex justify-between">
+            <!-- <view>{{item.author}}</view> -->
+            <view class="text-gray text-df">{{item.date}}</view>
           </view>
         </view>
       </view>
     </view>
   </view>
-</block>
-
-<block wx:else>
-   <view class="box" bindtap="noticeDetial">
-    <view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{homework}}">
-      <view class="cu-item shadow"  bindtap="homeworkDetial"  data-index="{{index}}">
-        <view class="title">
-          <view class="text-cut">{{item.title}}</view>
-        </view>
-        <view class="content">
-          <view class="desc">
-            <view class="text-content">{{item.text}}</view>
-            <view class="margin-top-sm flex justify-between">
-              <view>{{item.author}}</view>
-              <view class="text-gray text-df">{{item.date}}</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-</block>
+</view>

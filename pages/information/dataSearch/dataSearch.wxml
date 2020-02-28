@@ -1,0 +1,11 @@
+<view class="cu-bar search bg-white">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="搜索资料" confirm-type="search" bindtap="search"></input>
+  </view>
+  <view class="flex" >
+      <button class="cu-btn bg-gradual-pink  margin-tb-sm round" bindtap="publish" style="width:120rpx;margin-right:20rpx"> 
+      搜索
+      </button>
+  </view>
+</view>

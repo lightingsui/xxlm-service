@@ -4,7 +4,7 @@
 
 Page({
   data: {
-    PageCur: 'notice'
+    PageCur: 'information'
   },
   NavChange(e) {
     this.setData({
