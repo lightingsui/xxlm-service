@@ -1,0 +1,18 @@
+.info-search {
+  color:#888;
+  font-size:28rpx;
+}
+
+.box {
+  margin-top: 200rpx;
+  margin-bottom: 120rpx;
+}
+
+
+.infoTitle {
+  font-size:30rpx
+}
+
+.infoText {
+  color:#888
+}
