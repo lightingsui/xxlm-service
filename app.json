@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/nav/nav",
     "pages/notice/home/home",
     "pages/information/home/home",
     "pages/signIn/home/home",
     "pages/blog/home/home",
-    "pages/mine/home/home",
-    "pages/index/index"
+    "pages/mine/home/home"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
