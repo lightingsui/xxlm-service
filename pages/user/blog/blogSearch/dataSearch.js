@@ -1,21 +1,8 @@
 Page({
   data: {
-    TabCur: 0,
-    scrollLeft:0,
+    inputSearch:'',
 
-    isSelf:true,
-
-    //tab
-    tabArray: [
-      {tab: '最新'},
-      {tab: 'Java'},
-      {tab: 'Python'},
-      {tab: '前端'},
-      {tab: '数据库'},
-      {tab: '区块链'},
-      {tab: '人工智能'},
-      {tab: '移动开发'}
-    ],
+    card:false,
 
     //数组
     information: [
@@ -49,48 +36,24 @@ Page({
    */
   onLoad: function(options) {
 
-    //发送请求加载 tabArray, information 数组
-
-  },
-
-  tabSelect(e) {
-    this.setData({
-      TabCur: e.currentTarget.dataset.id,
-      scrollLeft: (e.currentTarget.dataset.id-1)*60
-    })
-
-    console.log(this.data.TabCur)
-    //发送请求加载 information
-  },
-
-  share:function() {
-    wx.navigateTo({
-      url: '/pages/user/blog/blogPublish/dataPublish',
-    })
   },
 
   search:function() {
-    wx.navigateTo({
-      url: '/pages/user/blog/blogSearch/dataSearch',
-    })
-  },
-  
-  showModal(e) {
+
+    console.log(this.data.inputSearch);
+
+    //发送请求查询
+
     this.setData({
-      modalName: e.currentTarget.dataset.target
-    })
-  },
-  hideModal(e) {
-    this.setData({
-      modalName: null
+      card:true,
     })
   },
 
-  infoConfirm:function(e){
+  inputSearch:function(e){
+    // console.log(e)
     this.setData({
-      modalName: null
+      inputSearch:e.detail.value
     })
-
-    //发送请求删除数据
   }
+
 })
