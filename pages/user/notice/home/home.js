@@ -98,7 +98,7 @@ Page({
     wx.navigateTo({
       url: '/pages/user/notice/noticePublish/noticePublish'
     })
-  }
+  },
 })
 
 

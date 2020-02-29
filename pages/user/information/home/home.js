@@ -3,6 +3,8 @@ Page({
     TabCur: 0,
     scrollLeft:0,
 
+    isSelf:true,
+
     //tab
     tabArray: [
       {tab: '最新'},
@@ -71,5 +73,24 @@ Page({
     wx.navigateTo({
       url: '/pages/user/information/dataSearch/dataSearch',
     })
+  },
+  
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
+  infoConfirm:function(e){
+    this.setData({
+      modalName: null
+    })
+
+    //发送请求删除数据
   }
 })

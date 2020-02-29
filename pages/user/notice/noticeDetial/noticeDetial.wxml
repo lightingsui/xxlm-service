@@ -10,9 +10,9 @@
           <text class="title text-xxl text-black" selectable="true">{{items[0].dTitle}}</text>
       </view>
       <view class=" flex justify-between padding-left padding-right">
-              <text class="text-gray text-df" selectable="true">{{items[0].dDate}}</text>
-
-        <view class="text-gray">
+        <text class="text-gray text-df" selectable="true">{{items[0].dDate}}</text>
+        <view class="text-gray flex">
+          <view class="cuIcon-delete margin-right" wx:if="{{isSelf}}" bindtap="showModal" data-target="DialogModal1"></view>
           <text class="cuIcon-attentionfill"></text> {{items[0].dHits}}
         </view>
         <!-- <text class="text-black padding-left" selectable="true">{{items[0].dAuthor}}</text> -->
@@ -25,6 +25,28 @@
             </text>
           </view>
         </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 删除确认模态框 -->
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">删除确认</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      确定删除该公告吗？
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal" style="width:150rpx;margin-right:20rpx">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="hideModal" style="width:150rpx">确定</button>
       </view>
     </view>
   </view>

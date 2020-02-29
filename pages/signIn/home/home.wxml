@@ -1,3 +1,0 @@
-<cu-custom bgColor="bg-gradual-pink">
-	<view slot="content">签到</view>
-</cu-custom>
