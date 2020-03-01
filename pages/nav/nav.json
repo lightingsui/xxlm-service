@@ -2,10 +2,10 @@
   "navigationStyle": "custom",
   "navigationBarTitleText": "",
   "usingComponents": {
-    "notice": "/pages/notice/home/home",
-    "information": "/pages/information/home/home",
-    "signIn": "/pages/signIn/home/home",
-    "blog": "/pages/blog/home/home",
-    "mine": "/pages/mine/home/home"
+    "notice": "/pages/user/notice/home/home",
+    "information": "/pages/user/information/home/home",
+    "signIn": "/pages/user/signIn/home/home",
+    "blog": "/pages/user/blog/home/home",
+    "mine": "/pages/user/mine/home/home"
   }
 }

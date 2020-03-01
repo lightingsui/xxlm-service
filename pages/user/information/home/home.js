@@ -3,6 +3,8 @@ Page({
     TabCur: 0,
     scrollLeft:0,
 
+    isSelf:true,
+
     //tab
     tabArray: [
       {tab: '最新'},
@@ -17,6 +19,20 @@ Page({
 
     //数组
     information: [
+      {
+        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
+        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
+        link:'https://www.baidu.com',
+        author:'发表者',
+        date:'2018年12月4日'
+      },
+      {
+        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
+        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
+        link:'https://www.baidu.com',
+        author:'发表者',
+        date:'2018年12月4日'
+      },
       {
         title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
         text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
@@ -47,25 +63,34 @@ Page({
     //发送请求加载 information
   },
 
+  share:function() {
+    wx.navigateTo({
+      url: '/pages/user/information/dataPublish/dataPublish',
+    })
+  },
+
   search:function() {
     wx.navigateTo({
-      url: '/pages/information/dataSearch/dataSearch',
+      url: '/pages/user/information/dataSearch/dataSearch',
+    })
+  },
+  
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
     })
   },
 
-  publish:function() {
-    wx.navigateTo({
-      url: '/pages/information/dataPublish/dataPublish',
+  infoConfirm:function(e){
+    this.setData({
+      modalName: null
     })
-  },
 
-  search:function(e) {
-    console.log(e);
-  },
-
-  inputFocus:function(e) {
-    wx.navigateTo({
-      url: '/pages/information/dataSearch/dataSearch',
-    })
+    //发送请求删除数据
   }
 })

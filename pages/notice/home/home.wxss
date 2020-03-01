@@ -1,8 +1,0 @@
-.box {
-  margin-bottom: 15%;
-}
-
-.publish {
-  width:690rpx!important;
-  margin-bottom: 0;
-}

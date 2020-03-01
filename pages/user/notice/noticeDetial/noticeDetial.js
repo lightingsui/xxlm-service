@@ -3,7 +3,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: []
+    items: [],
+
+    isSelf:true,
 
   },
 
@@ -15,5 +17,16 @@ Page({
     this.setData({ items: this.data.items });
 
     console.log(this.data.items)
+  },
+
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
   },
 })

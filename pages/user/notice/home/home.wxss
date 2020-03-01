@@ -1,0 +1,16 @@
+.notice-scrool {
+  position:fixed;z-index:10;
+}
+
+.notice-publish {
+  margin-top:100rpx;z-index:0;
+}
+
+.noticeBox {
+  margin-bottom: 15%;
+}
+
+.publish {
+  width:690rpx!important;
+  margin-bottom: 0;
+}

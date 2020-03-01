@@ -17,25 +17,25 @@ Page({
       {
         title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
         text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        author:'发表者',
+        hits:'10',
         date:'2018年12月4日'
       },
       {
         title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
         text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        author:'发表者',
+        hits:'10',
         date:'2018年12月4日'
       },
       {
         title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
         text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        author:'发表者',
+        hits:'10',
         date:'2018年12月4日'
       },
       {
         title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
         text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        author:'发表者',
+        hits:'10',
         date:'2018年12月4日'
       }
     ],
@@ -73,51 +73,32 @@ Page({
   //公告详情
   noticeDetial: function(e) {
 
-    console.log(e.currentTarget.dataset.index);
+    // console.log(e.currentTarget.dataset.index);
     let i = e.currentTarget.dataset.index;
   
     var item = {
       dTitle: this.data.notice[i].title,
       dText: this.data.notice[i].text,
-      // dAuthor: this.data.notice[i].author,
+      dHits: this.data.notice[i].hits,
       dDate: this.data.notice[i].date
     };
 
-    console.log(item);
+    // console.log(item);
 
     wx.setStorageSync("DetailItem", item);
 
     wx.navigateTo({
-      url: '/pages/notice/noticeDetial/noticeDetial'
+      url: '/pages/user/notice/noticeDetial/noticeDetial'
     })
   },
 
-  //作业详情
-  homeworkDetial: function(e) {
-    let i = e.currentTarget.dataset.index;
-  
-    var item = {
-      dTitle: this.data.homework[i].title,
-      dText: this.data.homework[i].text,
-      // dAuthor: this.data.homework[i].author,
-      dDate: this.data.homework[i].date
-    };
-
-    console.log(item);
-
-    wx.setStorageSync("DetailItem", item);
-
-    wx.navigateTo({
-      url: '/pages/notice/noticeDetial/noticeDetial'
-    })
-  },
 
   //发表
   publish:function() {
     wx.navigateTo({
-      url: '/pages/notice/noticePublish/noticePublish'
+      url: '/pages/user/notice/noticePublish/noticePublish'
     })
-  }
+  },
 })
 
 
