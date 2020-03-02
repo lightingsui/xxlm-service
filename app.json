@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/nav/nav",
+    "pages/manager/nav/nav",
+    "pages/user/nav/nav",
     "pages/user/notice/home/home",
     "pages/user/information/home/home",
     "pages/user/signIn/home/home",
@@ -8,6 +9,11 @@
     "pages/user/mine/home/home",
     "pages/user/index/index"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

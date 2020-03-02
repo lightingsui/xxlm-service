@@ -4,6 +4,8 @@
 <blog wx:if="{{PageCur=='blog'}}"></blog>
 <mine wx:if="{{PageCur=='mine'}}"></mine>
 
+
+
 <view  class="cu-bar tabbar bg-white foot">
     <view class="action {{PageCur=='notice'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="notice">
       <view class="cuIcon-noticefill"></view> 

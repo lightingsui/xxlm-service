@@ -40,7 +40,7 @@
       </view>
 
       <view class="cu-form-group"> 
-        <view >{{item.author}}</view>
+        <view class="text-gray">{{item.author}}</view>
         <view class="text-gray text-df">{{item.date}}</view>
       </view>
 
