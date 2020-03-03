@@ -1,0 +1,65 @@
+<cu-custom bgColor="bg-gradual-pink"  isBack="{{true}}">
+  <view slot="backText">返回</view>
+	<view slot="content">资料分享</view>
+</cu-custom>
+
+<view class="cu-bar search bg-white" style="position:fixed;width:100%">
+  <view class="search-form round" bindtap="search">
+    <view class="cuIcon-search"></view>
+    <view class="info-search">博客搜索</view>
+  </view>
+</view>
+
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}" style="position:fixed;margin-top:100rpx">
+  <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{tabArray}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    {{item.tab}}
+  </view>
+</scroll-view>
+
+<view class="box">
+  <view class="cu-card dynamic {{isCard?'no-card':''}}" wx:for="{{information}}">
+    <view class="cu-item shadow">    
+
+      <view class="cu-form-group"> 
+        <text class="text-black text-bold infoTitle" selectable="true">{{item.title}}</text>
+        <view class="cuIcon-delete" bindtap="showModal" data-target="DialogModal1"></view>
+      </view>
+
+      <view class="cu-form-group align-center"> 
+        <text class="padding-top-sm padding-bottom-sm infoText" selectable="true">{{item.text}}</text>
+      </view>
+
+      <view class="cu-form-group align-center"> 
+        <!-- <textarea maxlength="-1" bindinput="textInput" value="{{item.link}}" style="height:30rpx"></textarea> -->
+        <text class="padding-top-sm padding-bottom-sm" selectable="true">{{item.link}}</text>
+      </view>
+
+      <view class="cu-form-group"> 
+        <view class="text-gray">{{item.author}}</view>
+        <view class="text-gray text-df">{{item.date}}</view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+<!-- 删除确认模态框 -->
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">删除确认</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      确定删除该条资料分享吗？
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal" style="width:150rpx;margin-right:20rpx">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="infoConfirm" style="width:150rpx">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

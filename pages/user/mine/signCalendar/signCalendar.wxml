@@ -1,0 +1,4 @@
+<cu-custom bgColor="bg-gradual-pink"  isBack="{{true}}">
+  <view slot="backText">返回</view>
+	<view slot="content">签到月历</view>
+</cu-custom>

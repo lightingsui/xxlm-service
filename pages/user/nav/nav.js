@@ -1,6 +1,6 @@
 Page({
   data: {
-    PageCur: 'signIn',
+    PageCur: 'mine',
   },
   NavChange(e) {
     this.setData({
