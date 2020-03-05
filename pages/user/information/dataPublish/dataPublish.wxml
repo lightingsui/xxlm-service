@@ -4,7 +4,7 @@
 </cu-custom>
 
 <view class="cu-card dynamic {{isCard?'no-card':''}}">
-  <view class="cu-item shadow" style="height:1130rpx">
+  <view class="cu-item shadow" style="height:1145rpx">
 
     <view class="cu-list menu-avatar">
       <view class="cu-item">
@@ -41,7 +41,7 @@
 
 
      <view class="cu-form-group">
-      <view class="flex solid-bottom justify-center">
+      <view class="flex justify-center">
           <button class="cu-btn bg-gradual-pink  margin-tb-sm round" style="width:640rpx" bindtap="publish">
           分享
           </button>

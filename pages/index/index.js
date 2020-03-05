@@ -72,9 +72,8 @@ Page({
       //   modelTitle: "提示",
       //   modelText: "用户名或密码不能为空"
       // })
-
       wx.reLaunch({
-        url: '../user/nav'
+        url: '/manager/nav'
       })
 
     } else {
@@ -90,7 +89,7 @@ Page({
 
 
       wx.redirectTo({
-        url: '../user/nav'
+        url: '../user/signln'
       })
 
     }
@@ -100,7 +99,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      
   },
 
   /**

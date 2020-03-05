@@ -29,9 +29,9 @@
           <view class="margin-top-sm flex justify-between">
             <!-- <view>{{item.author}}</view> -->
             <view class="text-gray text-df">{{item.date}}</view>
-            <view class="text-gray flex">
+            <!-- <view class="text-gray flex">
               <text class="cuIcon-attentionfill"></text> {{item.hits}}
-            </view>
+            </view> -->
           </view>
         </view>
       </view>
