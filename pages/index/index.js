@@ -74,7 +74,7 @@ Page({
       // })
 
       wx.reLaunch({
-        url: '../nav/nav'
+        url: '../user/nav'
       })
 
     } else {
@@ -90,7 +90,7 @@ Page({
 
 
       wx.redirectTo({
-        url: '../nav/nav'
+        url: '../user/nav'
       })
 
     }
