@@ -16,7 +16,7 @@ Page({
     this.data.items.push(wx.getStorageSync("DetailItem"));
     this.setData({ items: this.data.items });
 
-    console.log(this.data.items)
+    // console.log(this.data.items)
   },
 
   showModal(e) {
@@ -29,4 +29,10 @@ Page({
       modalName: null
     })
   },
+
+  infoConfirm:function() {
+    this.setData({
+      modalName: null
+    })
+  }
 })

@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "notice": "/pages/user/notice/home/home",
+    "information": "/pages/user/information/home/home",
+    "attendance": "/pages/manager/attendance/attendance",
+    "blog": "/pages/user/blog/home/home",
+    "mine": "/pages/manager/mine/home/home"
+  }
+}

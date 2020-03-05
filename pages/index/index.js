@@ -74,7 +74,7 @@ Page({
       // })
 
       wx.reLaunch({
-        url: '../nav/nav'
+        url: '../user/nav/nav'
       })
 
     } else {
@@ -90,7 +90,7 @@ Page({
 
 
       wx.redirectTo({
-        url: '../nav/nav'
+        url: '../user/nav/nav'
       })
 
     }
@@ -100,7 +100,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      wx.request({
+        url: 'https://api.lightingsui.com/test/selectall',
+        success: function (data, statusCode) {
+          console.log(data);
+          console.log(statusCode);
 
+        }
+      })
   },
 
   /**

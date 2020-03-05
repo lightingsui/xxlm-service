@@ -28,7 +28,7 @@ page {
 /*表单内容*/
 
 .login-from {
-  margin-top: 15%;
+  margin-top: 20px;
   flex: auto;
   height: 100%;
 }
@@ -100,8 +100,4 @@ page {
   
   font-size: 13px;
   color: #808080
-}
-
-.text-center {
-  color: #99A3A4;
 }
