@@ -7,7 +7,8 @@
     "pages/user/information/home/home",
     "pages/user/signIn/home/home",
     "pages/user/blog/home/home",
-    "pages/user/mine/home/home"
+    "pages/user/mine/home/home",
+    "pages/manager/mine/home/home"
   ],
   "permission": {
     "scope.userLocation": {

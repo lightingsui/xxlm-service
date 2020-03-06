@@ -9,7 +9,7 @@
     <view class="cu-item shadow padding">
       <view class="flex justify-between text-xl padding">
         <view>已在考勤范围内</view>
-        <view class="refresh" bindtap="get">刷新</view> 
+        <view class="refresh" bindtap="geta">刷新</view> 
       </view>
       <view class="flex justify-center padding">
         <button class="cu-btn bg-gradual-pink lg round" style="width:690rpx" bindtap="signIn">{{sign}}</button>

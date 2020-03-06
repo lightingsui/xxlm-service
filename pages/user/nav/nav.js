@@ -9,8 +9,11 @@ Page({
   },
 
   onLoad: function(options) {
-
+    
   },
+
+  onShow:function() {
+  }
 
   // data: {
   //   motto: 'Hello World',

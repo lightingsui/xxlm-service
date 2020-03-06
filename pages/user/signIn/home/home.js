@@ -1,11 +1,33 @@
-var app = getApp()
-
-Page({
+Component({
+  options: {
+    styleIsolation: 'shared'
+  },
+  pageLifetimes: {
+    created: function() {
+      
+    },
+    show: function () {
+      // 页面被展示
+      this.geta();
+      wx.request({
+        url: 'https://www.baidu.com',
+        success:function(res) {
+            console.log(res)
+        }
+      })
+    },
+    hide: function () {
+      // 页面被隐藏
+    },
+    resize: function (size) {
+      // 页面尺寸变化
+    }
+  },
   data: {
-    latitude:23.10229,
-    longitude:113.3245211,
+    latitude: 37.5,
+    longitude: 112.3245211,
 
-    sign:'',
+    sign: '',
 
     // markers: [{
     //   iconPath: "/icon/position.png",
@@ -40,74 +62,43 @@ Page({
     // }]
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    // this.setData({
-    //   sign:app.globalData.sign
-    // })
-    // console.log(this.data.sign);
-    this.get();
-  },
+  methods: {
+    geta: function () {
+      var that = this
+      wx.getLocation({//调用API得到经纬度
+        type: 'gcj02',
+        success: function (res) {
+          that.setData({
+            latitude: res.latitude,
+            longitude: res.longitude
+          }),
 
-  // 生命周期函数--监听页面显示
-  onShow: function () {
-    this.setData({
-      sign: app.globalData.sign
-    })
-    console.log(app.globalData.sign)
-    this.get();
-   
-  },
+            console.log(that.data.latitude);
+          console.log(that.data.longitude);
+        }
+      })
 
-  get:function() {
-    var that = this
-    wx.getLocation({//调用API得到经纬度
-      type: 'gcj02',
-      success: function (res) {
-        that.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        }),
-        
-        console.log(that.data.latitude);
-        console.log(that.data.longitude);
+      
+    },
+
+    signIn: function () {
+      if (this.data.sign == '签到') {
+        this.setData({
+          sign: '签退'
+        })
+        app.globalData.sign = '签退'
+      } else {
+        this.setData({
+          sign: '签到'
+        })
+        app.globalData.sign = '签到'
       }
-    })
-    
-    console.log(app.globalData.sign)
-  },
+      
+    },
 
-  signIn:function() {
-    if(this.data.sign == '签到'){
-      this.setData({
-        sign:'签退'
-      })
-      app.globalData.sign = '签退'
-    }else {
-      this.setData({
-        sign:'签到'
-      })
-      app.globalData.sign = '签到'
+    //视野发生变化时触发
+    regionchange(e) {
+      // console.log(e.type)
     }
-    console.log(app.globalData.sign)
-  },
-
-
-
-  //视野发生变化时触发
-  regionchange(e) {
-    // console.log(e.type)
-  },
-
-  //点击标记点时触发
-  // markertap(e) {
-  //   console.log(e.markerId)
-  // },
-
-  //点击控件时触发
-  // controltap(e) {
-  //   console.log(e.controlId)
-  // }
+  }
 })

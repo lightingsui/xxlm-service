@@ -1,4 +1,5 @@
 // pages/index/index.js
+const app = getApp();
 Page({
 
   /**
@@ -11,7 +12,9 @@ Page({
     modelName: null,
     modelTitle: "",
     modelText: "",
-    userStatus: 0
+    userStatus: 0,
+    loadProgress: 0,
+    CustomBar: app.globalData.CustomBar
   },
 
   /**
@@ -65,19 +68,76 @@ Page({
     if (this.data.phone.length == 0 || this.data.password.length == 0) {
 
 
-      // this.setData({
-      //   modalName: 'Modal'
-      // });
-      // this.setData({
-      //   modelTitle: "提示",
-      //   modelText: "用户名或密码不能为空"
-      // })
-      wx.reLaunch({
-        url: '/manager/nav'
+      this.setData({
+        modalName: 'Modal'
+      });
+      this.setData({
+        modelTitle: "提示",
+        modelText: "用户名或密码不能为空"
       })
+      // wx.reLaunch({
+      //   url: '../user/nav/nav'
+      // })
 
     } else {
-      // 登录逻辑
+      // 发送请求
+      this.loadProgress();
+      let _this = this;
+      wx.request({
+        url: 'https://api.lightingsui.com/user/login',
+        method: "POST",
+        data: {
+          username: _this.data.phone,
+          password: _this.data.password,
+          userStatus: _this.data.userStatus
+        },
+        header: {
+          "content-type": "application/x-www-form-urlencoded"
+        },
+        success: function(res){
+          // 进度条清零
+          _this.setData({
+            loadProgress: 100
+          });
+          if(res.data != null && res.data.data == true) {
+            if (_this.data.userStatus == 0) {
+              // 界面跳转
+              wx.reLaunch({
+                url: '../user/nav/nav'
+              })
+            } else {
+              // 界面跳转
+              wx.reLaunch({
+                url: '../manager/nav/nav'
+              })
+            }
+          } else {
+            _this.setData({
+              modalName: 'Modal'
+            });
+            _this.setData({
+              modelTitle: "提示",
+              modelText: res.data.responseMessage
+            })
+          }
+          
+          
+        },
+        fail:function(errorMessage){
+          // 进度条清零
+          _this.setData({
+            loadProgress: 100
+          })
+
+          _this.setData({
+            modalName: 'Modal'
+          });
+          _this.setData({
+            modelTitle: "提示",
+            modelText: "服务器繁忙，请稍后再试！"
+          })
+        }
+      })
 
       // this.setData({
       //   modalName: 'Modal'
@@ -86,11 +146,11 @@ Page({
       //   modelTitle: "提示",
       //   modelText: "用户名或密码错误"
       // })
+      
 
-
-      wx.redirectTo({
-        url: '../user/signln'
-      })
+      // wx.redirectTo({
+      //   url: '../user/nav/nav'
+      // })
 
     }
   },
@@ -149,5 +209,20 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  loadProgress() {
+    this.setData({
+      loadProgress: this.data.loadProgress + 3
+    })
+    if (this.data.loadProgress < 100) {
+      console.log(this.data.loadProgress)
+      setTimeout(() => {
+        this.loadProgress();
+      }, 100)
+    } else {
+      this.setData({
+        loadProgress: 0
+      })
+    }
   }
 })

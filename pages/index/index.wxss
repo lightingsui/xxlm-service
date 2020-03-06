@@ -1,5 +1,9 @@
 /* pages/index/index.wxss */
 
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+@import "../../colorui/animation.wxss";
+
 page {
   height: 100%;
 }
