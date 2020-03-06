@@ -1,6 +1,8 @@
-Page({
+Component({
+  options: {
+    styleIsolation: 'shared'
+  },
   data: {
-
     TabCur: 0,
     scrollLeft:0,
 
@@ -24,81 +26,71 @@ Page({
         title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
         text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
         hits:'10',
-        date:'2018年12月4日'
+        date:'2018年12月5日'
       },
       {
         title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
         text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
         hits:'10',
-        date:'2018年12月4日'
+        date:'2018年12月6日'
       },
       {
         title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
         text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
         hits:'10',
-        date:'2018年12月4日'
+        date:'2018年12月7日'
       }
     ],
   },
+  lifetimes: {
+    attached: function () {
+      //判断用户是管理员或者普通用户
 
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-
-    //判断用户是管理员或者普通用户
-
-    //发送请求加载 notice 数组
-
+      //发送请求加载 notice 数组
+    },
   },
 
-
-  isCard(e) {
-    this.setData({
-      isCard: e.detail.value
-    })
-  },
-  tabSelect(e) {
-    this.setData({
-      TabCur: e.currentTarget.dataset.id,
-      scrollLeft: (e.currentTarget.dataset.id-1)*60
-    })
-
-    //发送请求加载 notice 数组
-    console.log(this.data.TabCur)
-
-  },
-
-  //公告详情
-  noticeDetial: function(e) {
-
-    // console.log(e.currentTarget.dataset.index);
-    let i = e.currentTarget.dataset.index;
+  methods: {
+    isCard(e) {
+      this.setData({
+        isCard: e.detail.value
+      })
+    },
+    tabSelect(e) {
+      this.setData({
+        TabCur: e.currentTarget.dataset.id,
+        scrollLeft: (e.currentTarget.dataset.id-1)*60
+      })
   
-    var item = {
-      dTitle: this.data.notice[i].title,
-      dText: this.data.notice[i].text,
-      dHits: this.data.notice[i].hits,
-      dDate: this.data.notice[i].date
-    };
+      //发送请求加载 notice 数组
+      console.log(this.data.TabCur)
+  
+    },
+    //发表
+    publish:function() {
+      wx.navigateTo({
+        url: '/pages/user/notice/noticePublish/noticePublish'
+      })
+    },
 
-    // console.log(item);
+    noticeDetail:function(e) {
+      let i = e.currentTarget.dataset.index;
+  
+      var item = {
+        dTitle: this.data.notice[i].title,
+        dText: this.data.notice[i].text,
+        dHits: this.data.notice[i].hits,
+        dDate: this.data.notice[i].date
+      };
 
-    wx.setStorageSync("DetailItem", item);
+      // console.log(item);
 
-    wx.navigateTo({
-      url: '/pages/user/notice/noticeDetial/noticeDetial'
-    })
-  },
+      wx.setStorageSync("DetailItem", item);
 
-
-  //发表
-  publish:function() {
-    wx.navigateTo({
-      url: '/pages/user/notice/noticePublish/noticePublish'
-    })
-  },
+      wx.navigateTo({
+        url: '/pages/user/notice/noticeDetail/noticeDetail',
+      })
+    }
+  }
 })
-
 

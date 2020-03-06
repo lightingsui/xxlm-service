@@ -1,13 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/manager/nav/nav",
     "pages/user/nav/nav",
-    "pages/user/notice/home/home",
-    "pages/user/information/home/home",
-    "pages/user/signIn/home/home",
-    "pages/user/blog/home/home",
-    "pages/user/mine/home/home"
+    "pages/manager/nav/nav"
   ],
   "permission": {
     "scope.userLocation": {
