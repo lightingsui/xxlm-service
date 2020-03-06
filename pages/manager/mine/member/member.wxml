@@ -8,32 +8,32 @@
       <view class="cu-tag badge cuIcon-female bg-pink"></view>
     </view>
     <!-- <view class="content margin-left"> -->
-      <text class="text-xl" style="margin-left:50rpx"> 冰冰</text>
+      <text class="text-xl" style="margin-left:50rpx"> {{identity[0].name}}</text>
     <!-- </view> -->
   </view>
 </view>
 
 
 <view class="cu-list menu card-menu margin-bottom-xl">
-    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/user/mine/dataShare/dataShare" hover-class="none">
+    <navigator class="cu-item arrow" url="/pages/user/mine/dataShare/dataShare">
+      <navigator class="content" hover-class="none">
         <text>资料分享</text>
       </navigator>
-    </view>
-    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/user/mine/blogShare/blogShare" hover-class="none">
+    </navigator>
+    <navigator class="cu-item arrow" url="/pages/user/mine/blogShare/blogShare">
+      <navigator class="content" hover-class="none">
         <text>博客分享</text>
       </navigator>
-    </view>
-    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/user/mine/signCalendar/signCalendar" hover-class="none">
+    </navigator>
+    <navigator class="cu-item arrow" url="/pages/user/mine/signCalendar/signCalendar">
+      <navigator class="content" hover-class="none">
         <text>签到月历</text>
       </navigator>
-    </view>
-    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/user/mine/attendanceChart/attendanceChart" hover-class="none">
+    </navigator>
+    <navigator class="cu-item arrow" url="/pages/user/mine/attendanceChart/attendanceChart">
+      <navigator class="content" hover-class="none">
         <text>考勤图表</text>
       </navigator>
-    </view>
+    </navigator>
   </view>
   <!-- <view class="cu-tabbar-height"></view> -->

@@ -19,7 +19,7 @@
 
 <view class="noticeBox">
   <view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{notice}}">
-    <view class="cu-item shadow" bindtap="noticeDetial"  data-index="{{index}}">
+    <view class="cu-item shadow" bindtap="noticeDetail"  data-index="{{index}}">
       <view class="title">
         <view class="text-cut">{{item.title}}</view>
       </view>

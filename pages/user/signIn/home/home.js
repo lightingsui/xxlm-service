@@ -1,87 +1,43 @@
+const app = getApp();
 Component({
   options: {
     styleIsolation: 'shared'
   },
-  pageLifetimes: {
-    created: function() {
-      
-    },
-    show: function () {
+  data: {
+    latitude: 37.8721771900,
+    longitude: 112.4840569500,
+
+    msg: '正在定位中...',
+    sign: ''
+  },
+  lifetimes: {
+    attached: function() {
       // 页面被展示
       this.geta();
-      wx.request({
-        url: 'https://www.baidu.com',
-        success:function(res) {
-            console.log(res)
-        }
+      this.setData({
+        sign: app.globalData.sign
       })
-    },
-    hide: function () {
-      // 页面被隐藏
-    },
-    resize: function (size) {
-      // 页面尺寸变化
     }
-  },
-  data: {
-    latitude: 37.5,
-    longitude: 112.3245211,
-
-    sign: '',
-
-    // markers: [{
-    //   iconPath: "/icon/position.png",
-    //   id: 0,
-    //   latitude: '',
-    //   longitude: '',
-    //   width: 32,
-    //   height: 32
-    // }],
-    // polyline: [{
-    //   points: [{
-    //     longitude: 113.3245211,
-    //     latitude: 23.10229
-    //   }, {
-    //     longitude: 113.324520,
-    //     latitude: 23.21229
-    //   }],
-    //   color:"#FF0000DD",
-    //   width: 2,
-    //   dottedLine: true
-    // }],
-    // controls: [{
-    //   id: 1,
-    //   iconPath: '/resources/location.png',
-    //   position: {
-    //     left: 0,
-    //     top: 300 - 50,
-    //     width: 50,
-    //     height: 50
-    //   },
-    //   clickable: true
-    // }]
   },
 
   methods: {
-    geta: function () {
+    geta: function() {
       var that = this
-      wx.getLocation({//调用API得到经纬度
+      wx.getLocation({ //调用API得到经纬度
         type: 'gcj02',
-        success: function (res) {
+        success: function(res) {
           that.setData({
             latitude: res.latitude,
-            longitude: res.longitude
-          }),
-
-            console.log(that.data.latitude);
-          console.log(that.data.longitude);
+            longitude: res.longitude,
+            msg: '已在考勤范围内'
+          })
         }
       })
 
-      
+
     },
 
-    signIn: function () {
+    signIn: function() {
       if (this.data.sign == '签到') {
         this.setData({
           sign: '签退'
@@ -93,7 +49,7 @@ Component({
         })
         app.globalData.sign = '签到'
       }
-      
+
     },
 
     //视野发生变化时触发

@@ -1,4 +1,7 @@
-Page({
+Component({
+  options: {
+    styleIsolation: 'shared'
+  },
   data: {
     inputSearch:'',
 
@@ -30,30 +33,29 @@ Page({
     ],
 
   },
+  lifetimes: {
+    attached: function () {
 
-    /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-
+    },
   },
 
-  search:function() {
+  methods: {
+    search:function() {
 
-    console.log(this.data.inputSearch);
-
-    //发送请求查询
-
-    this.setData({
-      card:true,
-    })
-  },
-
-  inputSearch:function(e){
-    // console.log(e)
-    this.setData({
-      inputSearch:e.detail.value
-    })
+      console.log(this.data.inputSearch);
+  
+      //发送请求查询
+  
+      this.setData({
+        card:true,
+      })
+    },
+  
+    inputSearch:function(e){
+      // console.log(e)
+      this.setData({
+        inputSearch:e.detail.value
+      })
+    }
   }
-
 })

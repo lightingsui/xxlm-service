@@ -15,12 +15,13 @@ Component({
      //单选框
      index:'',
  
-     picker: ['普通公告', '作业公告'],
+     picker: ['Java', 'Python','前端','数据库','区块链','人工智能'],
      
-     //内容
+     //描述
      text:'',
   },
   lifetimes: {
+    
     attached: function () {
       //获取用户头像与姓名
 
@@ -55,8 +56,8 @@ Component({
       })
       console.log(this.data.index);
     },
-    
-    //发表公告
+
+    //资料分享
     publish:function(e) {
       console.log(this.data.name);
   
