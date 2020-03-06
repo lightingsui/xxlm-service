@@ -1,0 +1,23 @@
+<cu-custom bgColor="bg-gradual-pink"  isBack="{{true}}">
+  <view slot="backText">返回</view>
+	<view slot="content">资料分类</view>
+</cu-custom>
+
+<view class="cu-card dynamic {{isCard?'no-card':''}}">
+  <view class="cu-item shadow" style="height:270rpx">
+
+    <view class="cu-form-group">
+      <view class="title">新增分类</view>
+      <input bindinput="sort" value="{{sort}}"></input>
+    </view>
+
+    <view class="cu-form-group">
+      <view class="flex justify-center" style="margin-top:30rpx">
+          <button class="cu-btn bg-gradual-pink margin-tb-sm round" style="width:640rpx" bindtap="confirm">
+          确定
+          </button>
+      </view>
+    </view>
+
+  </view>
+</view>

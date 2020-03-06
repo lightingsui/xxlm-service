@@ -2,3 +2,4 @@
   <view slot="backText">返回</view>
 	<view slot="content">考勤图表</view>
 </cu-custom>
+

@@ -8,26 +8,29 @@
 
     <view class="cu-list menu-avatar">
       <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url({{identity[0].avatar}});"></view>
+        <view class="cu-avatar round lg" style="background-image:url({{identity[0].avatar}});">
+          <view class="cu-tag badge cuIcon-female bg-pink"></view>
+        </view>
         <view class="content flex-sub">
           <view>{{identity[0].name}}</view>
         </view>
       </view>
     </view>
 
+
     <view class="cu-form-group">
       <view class="title">旧密码</view>
       <input bindinput="oldPassword" value="{{oldPassword}}"></input>
     </view>
 
-    <view class="padding-left text-red">{{oldCheck}}</view>
+    <view class="padding-left text-red solid-bottom">{{oldCheck}}</view>
 
     <view class="cu-form-group">
       <view class="title">新密码</view>
       <input bindinput="newPassword" value="{{newPassword}}"></input>
     </view>
 
-    <view class="padding-left text-red">{{newCheck}}</view>
+    <view class="padding-left text-red solid-bottom">{{newCheck}}</view>
 
     <view class="cu-form-group">
       <view class="flex justify-center" style="margin-top:30rpx">

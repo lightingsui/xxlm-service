@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
   <view slot="backText">返回</view>
-  <view slot="content">公告发表</view>
+  <view slot="content">博客分享</view>
 </cu-custom>
 
 <view class="cu-card dynamic {{isCard?'no-card':''}}">
@@ -32,15 +32,20 @@
     </view>
 
     <view class="cu-form-group align-start"> 
-      <view class="title">内容</view>
-      <textarea maxlength="-1" bindinput="textInput" value="{{text}}"  style="height:620rpx"></textarea>
+      <view class="title">描述</view>
+      <textarea maxlength="-1" bindinput="textInput" value="{{text}}"  style="height:200rpx"></textarea>
+    </view>
+
+    <view class="cu-form-group align-start"> 
+      <view class="title">链接</view>
+      <textarea maxlength="-1" bindinput="textInput" value="{{text}}"  style="height:370rpx"></textarea>
     </view>
 
 
-    <view class="cu-form-group">
+     <view class="cu-form-group">
       <view class="flex solid-bottom justify-center">
-          <button class="cu-btn bg-gradual-pink  margin-tb-sm round publish" bindtap="publish">
-          发表
+          <button class="cu-btn bg-gradual-pink  margin-tb-sm round" style="width:640rpx" bindtap="publish">
+          分享
           </button>
       </view>
     </view>

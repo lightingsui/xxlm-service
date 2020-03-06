@@ -1,4 +1,7 @@
-Page({
+Component({
+  options: {
+    styleIsolation: 'shared'
+  },
   data: {
     TabCur: 0,
     scrollLeft:0,
@@ -41,54 +44,52 @@ Page({
     ],
 
   },
-
-    /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-
-    //发送请求加载 tabArray, information 数组
-
+  lifetimes: {
+    attached: function () {
+      
+    },
   },
 
-  tabSelect(e) {
-    this.setData({
-      TabCur: e.currentTarget.dataset.id,
-      scrollLeft: (e.currentTarget.dataset.id-1)*60
-    })
-
-    console.log(this.data.TabCur)
-    //发送请求加载 information
-  },
-
-  share:function() {
-    wx.navigateTo({
-      url: '/pages/user/information/dataPublish/dataPublish',
-    })
-  },
-
-  search:function() {
-    wx.navigateTo({
-      url: '/pages/user/information/dataSearch/dataSearch',
-    })
-  },
+  methods: {
+    tabSelect(e) {
+      this.setData({
+        TabCur: e.currentTarget.dataset.id,
+        scrollLeft: (e.currentTarget.dataset.id-1)*60
+      })
   
-  showModal(e) {
-    this.setData({
-      modalName: e.currentTarget.dataset.target
-    })
-  },
-  hideModal(e) {
-    this.setData({
-      modalName: null
-    })
-  },
+      console.log(this.data.TabCur)
+      //发送请求加载 information
+    },
+  
+    share:function() {
+      wx.navigateTo({
+        url: '/pages/user/information/dataPublish/dataPublish',
+      })
+    },
+  
+    search:function() {
+      wx.navigateTo({
+        url: '/pages/user/information/dataSearch/dataSearch',
+      })
+    },
 
-  infoConfirm:function(e){
-    this.setData({
-      modalName: null
-    })
-
-    //发送请求删除数据
+    showModal(e) {
+      this.setData({
+        modalName: e.currentTarget.dataset.target
+      })
+    },
+    hideModal(e) {
+      this.setData({
+        modalName: null
+      })
+    },
+  
+    infoConfirm:function(e){
+      this.setData({
+        modalName: null
+      })
+  
+      //发送请求删除数据
+    }
   }
 })

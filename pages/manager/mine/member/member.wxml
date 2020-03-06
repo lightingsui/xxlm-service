@@ -8,7 +8,7 @@
       <view class="cu-tag badge cuIcon-female bg-pink"></view>
     </view>
     <!-- <view class="content margin-left"> -->
-      <text class="text-xl" style="margin-left:50rpx"> 冰冰</text>
+      <text class="text-xl" style="margin-left:50rpx"> {{identity[0].name}}</text>
     <!-- </view> -->
   </view>
 </view>

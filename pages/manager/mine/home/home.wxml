@@ -14,23 +14,23 @@
   </view>
   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
     <navigator class="cu-item arrow" url="/pages/manager/mine/group/group">
-      <navigator class="content" hover-class="none">
+      <view class="content" hover-class="none">
         <!-- <image src="" class="png" mode="aspectFit"></image> -->
         <text class="text-gray">团队信息</text>
-      </navigator>
+      </view>
     </navigator>
-    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+    <navigator class="cu-item arrow" url="/pages/manager/mine/blogSort/blogSort">
+      <view class="content" hover-class="none">
         <!-- <image src="" class="png" mode="aspectFit"></image> -->
         <text class="text-gray">添加博客分类</text>
-      </navigator>
-    </view>
-    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/about/log/log" hover-class="none">
+      </view>
+    </navigator>
+    <navigator class="cu-item arrow" url="/pages/manager/mine/dataSort/dataSort">
+      <view class="content" hover-class="none">
         <!-- <text class="cuIcon-formfill text-green"></text> -->
         <text class="text-gray">添加资料分类</text>
-      </navigator>
-    </view>
+      </view>
+    </navigator>
     <view class="cu-item arrow" bindtap="showModal" data-target="bottomModal">
       <view class="content" hover-class="none">
         <!-- <text class="cuIcon-formfill text-green"></text> -->
