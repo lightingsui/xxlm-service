@@ -26,6 +26,23 @@ Component({
         modalName: null
       })
     },
+
+    //上传头像
+    upload: function(e) {
+      wx.chooseImage({
+        count: 1, //默认9
+        sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album'], //从相册选择
+        success: (res) => {
+          this.setData({
+            avatar: res.tempFilePaths
+          })
+          this.hideModal();
+
+          //发送请求上传照片
+        }
+      });
+    },
   
     changePassword:function(e) {
       wx.navigateTo({

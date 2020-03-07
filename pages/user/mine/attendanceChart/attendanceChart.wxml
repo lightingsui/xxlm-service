@@ -3,3 +3,26 @@
 	<view slot="content">考勤图表</view>
 </cu-custom>
 
+
+<view class="header">日工作时长图</view>
+
+<view class="cu-form-group margin-top">
+	<view class="title">起始日期</view>
+	<picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="startDateChange">
+		<view class="picker">
+			{{startDate}}
+		</view>
+	</picker>
+</view>
+<view class="cu-form-group">
+	<view class="title">截止日期</view>
+	<picker class="bottom-solid" mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="endDateChange">
+		<view class="picker">
+			{{endDate}}
+		</view>
+	</picker>
+</view>
+
+<view class="bg-white margin-top">
+	<canvas canvas-id="canvasLineA" id="canvasLineA" class="chart" disable-scroll="true" bindtouchstart="touchLineA" bindtouchmove="moveLineA" bindtouchend="touchEndLineA"></canvas>
+</view>

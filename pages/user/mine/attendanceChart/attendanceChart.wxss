@@ -1,16 +1,14 @@
-/* .box {
-  background-color:white;
-  height: 1100rpx;
-  width: 750rpx;
-} */
+.header {
+  padding: 30rpx;
+  background-color: white;
+  /* border: 1px solid blue; */
+  font-size: 40rpx;
+  display: flex;
+  justify-content: center;
+}
 
-.qiun-padding{padding:2%; width:96%;}
-.qiun-wrap{display:flex; flex-wrap:wrap;}
-.qiun-rows{display:flex; flex-direction:row !important;}
-.qiun-columns{display:flex; flex-direction:column !important;}
-.qiun-common-mt{margin-top:10upx;}
-.qiun-bg-white{background:#FFFFFF;}
-.qiun-title-bar{width:96%; padding:10upx 2%; flex-wrap:nowrap;}
-.qiun-title-dot-light{border-left: 10upx solid #0ea391; padding-left: 10upx; font-size: 32upx;color: #000000}
-.qiun-charts{width: 750upx; height:500upx;background-color: #FFFFFF;}
-.charts{width: 750upx; height:500upx;background-color: #FFFFFF;}
+.chart {
+  /* border: 1px solid violet; */
+  width: 100%;
+  height: 900rpx;
+}
