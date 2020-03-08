@@ -1,16 +1,8 @@
-.header {
-  padding: 30rpx;
-  background-color: white;
-  /* border: 1px solid blue; */
-  font-size: 40rpx;
-}
-
 .rank{
   margin-left:220rpx
 }
 
 .chart {
-  /* border: 1px solid violet; */
   width: 100%;
   height: 550rpx;
 }

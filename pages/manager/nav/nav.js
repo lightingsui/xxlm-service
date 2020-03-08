@@ -1,6 +1,6 @@
 Page({
   data: {
-    PageCur: 'attendance',
+    PageCur: 'mine',
   },
   NavChange(e) {
     this.setData({

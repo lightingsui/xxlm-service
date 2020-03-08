@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/user/nav/nav",
-    "pages/manager/nav/nav"
+    "pages/manager/nav/nav",
+    "pages/user/nav/nav"
   ],
   "permission": {
     "scope.userLocation": {
@@ -16,7 +16,8 @@
     "navigationStyle": "custom"
   },
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom"
+    "cu-custom": "/colorui/components/cu-custom",
+    "calendar": "/calendar/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

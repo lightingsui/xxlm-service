@@ -2,8 +2,8 @@
 	<view slot="content">考勤图表</view>
 </cu-custom>
 
-<view class="header flex justify-between">
-  <view class="rank">排行榜</view>
+<view class="bg-white padding flex justify-between">
+  <view class="title text-xxl rank">排行榜</view>
   <view>
     <button class="cu-btn bg-gradual-pink round" bindtap="look" style="width:160rpx">
     <view class="cuIcon-rankfill" style="font-size:35rpx"></view>
@@ -13,7 +13,6 @@
 </view>
 
   
-
 <view class="cu-form-group margin-top">
 	<view class="title">起始日期</view>
 	<picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="startDateChange">
