@@ -1,6 +1,6 @@
 <notice wx:if="{{PageCur=='notice'}}"></notice>
 <information wx:if="{{PageCur=='information'}}"></information>
-<signIn wx:if="{{PageCur=='signIn'}}"></signIn>
+<attendance wx:if="{{PageCur=='attendance'}}"></attendance>
 <blog wx:if="{{PageCur=='blog'}}"></blog>
 <mine wx:if="{{PageCur=='mine'}}"></mine>
 
@@ -15,7 +15,7 @@
       <view class="cuIcon-upload"></view> 
       资料
     </view>
-    <view class="action add-action {{PageCur=='signIn'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="signIn">
+    <view class="action add-action {{PageCur=='signIn'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="attendance">
       <button class="cu-btn cuIcon-locationfill bg-green shadow"></button>
       考勤
     </view>

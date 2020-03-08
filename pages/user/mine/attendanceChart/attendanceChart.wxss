@@ -3,12 +3,14 @@
   background-color: white;
   /* border: 1px solid blue; */
   font-size: 40rpx;
-  display: flex;
-  justify-content: center;
+}
+
+.rank{
+  margin-left:220rpx
 }
 
 .chart {
   /* border: 1px solid violet; */
   width: 100%;
-  height: 900rpx;
+  height: 550rpx;
 }

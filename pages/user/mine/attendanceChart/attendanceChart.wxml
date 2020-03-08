@@ -3,8 +3,15 @@
 	<view slot="content">考勤图表</view>
 </cu-custom>
 
-
-<view class="header">日工作时长图</view>
+<view class="header flex justify-between">
+  <view class="rank">日工作时长图</view>
+  <view>
+    <button class="cu-btn bg-gradual-pink round" bindtap="look" style="width:160rpx">
+    <view class="cuIcon-rankfill" style="font-size:35rpx"></view>
+    查看
+    </button>
+  </view>
+</view>
 
 <view class="cu-form-group margin-top">
 	<view class="title">起始日期</view>
@@ -26,3 +33,5 @@
 <view class="bg-white margin-top">
 	<canvas canvas-id="canvasLineA" id="canvasLineA" class="chart" disable-scroll="true" bindtouchstart="touchLineA" bindtouchmove="moveLineA" bindtouchend="touchEndLineA"></canvas>
 </view>
+
+<view class="bg-white padding text-gray">注：默认显示近一周内工作时长图表，如果想要查看其它时间段内工作时长，请选择起始日期</view>

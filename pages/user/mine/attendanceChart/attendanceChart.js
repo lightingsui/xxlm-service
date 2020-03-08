@@ -1,4 +1,5 @@
 import uCharts from '../../../../utils/u-charts.js';
+import util from '../../../../utils/util.js';
 
 var _self;
 var canvaLineA=null;
@@ -8,6 +9,8 @@ Page({
     startDate: '2018-12-25',
     endDate: '2018-12-25',
 
+    currentDate:'',
+    
     cWidth:'',
     cHeight:'',
     pixelRatio:1,
@@ -24,8 +27,11 @@ Page({
   onLoad() {
     _self = this;
     this.cWidth=400;
-    this.cHeight=350;
+    this.cHeight=300;
     this.getServerData();
+  },
+  look:function() {
+    //根据起始截止日期查询
   },
   startDateChange(e) {
     this.setData({
@@ -38,6 +44,19 @@ Page({
     })
   },
   getServerData() {
+     //获取当前系统时间
+      // 调用函数时，传入new Date()参数，返回值是日期和时间
+      var time = util.formatTime(new Date());
+      console.log(time)
+      // 再通过setData更改Page()里面的data，动态更新页面的数据
+      this.setData({
+        currentDate: time
+      });      
+
+      //查询最近一周内的数据
+
+
+
     console.log(this.data.data);
     //下面这个根据需要保存后台数据，我是为了模拟更新柱状图，所以存下来了
     _self.serverData=this.data.data;
