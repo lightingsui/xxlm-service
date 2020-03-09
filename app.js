@@ -44,6 +44,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    sign: '签到'
+    sign: '签到',
+    noticeNum:0,
+    infoNum:0,
+    blogNum:9,
   }
 })
