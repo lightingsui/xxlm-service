@@ -11,32 +11,7 @@ Component({
 
     list:['A','B','C','D','F','G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
 
-    cityList : [	 
-      {
-          "title":"A",
-          "lists":[
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'阿坝'
-            },
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'阿拉善'
-            },
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'阿里'
-            },
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'安康'
-            },
-          ]
-      },
+    cityList : [
       {
           "title":"B",
           "lists":[
@@ -283,7 +258,7 @@ Component({
     attached: function () {
       this.setData({
         // list: list,
-        listCur: list[0]
+        listCur: this.data.list[0]
       })
   
       //请求cityList数组
@@ -346,31 +321,19 @@ Component({
         listCurID: this.data.listCur
       })
     },
-    indexSelect(e) {
-      let that = this;
-      let barHeight = this.data.barHeight;
-      let list = this.data.list;
-      let scrollY = Math.ceil(list.length * e.detail.y / barHeight);
-      for (let i = 0; i < list.length; i++) {
-        if (scrollY < i + 1) {
-          that.setData({
-            listCur: list[i],
-            movableY: i * 20
-          })
-          return false
-        }
-      }
-    },
     member:function(e) {
-      // console.log(e)
-      let i = e.currentTarget.dataset.index;
 
-      console.log(e);
+      //父id
+      let fid = e.currentTarget.dataset.index;
+
+      //子id
+      let sid = e.currentTarget.dataset.sid;
+
 
       var identity = {
-        avatar: this.data.cityList[i].lists.avatar,
-        gender:this.data.cityList[i].lists.gender,
-        name:this.data.cityList[i].lists.name
+        avatar: this.data.cityList[fid].lists[sid].avatar,
+        gender:this.data.cityList[fid].lists[sid].gender,
+        name:this.data.cityList[fid].lists[sid].name
       };
 
       wx.setStorageSync("identity", identity);
