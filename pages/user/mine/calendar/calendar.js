@@ -29,6 +29,7 @@ Page({
 
   onLoad:function (options) {
     //发送请求获取markdates数组值
+    
   },
 
   onReady:function () {
