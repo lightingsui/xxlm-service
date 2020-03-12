@@ -1,7 +1,6 @@
-import calendar from '../../../../calendar/index.js'
+
 
 Page({
-
   data: {
     // 此处为日历自定义配置字段
     calendarConfig: {
