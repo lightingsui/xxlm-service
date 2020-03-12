@@ -1,0 +1,8 @@
+.rank{
+  margin-left:280rpx
+}
+
+.chart {
+  width: 100%;
+  height: 550rpx;
+}

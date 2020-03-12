@@ -16,7 +16,8 @@
     "navigationStyle": "custom"
   },
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom"
+    "cu-custom": "/colorui/components/cu-custom",
+    "calendar": "/calendar/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

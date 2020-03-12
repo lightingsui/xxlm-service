@@ -1,0 +1,22 @@
+<cu-custom bgColor="bg-gradual-pink"  isBack="{{true}}">
+  <view slot="backText">返回</view>
+	<view slot="content">签到月历</view>
+</cu-custom>
+
+<view class="padding tltle bg-white text-xxl flex justify-center">个人签到日历</view>
+
+<view class="bg-white">
+  <calendar
+  calendarConfig="{{calendarConfig}}"
+  bind:onTapDay="onTapDay"
+  bind:afterTapDay="afterTapDay"
+  bind:onSwipe="onSwipe"
+  bind:whenChangeWeek="whenChangeWeek"
+  bind:whenChangeMonth="whenChangeMonth"
+  bind:afterCalendarRender="afterCalendarRender"
+></calendar>
+</view>
+
+<view class="bg-white" style="height:50rpx"></view>
+
+<view class="padding bg-white text-gray">注：标记的日期为已经签到的日期</view>
