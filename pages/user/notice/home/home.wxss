@@ -13,4 +13,11 @@
 .publish {
   width:690rpx!important;
   margin-bottom: 0;
+  
+}
+
+.warn-tab {
+  color: red;
+  background-color: none;
+  font-weight: bold;
 }

@@ -9,6 +9,11 @@ Page({
   },
 
   onLoad: function(options) {
+    this.getUnResolveCount();
+  },
+
+  // 获取未读数量
+  getUnResolveCount: function() {
 
   }
 })

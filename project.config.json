@@ -58,27 +58,6 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/main/main",
-					"pathName": "pages/main/main",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/notice/home/home",
-					"pathName": "pages/notice/home/home",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/nav/nav",
-					"pathName": "pages/nav/nav",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
 					"query": "",
@@ -86,29 +65,9 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/user/signIn/home/home",
-					"pathName": "pages/user/signIn/home/home",
+					"name": "pages/user/nav/nav",
+					"pathName": "pages/user/nav/nav",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/user/mine/home/home",
-					"pathName": "pages/user/mine/home/home",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/manager/mine/home",
-					"pathName": "pages/manager/mine/home",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/manager/mine/home/home",
-					"pathName": "pages/manager/mine/home/home",
 					"scene": null
 				}
 			]

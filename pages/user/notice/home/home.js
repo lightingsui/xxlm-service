@@ -1,4 +1,4 @@
-
+const app = getApp();
 Component({
   options: {
     styleIsolation: 'shared'
@@ -13,48 +13,80 @@ Component({
       {tab: '作业'},
     ],
 
-    manager:true,
+    manager: false,
 
     //公告数组
-    notice: [
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
-        text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        hits:'10',
-        date:'2018年12月4日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
-        text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        hits:'10',
-        date:'2018年12月5日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
-        text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        hits:'10',
-        date:'2018年12月6日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。',
-        text:' 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        hits:'10',
-        date:'2018年12月7日'
-      }
-    ],
+    notice: [],
   },
-  lifetimes: {
-    attached: function () {
-      //判断用户是管理员或者普通用户
+  created: function() {
+    
+  },
 
-      //发送请求加载 notice 数组
-    },
+  pageLifetimes: {
+    show: function() {
+      this.checkUserIdentify();
+      this.loadFormData();
+    }
   },
 
   methods: {
     isCard(e) {
       this.setData({
         isCard: e.detail.value
+      })
+    },
+    // 载入数据
+    loadFormData: function() {
+        let _this = this;
+
+        wx.request({
+          url: 'https://api.lightingsui.com/notice/select-all-message',
+          data: {
+            typeId: _this.data.TabCur
+          },
+          success: function(res) {
+            if(res.data.data != null || res.data.data.length > 0) {
+              _this.setData({
+                notice: []
+              })
+                for(let i = 0; i < res.data.data.length; i++) {
+                  let obj = res.data.data[i];
+
+                  let noticeArrayTemp = _this.data.notice;
+                  noticeArrayTemp.push({
+                    id: obj.noticeId,
+                    title: obj.noticeTitle,
+                    text: obj.noticeContent,
+                    date: obj.noticeDate
+                  })
+
+                  _this.setData({
+                    notice: noticeArrayTemp
+                  })
+                }
+            }
+          }
+        })
+    },
+
+    // 判断用户身份
+    checkUserIdentify: function() {
+      let _this = this;
+      //判断用户是管理员或者普通用户
+      wx.request({
+        url: 'https://api.lightingsui.com/user/select-admin-message',
+        header: app.globalData.header,
+        success: function (res) {
+          console.log(res);
+          if (res.data.data != null) {
+            _this.setData({
+              manager: res.data.data.umIdentify == '1' ? true : false
+            })
+          }
+        },
+        fail: function (res) {
+          console.log(res)
+        }
       })
     },
     tabSelect(e) {
@@ -64,7 +96,7 @@ Component({
       })
   
       //发送请求加载 notice 数组
-      console.log(this.data.TabCur)
+      this.loadFormData();
   
     },
     //发表
@@ -78,10 +110,7 @@ Component({
       let i = e.currentTarget.dataset.index;
   
       var item = {
-        dTitle: this.data.notice[i].title,
-        dText: this.data.notice[i].text,
-        dHits: this.data.notice[i].hits,
-        dDate: this.data.notice[i].date
+        id: this.data.notice[i].id,
       };
 
       // console.log(item);

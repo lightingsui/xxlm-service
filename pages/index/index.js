@@ -14,7 +14,8 @@ Page({
     modelText: "",
     userStatus: 0,
     loadProgress: 0,
-    CustomBar: app.globalData.CustomBar
+    CustomBar: app.globalData.CustomBar,
+    disabled: false
   },
 
   /**
@@ -64,6 +65,9 @@ Page({
    * 登录
    */
   login: function () {
+    this.setData({
+      disabled: true
+    });
 
     if (this.data.phone.length == 0 || this.data.password.length == 0) {
 
@@ -78,6 +82,9 @@ Page({
       // wx.reLaunch({
       //   url: '../user/nav/nav'
       // })
+      this.setData({
+        disabled: false
+      });
 
     } else {
       // 发送请求
@@ -99,7 +106,11 @@ Page({
           _this.setData({
             loadProgress: 100
           });
-          if(res.data != null && res.data.data == true) {
+          if(res.data != null && res.data.data != null) {
+            // 存储JSSIONID
+            console.log(res);
+            app.globalData.header.Cookie = "JSESSIONID=" + res.data.data;
+
             if (_this.data.userStatus == 0) {
               // 界面跳转
               wx.reLaunch({
@@ -120,7 +131,9 @@ Page({
               modelText: res.data.responseMessage
             })
           }
-          
+          _this.setData({
+            disabled: false
+          });
           
         },
         fail:function(errorMessage){
@@ -136,6 +149,10 @@ Page({
             modelTitle: "提示",
             modelText: "服务器繁忙，请稍后再试！"
           })
+
+          _this.setData({
+            disabled: false
+          });
         }
       })
 

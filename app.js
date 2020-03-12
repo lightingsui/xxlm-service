@@ -16,6 +16,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    sign: '签到'
+    sign: '签到',
+    header: { 'Cookie': '' }
   }
 })

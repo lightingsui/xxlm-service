@@ -3,22 +3,26 @@
   <view slot="content">公告详情</view>
 </cu-custom>
 
-<view class="bg-white">
+<view  class="bg-white">
   <view class="solids-bottom padding-xs flex align-center">
-    <view class="text-left">
+    <view style="width: 100%" class="text-left">
       <view class="padding">
           <text class="title text-xxl text-black" selectable="true">{{items[0].dTitle}}</text>
       </view>
-      <view class=" flex justify-between padding-left padding-right">
-        <text class="text-gray text-df" selectable="true">{{items[0].dDate}}</text>
+      <view  class="flex justify-between padding-left padding-right">
+
+        <view><text class="text-gray text-df" selectable="true">{{items[0].dDate}}</text></view>
+
         <view class="text-gray flex">
           <view class="cuIcon-delete margin-right" wx:if="{{isSelf}}" bindtap="showModal" data-target="bottomModal"></view>
-          <text class="cuIcon-attentionfill"></text> {{items[0].dHits}}
+
+          <view style="float: right; margin-right: 30rpx"><text class="cuIcon-attentionfill"></text> {{items[0].dHits}}</view>
+          
         </view>
         <!-- <text class="text-black padding-left" selectable="true">{{items[0].dAuthor}}</text> -->
       </view>
-      <view class="padding text-xl flex justify-center" style="margin-top:-50rpx">
-        <view class="content">
+      <view class="padding text-left flex justify-center" style="margin-top:-50rpx">
+        <view class="content" style="width: 100%">
           <view class="desc">
             <text class="text-content" selectable="true">
             {{items[0].dText}}
