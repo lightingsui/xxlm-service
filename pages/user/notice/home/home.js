@@ -19,13 +19,15 @@ Component({
     notice: [],
   },
   created: function() {
-    
+    this.checkUserIdentify();
+    this.loadFormData();
   },
 
   pageLifetimes: {
     show: function() {
       this.checkUserIdentify();
       this.loadFormData();
+      
     }
   },
 

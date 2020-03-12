@@ -2,9 +2,9 @@ const app =getApp()
 
 Page({
   data: {
-    PageCur: 'mine',
+    PageCur: null,
 
-    noticeNum: '',
+    noticeNum: 'notice',
     noticeIsShow: true,
 
     infoNum: '',
@@ -20,6 +20,8 @@ Page({
   },
 
   onLoad: function(options) {
+    
+
     this.getUnResolveCount();
 
     this.setData({
