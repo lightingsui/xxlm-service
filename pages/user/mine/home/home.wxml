@@ -1,7 +1,7 @@
 <scroll-view scroll-y class="scrollPage">
   <view class="UCenter-bg">
     <!-- <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" class="round" mode="widthFix"></image> -->
-    <view class="cu-avatar round xl" style="background-image:url({{avatar}});">
+    <view class="cu-avatar round xl" style="background-image:url({{avatar}});"  bindtap="showModal" data-target="bottomModal1">
       <view class="cu-tag badge cuIcon-female bg-pink"></view>
     </view>
     <view class="text-xl margin-top">{{name}}</view>
@@ -20,7 +20,7 @@
         <text class="text-gray">博客分享</text>
       </view>
     </navigator>
-    <navigator class="cu-item arrow" url="/pages/user/mine/signCalendar/signCalendar">
+    <navigator class="cu-item arrow" url="/pages/user/mine/calendar/calendar">
       <view class="content" hover-class="none">
         <!-- <text class="cuIcon-formfill text-green"></text> -->
         <text class="text-gray">签到月历</text>
@@ -41,6 +41,29 @@
   </view>
   <view class="cu-tabbar-height"></view>
 </scroll-view>
+
+
+<!-- 修改头像模态框 -->
+<view class="cu-modal bottom-modal {{modalName=='bottomModal1'?'show':''}} radius">
+  <view class="cu-dialog">
+    <view class="cu-card dynamic no-card" bindtap="upload">
+      <view class="cu-item shadow">    
+        <view class="cu-form-group flex justify-center solid-bottom"> 
+            <text class="text-black text-lg" selectable="true">从相册选择</text>
+        </view>
+      </view>
+    </view>
+    <view style="height:10rpx"></view>
+    <view class="cu-card dynamic no-card" bindtap="hideModal">
+      <view class="cu-item shadow">    
+        <view class="cu-form-group flex justify-center solid-bottom"> 
+            <text class="text-black text-lg" selectable="true">取消</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
 
 <!-- 设置模态框 -->
 <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}} radius">

@@ -1,6 +1,6 @@
 <notice wx:if="{{PageCur=='notice'}}"></notice>
 <information wx:if="{{PageCur=='information'}}"></information>
-<signIn wx:if="{{PageCur=='signIn'}}"></signIn>
+<attendance wx:if="{{PageCur=='attendance'}}"></attendance>
 <blog wx:if="{{PageCur=='blog'}}"></blog>
 <mine wx:if="{{PageCur=='mine'}}"></mine>
 
@@ -8,26 +8,31 @@
 
 <view  class="cu-bar tabbar bg-white foot">
     <view class="action {{PageCur=='notice'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="notice">
-      <view class="cuIcon-noticefill"></view> 
+      <view class="cuIcon-noticefill">
+        <view class="cu-tag badge" wx:if="{{noticeIsShow}}">{{noticeNum}}</view>
+      </view> 
       公告
     </view>
    <view class="action {{PageCur=='information'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="information">
-      <view class="cuIcon-upload"></view> 
+      <view class="cuIcon-upload">
+        <view class="cu-tag badge" wx:if="{{infoIsShow}}">{{infoNum}}</view>
+      </view> 
       资料
     </view>
-    <view class="action add-action {{PageCur=='signIn'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="signIn">
-      <button class="cu-btn cuIcon-locationfill bg-green shadow"></button>
+    <view class="action {{PageCur=='attendance'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="attendance">
+      <!-- <button class="cu-btn cuIcon-locationfill bg-green shadow"></button> -->
+      <view class="cuIcon-rankfill"></view>
       考勤
     </view>
     <view class="action {{PageCur=='blog'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="blog">
       <view class="cuIcon-share">
-        <view class="cu-tag badge">99</view>
+        <view class="cu-tag badge" wx:if="{{blogIsShow}}">{{blogNum}}</view>
       </view>
       博客
     </view>
     <view class="action {{PageCur=='mine'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="mine">
       <view class="cuIcon-my">
-        <view class="cu-tag badge"></view>
+        <!-- <view class="cu-tag badge"></view> -->
       </view>
       我的
     </view>
