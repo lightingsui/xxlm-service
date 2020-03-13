@@ -1,5 +1,3 @@
-import calendar from '../../../../calendar/index.js'
-
 Page({
 
   data: {
