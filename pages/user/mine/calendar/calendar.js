@@ -15,7 +15,6 @@ Page({
         year: 2020,
         month: 3,
         day: 1,
-        todoText: '待办'
       },
       {
         year: 2018,
