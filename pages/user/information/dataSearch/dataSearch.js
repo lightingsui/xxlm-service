@@ -5,38 +5,19 @@ Component({
   data: {
     inputSearch:'',
 
-    card:false,
+    card:true,
 
     //数组
-    information: [
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-    ],
+    information: [],
 
   },
   lifetimes: {
     attached: function () {
 
     },
+  },
+  created: function() {
+
   },
 
   methods: {
@@ -45,6 +26,7 @@ Component({
       console.log(this.data.inputSearch);
   
       //发送请求查询
+      this.searchQuest();
   
       this.setData({
         card:true,
@@ -55,6 +37,41 @@ Component({
       // console.log(e)
       this.setData({
         inputSearch:e.detail.value
+      })
+    },
+
+    searchQuest: function() {
+      let _this = this;
+
+      wx.request({
+        url: 'https://api.lightingsui.com/assets/search-assets-by-filed',
+        data: {
+          searchFiled: this.data.inputSearch
+        },
+        success: function(res) {
+          let arrTemp = [];
+          _this.setData({
+            information: []
+          });
+
+          if(res.data.data != null || res.data.data.length != 0) {
+            
+            for(let i = 0; i < res.data.data.length; i++) {
+              let obj = res.data.data[i];
+              arrTemp.push({
+                title: obj.acTitle,
+                text: obj.acContent,
+                link: obj.acLink == null || obj.acLink == '' ? "无" : obj.acLink,
+                author: obj.assetsName,
+                date: obj.acDate
+              });
+            }
+
+            _this.setData({
+              information: arrTemp
+            })
+          }
+        }
       })
     }
   }

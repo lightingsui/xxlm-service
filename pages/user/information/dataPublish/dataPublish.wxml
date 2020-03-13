@@ -8,8 +8,8 @@
 
     <view class="cu-list menu-avatar">
       <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);">
-          <view class="cu-tag badge cuIcon-female bg-pink"></view>
+        <view class="cu-avatar round lg" style="background-image:url({{avatar}});">
+          <view class="cu-tag badge cuIcon-{{sex}} bg-pink"></view>
         </view>
         <view class="content flex-sub">
           <view>{{name}}</view>
@@ -23,32 +23,51 @@
     </view>
 
     <view class="cu-form-group">
-		<view class="title">类型</view>
-      <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+      <view class="title">类型</view>
+      <picker bindchange="PickerChange" value="{{index == -1 ? 0 : index - 1}}" range="{{picker}}">
         <view class="picker">
-          {{index?picker[index]:'请选择'}}
+          {{selectName?selectName:'请选择'}}
         </view>
       </picker>
     </view>
 
-    <view class="cu-form-group align-start"> 
+    <view class="cu-form-group align-start">
       <view class="title">描述</view>
-      <textarea maxlength="-1" bindinput="textInput" value="{{text}}"  style="height:200rpx"></textarea>
+      <textarea maxlength="-1" bindinput="textInput" value="{{text}}" style="height:200rpx"></textarea>
     </view>
 
-    <view class="cu-form-group align-start"> 
+    <view class="cu-form-group align-start">
       <view class="title">链接</view>
-      <textarea maxlength="-1" bindinput="textInput" value="{{text}}"  style="height:370rpx"></textarea>
+      <textarea maxlength="-1" bindinput="linkInput" value="{{link}}" style="height:370rpx"></textarea>
     </view>
 
 
-     <view class="cu-form-group">
+    <view class="cu-form-group">
       <view class="flex justify-center">
-          <button class="cu-btn bg-gradual-pink  margin-tb-sm round" style="width:640rpx" bindtap="publish">
+        <button class="cu-btn bg-gradual-pink  margin-tb-sm round" style="width:640rpx" bindtap="publish">
           分享
-          </button>
+        </button>
       </view>
     </view>
-    
+
   </view>
+</view>
+
+<view class="cu-modal {{modelName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">警告</view>
+      <view class="action" bindtap="closeModel">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      请填写必填项
+    </view>
+  </view>
+</view>
+
+<view class='cu-load load-modal' wx:if="{{confirmPush}}">
+  <view class='cuIcon-lightfill text-orange'></view>
+  <view class='gray-text'>发表中...</view>
 </view>

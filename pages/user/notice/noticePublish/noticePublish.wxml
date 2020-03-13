@@ -23,7 +23,7 @@
     </view>
 
     <view class="cu-form-group">
-		<view class="title">类型</view>
+      <view class="title">类型</view>
       <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
         <view class="picker">
           {{index?picker[index]:'请选择'}}
@@ -31,38 +31,38 @@
       </picker>
     </view>
 
-    <view class="cu-form-group align-start"> 
+    <view class="cu-form-group align-start">
       <view class="title">内容</view>
-      <textarea maxlength="-1" bindinput="textInput" value="{{text}}"  style="height:620rpx"></textarea>
+      <textarea maxlength="-1" bindinput="textInput" value="{{text}}" style="height:620rpx"></textarea>
     </view>
 
 
     <view class="cu-form-group">
       <view class="flex solid-bottom justify-center">
-          <button class="cu-btn bg-gradual-pink  margin-tb-sm round publish" bindtap="publish">
+        <button class="cu-btn bg-gradual-pink  margin-tb-sm round publish" bindtap="publish">
           发表
-          </button>
+        </button>
       </view>
     </view>
-    
+
   </view>
 </view>
 
 <view class="cu-modal {{modelName=='Modal'?'show':''}}">
-    <view class="cu-dialog">
-      <view class="cu-bar bg-white justify-end">
-        <view class="content">警告</view>
-        <view class="action" bindtap="closeModel">
-          <text class="cuIcon-close text-red"></text>
-        </view>
-      </view>
-      <view class="padding-xl">
-        请填写必填项
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">警告</view>
+      <view class="action" bindtap="closeModel">
+        <text class="cuIcon-close text-red"></text>
       </view>
     </view>
+    <view class="padding-xl">
+      请填写必填项
+    </view>
   </view>
+</view>
 
-  <view class='cu-load load-modal' wx:if="{{confirmPush}}">
+<view class='cu-load load-modal' wx:if="{{confirmPush}}">
   <view class='cuIcon-lightfill text-orange'></view>
   <view class='gray-text'>发表中...</view>
 </view>

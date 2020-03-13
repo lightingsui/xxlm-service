@@ -1,65 +1,120 @@
+const app = getApp();
 Component({
   options: {
     styleIsolation: 'shared'
   },
   data: {
     TabCur: 0,
+
+    tabCurValue: null,
     scrollLeft:0,
 
-    isSelf:true,
+    
 
     //tab
-    tabArray: [
-      {tab: '最新'},
-      {tab: 'Java'},
-      {tab: 'Python'},
-      {tab: '前端'},
-      {tab: '数据库'},
-      {tab: '区块链'},
-      {tab: '人工智能'},
-      {tab: '移动开发'}
-    ],
+    tabArray: [],
 
     //数组
-    information: [
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-    ],
+    information: [],
+
+    // 待删除记录ID
+    delId: null
   },
-  lifetimes: {
-    attached: function () {
+  pageLifetimes: {
+    show: function () {
       //发送请求加载 tabArray, information 数组
+      this.getAllCategory();
+      this.getAllDetails();
     },
   },
 
+  created: function() {
+    this.getAllCategory();
+    this.getAllDetails();
+  },
+
   methods: {
+    // 查询所有详细信息
+    getAllDetails:function() {
+      let _this = this;
+      wx.request({
+        url: 'https://api.lightingsui.com/assets/select-assets-by-category-search',
+        header: app.globalData.header,
+        data: {
+          cId: _this.data.tabCurValue,
+        },
+        success: function(res) {
+          _this.setData({
+            information: []
+          })
+
+          if(res.data.data != null && res.data.data.length != 0) {
+            console.log(res.data.data);
+            let arrTemp = [];
+              for(let i = 0; i < res.data.data.length; i++) {
+                let obj = res.data.data[i];
+                arrTemp.push({
+                  id: obj.acId,
+                  title: obj.acTitle,
+                  text: obj.acContent,
+                  link: obj.acLink == null || obj.acLink == '' ? "无" : obj.acLink,
+                  author: obj.assetsName,
+                  date: obj.acDate,
+                  isSelf: obj.deleteShow
+                });
+              }
+
+              _this.setData({
+                information: arrTemp
+              })
+          }
+        }
+      })
+    },
+    // 查询所有分类
+    getAllCategory: function () {
+      let _this = this;
+
+      wx.request({
+        url: 'https://api.lightingsui.com/assets/get-all-category',
+        success: function (res) {
+          if (res.data.data != null || res.data.data.length != 0) {
+            _this.setData({
+              tabArray: []
+            })
+            let arrTemp = [];
+            arrTemp.push({
+              tab: "全部",
+              mId: "0"
+            })
+            for (let i = 0; i < res.data.data.length; i++) {
+              let obj = res.data.data[i];
+              arrTemp.push({
+                tab: obj.assetsName,
+                mId: obj.assetsId
+              })
+            }
+
+            _this.setData({ 
+              tabArray: arrTemp
+            })
+          }
+        }
+      })
+    },
+
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,
+        tabCurValue: e.currentTarget.dataset.mId,
         scrollLeft: (e.currentTarget.dataset.id-1)*60
       })
   
       console.log(this.data.TabCur)
+      console.log(this.data.tabCurValue)
       //发送请求加载 information
+      this.getAllDetails();
+      
     },
   
     share:function() {
@@ -76,9 +131,11 @@ Component({
     
     showModal(e) {
       this.setData({
-        modalName: e.currentTarget.dataset.target
+        modalName: e.currentTarget.dataset.target,
+        delId: e.currentTarget.dataset.delId
       })
     },
+
     hideModal(e) {
       this.setData({
         modalName: null
@@ -91,6 +148,18 @@ Component({
       })
   
       //发送请求删除数据
+      let _this = this;
+      wx.request({
+        url: 'https://api.lightingsui.com/assets/delete-by-id',
+        data: {
+          delId: this.data.delId
+        },
+        success: function(res) {
+          if(res.data.data != null && res.data.data != false) {
+            _this.getAllDetails();
+          }
+        } 
+      })
     }
   }
 })

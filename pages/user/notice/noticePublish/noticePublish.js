@@ -26,7 +26,7 @@ Component({
 
     modelName: null,
 
-    confirmPush: false
+    confirmPush: false,
   },
   created: function() {
     let _this = this;

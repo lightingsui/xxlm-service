@@ -2,7 +2,7 @@ const app =getApp()
 
 Page({
   data: {
-    PageCur: null,
+    PageCur: 'notice',
 
     noticeNum: 'notice',
     noticeIsShow: true,
