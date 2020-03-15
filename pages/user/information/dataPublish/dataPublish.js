@@ -30,6 +30,7 @@ Component({
     text:'',
 
     modelName: null,
+    modalContent: '',
 
     confirmPush: false
   },
@@ -142,13 +143,37 @@ Component({
   
       console.log(this.data.text);
 
-      // 验证
-      let paramsCheck = this.data.index == -1 || this.data.text == null || this.data.text == ''
-        || this.data.title == null || this.data.title == '';
+      // 表单验证
+      let paramsCheck = this.data.index == -1 || this.data.text == null || this.data.text == '' || this.data.title == null || this.data.title == '' || this.data.link == null || this.data.link == '';
 
-      if(paramsCheck) {
+      if (paramsCheck) {
         this.setData({
-          modelName: "Modal"
+          modalName: "Modal",
+          modalContent: "请填写必填项"
+        })
+        return;
+      }
+
+      if (this.data.link.length > 255) {
+        this.setData({
+          modalName: "Modal",
+          modalContent: "链接地址长度应小于255"
+        })
+        return;
+      }
+
+      if (this.data.title.length > 100) {
+        this.setData({
+          modalName: "Modal",
+          modalContent: "标题长度应小于100"
+        })
+        return;
+      }
+
+      if (this.data.text.length > 500) {
+        this.setData({
+          modalName: "Modal",
+          modalContent: "文本长度应小于500"
         })
         return;
       }

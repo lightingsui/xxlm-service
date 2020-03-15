@@ -19,7 +19,7 @@
 
     <view class="cu-form-group">
       <view class="title">标题</view>
-      <input bindinput="titleInput" value="{{title}}"></input>
+      <input bindinput="titleInput" maxlength='100' value="{{title}}"></input>
     </view>
 
     <view class="cu-form-group">
@@ -62,7 +62,7 @@
       </view>
     </view>
     <view class="padding-xl">
-      请填写必填项
+      {{modalContent}}
     </view>
   </view>
 </view>

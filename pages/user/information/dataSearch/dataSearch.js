@@ -9,7 +9,6 @@ Component({
 
     //数组
     information: [],
-
   },
   lifetimes: {
     attached: function () {
