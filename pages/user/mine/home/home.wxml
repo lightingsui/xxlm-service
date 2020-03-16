@@ -20,6 +20,12 @@
         <text class="text-gray">博客分享</text>
       </view>
     </navigator>
+    <navigator class="cu-item arrow" url="/pages/user/mine/remark/remark">
+      <view class="content" hover-class="none">
+        <!-- <text class="cuIcon-formfill text-green"></text> -->
+        <text class="text-gray">签到记录</text>
+      </view>
+    </navigator>
     <navigator class="cu-item arrow" url="/pages/user/mine/calendar/calendar">
       <view class="content" hover-class="none">
         <!-- <text class="cuIcon-formfill text-green"></text> -->
