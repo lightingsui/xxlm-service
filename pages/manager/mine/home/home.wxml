@@ -7,7 +7,7 @@
   <view class="UCenter-bg">
     <!-- <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" class="round" mode="widthFix"></image> -->
     <view class="cu-avatar round xl" style="background-image:url({{avatar}});" bindtap="showModal" data-target="bottomModal1">
-      <view class="cu-tag badge cuIcon-female bg-pink"></view>
+      <view class="cu-tag badge cuIcon-{{gender}} bg-pink"></view>
     </view>
     <view class="text-xl margin-top">{{name}}</view>
     <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>

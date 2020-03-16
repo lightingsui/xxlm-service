@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
   "navigationStyle": "custom",
-  "navigationBarTitleText": ""
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "tui-tips": "../../components/tips/tips"
+  }
 }

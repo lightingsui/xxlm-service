@@ -1,33 +1,34 @@
 const app = getApp();
+const utils = require('../../../../components/utils/utils');
 Component({
   options: {
     styleIsolation: 'shared'
   },
   data: {
     //头像
-    avatar:'',
+    avatar: '',
 
     //姓名
-    name:'',
+    name: '',
 
     // 性别
     sex: "",
 
     //标题
-    title:'',
+    title: '',
 
     link: '',
 
     //单选框
-    index: -1,
+    index: '',
 
     selectName: null,
 
     picker: [],
     mutilArr: [],
-    
+
     //描述
-    text:'',
+    text: '',
 
     modelName: null,
     modalContent: '',
@@ -35,7 +36,7 @@ Component({
     confirmPush: false
   },
   lifetimes: {
-    attached: function () {
+    attached: function() {
       //获取用户头像与姓名
       this.getUSernameAndHead();
       this.getAllCategory();
@@ -43,13 +44,23 @@ Component({
   },
 
   methods: {
+    // 显示错误提示
+    showTips: function (msg) {
+      console.log(utils);
+      let options = {
+        msg: msg,
+        duration: 2000,
+        type: "danger"
+      };
+      utils.toast(options);
+    },
     // 获取用户头像与姓名
     getUSernameAndHead: function() {
       let _this = this;
       wx.request({
         url: 'https://api.lightingsui.com/user/select-admin-message',
         header: app.globalData.header,
-        success: function (res) {
+        success: function(res) {
           console.log(res);
           if (res.data.data != null) {
             _this.setData({
@@ -59,54 +70,54 @@ Component({
             })
           }
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log(res)
         }
       })
     },
     // 查询所有分类
     getAllCategory: function() {
-        let _this = this;
+      let _this = this;
 
-        wx.request({
-          url: 'https://api.lightingsui.com/assets/get-all-category',
-          success: function(res) {
-              if(res.data.data != null || res.data.data.length != 0) {
-                let arrTemp = [];
-                let mutilArr = [];
-                for(let i = 0; i < res.data.data.length; i++) {
-                    let obj = res.data.data[i];
-                    arrTemp.push({
-                      name: obj.assetsName,
-                      id: obj.assetsId
-                    })
+      wx.request({
+        url: 'https://api.lightingsui.com/assets/get-all-category',
+        success: function(res) {
+          if (res.data.data != null || res.data.data.length != 0) {
+            let arrTemp = [];
+            let mutilArr = [];
+            for (let i = 0; i < res.data.data.length; i++) {
+              let obj = res.data.data[i];
+              arrTemp.push({
+                name: obj.assetsName,
+                id: obj.assetsId
+              })
 
-                    mutilArr.push(obj.assetsName);
-                }
+              mutilArr.push(obj.assetsName);
+            }
 
-                console.log(arrTemp);
+            console.log(arrTemp);
 
-                _this.setData({
-                  mutilArr: arrTemp
-                })
+            _this.setData({
+              mutilArr: arrTemp
+            })
 
-                _this.setData({
-                  picker: mutilArr
-                })
-              }
+            _this.setData({
+              picker: mutilArr
+            })
           }
-        })
+        }
+      })
     },
 
 
-    titleInput: function (e) {
+    titleInput: function(e) {
       this.setData({
         title: e.detail.value
       })
       console.log(this.data.title);
     },
-  
-    textInput: function (e) {
+
+    textInput: function(e) {
       this.setData({
         text: e.detail.value
       })
@@ -119,69 +130,65 @@ Component({
       })
       console.log(this.data.link);
     },
-  
+
     //单选框
     PickerChange(e) {
       console.log(e);
       this.setData({
-        index: this.data.mutilArr[e.detail.value].id
+        index: e.detail.value,
       })
 
       for (let i = 0; i < this.data.mutilArr.length; i++) {
-          if(this.data.mutilArr[i].id == this.data.index) {
-            this.setData({
-              selectName: this.data.mutilArr[i].name
-            })
-          }
+        if (this.data.picker[this.data.index] == this.data.mutilArr[i].name) {
+          this.setData({
+            selectName: this.data.mutilArr[i].id
+          })
+          console.log(this.data.selectName);
+          return;
+        }
       }
-      console.log(this.data.index);
+      
     },
 
     //资料分享
-    publish:function(e) {
+    publish: function(e) {
       console.log(this.data.name);
-  
+
       console.log(this.data.text);
 
       // 表单验证
-      let paramsCheck = this.data.index == -1 || this.data.text == null || this.data.text == '' || this.data.title == null || this.data.title == '' || this.data.link == null || this.data.link == '';
-
-      if (paramsCheck) {
-        this.setData({
-          modalName: "Modal",
-          modalContent: "请填写必填项"
-        })
+      if (this.data.selectName == null || this.data.selectName == '') {
+        this.showTips("请选择类型");
+        return;
+      }
+      if (this.data.text == null || this.data.text == '') {
+        this.showTips("请填写描述内容");
+        return;
+      }
+      if (this.data.title == null || this.data.title == '' || this.data.title.length == 0) {
+        this.showTips("请填写标题");
         return;
       }
 
       if (this.data.link.length > 255) {
-        this.setData({
-          modalName: "Modal",
-          modalContent: "链接地址长度应小于255"
-        })
+        this.showTips("链接地址长度应小于255");
         return;
       }
 
       if (this.data.title.length > 100) {
-        this.setData({
-          modalName: "Modal",
-          modalContent: "标题长度应小于100"
-        })
+        this.showTips("标题长度应小于100");
         return;
       }
 
       if (this.data.text.length > 500) {
-        this.setData({
-          modalName: "Modal",
-          modalContent: "文本长度应小于500"
-        })
+        this.showTips("描述长度应小于500");
         return;
       }
 
       this.setData({
         confirmPush: true
       })
-  
+
       //发送请求
       let _this = this;
 
@@ -193,13 +200,13 @@ Component({
           "Cookie": app.globalData.header.Cookie
         },
         data: {
-          assetsId: _this.data.index,
+          assetsId: _this.data.selectName,
           acTitle: _this.data.title,
           acLink: _this.data.link,
           acContent: _this.data.text
         },
         success: function(res) {
-          if(res.data.data != null && res.data.data != false) {
+          if (res.data.data != null && res.data.data != false) {
             _this.setData({
               confirmPush: false
             })
@@ -213,7 +220,7 @@ Component({
     },
 
     // 关闭警告模态框
-    closeModel: function () {
+    closeModel: function() {
       this.setData({
         modelName: null
       })

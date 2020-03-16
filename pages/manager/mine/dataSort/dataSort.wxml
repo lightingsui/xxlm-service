@@ -4,20 +4,33 @@
 </cu-custom>
 
 <view class="cu-card dynamic {{isCard?'no-card':''}}">
-  <view class="cu-item shadow" style="height:270rpx">
+  <view class="cu-item shadow">
 
-    <view class="cu-form-group">
-      <view class="title">新增分类</view>
-      <input bindinput="sort" value="{{sort}}"></input>
+    <view class="padding" style="margin:15rpx">
+      <view class="text-xl">新增分类</view>
+      <view class="flex justify-between align-center">
+        <input class="text-lg" bindinput="sort" value="{{sort}}" style="font-size: 14px" placeholder="请输入分类..."></input>
+        <view class="flex justify-center align-center"> 
+            <button class="cu-btn bg-gradual-pink margin-tb-sm round" bindtap="confirm" style="width:140rpx">
+            确定
+            </button>
+        </view>
+      </view>
+      <view class="text-red">{{sortCheck}}</view>
     </view>
+   
+    <view class="solid-bottom"></view>
 
-    <view class="cu-form-group">
-      <view class="flex justify-center" style="margin-top:30rpx">
-          <button class="cu-btn bg-gradual-pink margin-tb-sm round" style="width:640rpx" bindtap="confirm">
-          确定
-          </button>
+    <view class="padding">
+      <view class="text-xl" style="margin:15rpx">现有分类</view>
+      <view class="grid col-3">
+        <view class="margin-tb-sm text-center" wx:for="{{sortArray}}" wx:key>
+          <view class="cu-btn round line-pink" style="width:190rpx">{{item.sort}}</view>
+        </view>
       </view>
     </view>
 
   </view>
 </view>
+<!--toast提示-->
+<tui-toast id="tui-tips-ctx"></tui-toast>

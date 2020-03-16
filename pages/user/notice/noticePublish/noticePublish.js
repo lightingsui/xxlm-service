@@ -1,4 +1,5 @@
 const app = getApp();
+const utils = require('../../../../components/utils/utils');
 Component({
   options: {
     styleIsolation: 'shared'
@@ -51,6 +52,17 @@ Component({
   },
 
   methods: {
+    // 显示错误提示
+    showTips: function (msg) {
+      console.log(utils);
+      let options = {
+        msg: msg,
+        duration: 2000,
+        type: "danger"
+      };
+      utils.toast(options);
+    },
+
     titleInput: function(e) {
       this.setData({
         title: e.detail.value
@@ -82,17 +94,18 @@ Component({
 
     //发表公告
     publish: function(e) {
-      console.log(this.data.name);
-
-      console.log(this.data.text);
-      // 表单验证
-      let paramsCheck = this.data.title == null || this.data.tltle == '' || this.data.index ==                null || this.data.index == '' || this.data.text == null || this.data.text == '';
-
-      if(paramsCheck) {
-          this.setData({
-            modelName: "Modal"
-          })
+      console.log(this.data.title)
+      if (this.data.title == null || this.data.tltle == '' || this.data.title.length == 0) {
+          this.showTips("请填写标题");
           return;
+      }
+      if (this.data.index == null || this.data.index == '') {
+        this.showTips("请选择公告类型");
+        return;
+      }
+      if (this.data.text == null || this.data.text == '') {
+        this.showTips("请填写内容");
+        return;
       }
 
       this.setData({

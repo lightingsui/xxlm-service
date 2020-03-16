@@ -1,5 +1,6 @@
 // pages/index/index.js
 const app = getApp();
+const utils = require('../../components/utils/utils');
 Page({
 
   /**
@@ -15,7 +16,17 @@ Page({
     userStatus: 0,
     loadProgress: 0,
     CustomBar: app.globalData.CustomBar,
-    disabled: false
+    disabled: false,
+    confirmPush: false
+  },
+
+  showTips: function (msg) {
+    let options = {
+      msg: msg,
+      duration: 2000,
+      type: "danger"
+    };
+    utils.toast(options);
   },
 
   /**
@@ -35,7 +46,12 @@ Page({
    * 获取输入密码
    */
   passwordInput: function (e) {
-
+//     let params = {
+//       title: "操作成功",
+//       imgUrl: "/static/images/toast/check-circle.png",
+//       icon: true
+//     };
+// this.toast.show(params);
     this.setData({
 
       password: e.detail.value
@@ -71,14 +87,7 @@ Page({
 
     if (this.data.phone.length == 0 || this.data.password.length == 0) {
 
-
-      this.setData({
-        modalName: 'Modal'
-      });
-      this.setData({
-        modelTitle: "提示",
-        modelText: "用户名或密码不能为空"
-      })
+      this.showTips("用户名或密码不能为空")
       // wx.reLaunch({
       //   url: '../user/nav/nav'
       // })
@@ -88,7 +97,10 @@ Page({
 
     } else {
       // 发送请求
-      this.loadProgress();
+      this.setData({
+        confirmPush: true
+      });
+
       let _this = this;
       wx.request({
         url: 'https://api.lightingsui.com/user/login',
@@ -102,11 +114,10 @@ Page({
           "content-type": "application/x-www-form-urlencoded"
         },
         success: function(res){
-          // 进度条清零
-          _this.setData({
-            loadProgress: 100
-          });
           if(res.data != null && res.data.data != null) {
+            _this.setData({
+              confirmPush: false
+            });
             // 存储JSSIONID
             console.log(res);
             app.globalData.header.Cookie = "JSESSIONID=" + res.data.data;
@@ -124,31 +135,19 @@ Page({
             }
           } else {
             _this.setData({
-              modalName: 'Modal'
+              confirmPush: false
             });
-            _this.setData({
-              modelTitle: "提示",
-              modelText: res.data.responseMessage
-            })
+            _this.showTips(res.data.responseMessage);
           }
           _this.setData({
             disabled: false
           });
-          
         },
         fail:function(errorMessage){
-          // 进度条清零
           _this.setData({
-            loadProgress: 100
-          })
-
-          _this.setData({
-            modalName: 'Modal'
+            confirmPush: false
           });
-          _this.setData({
-            modelTitle: "提示",
-            modelText: "服务器繁忙，请稍后再试！"
-          })
+          _this.showTips("服务器繁忙，请重试");
 
           _this.setData({
             disabled: false
@@ -176,7 +175,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      
+    // this.toast = this.selectComponent("#tui-tips-ctx")
   },
 
   /**

@@ -1,4 +1,5 @@
 const app = getApp();
+const utils = require('../../../../components/utils/utils');
 Component({
   options: {
     styleIsolation: 'shared'
@@ -43,6 +44,16 @@ Component({
   },
 
   methods: {
+    // 显示错误提示
+    showTips: function (msg) {
+      console.log(utils);
+      let options = {
+        msg: msg,
+        duration: 2000,
+        type: "danger"
+      };
+      utils.toast(options);
+    },
     // 查询所有分类
     getAllCategory: function() {
       let _this = this;
@@ -143,37 +154,35 @@ Component({
       console.log(this.data.text);
 
       // 表单验证
-      let paramsCheck = this.data.indexValue == '' || this.data.text == null || this.data.text == '' || this.data.title == null || this.data.title == '' || this.data.link == null || this.data.link == '';
-
-      if (paramsCheck) {
-        this.setData({
-          modalName: "Modal",
-          modalContent: "请填写必填项"
-        })
+      if (this.data.title == null || this.data.title == '' || this.data.title.length == 0) {
+        this.showTips("请填写标题");
+        return;
+      }
+      if (this.data.indexValue == '') {
+        this.showTips("请选择类型");
+        return;
+      }
+      if (this.data.text == null || this.data.text == '') {
+        this.showTips("请填写描述信息");
+        return;
+      }
+      if (this.data.link == null || this.data.link == '') {
+        this.showTips("请填写链接地址");
         return;
       }
 
       if (this.data.link.length > 255) {
-        this.setData({
-          modalName: "Modal",
-          modalContent: "链接地址长度应小于255"
-        })
+        this.showTips("链接地址长度应小于255");
         return;
       }
 
       if (this.data.title.length > 100) {
-        this.setData({
-          modalName: "Modal",
-          modalContent: "标题长度应小于100"
-        })
+        this.showTips("标题长度应小于100");
         return;
       }
 
       if (this.data.text.length > 500) {
-        this.setData({
-          modalName: "Modal",
-          modalContent: "文本长度应小于500"
-        })
+        this.showTips("文本长度应小于500");
         return;
       }
 

@@ -1,7 +1,4 @@
-
-
 Page({
-
   data: {
     // 此处为日历自定义配置字段
     calendarConfig: {
@@ -17,7 +14,6 @@ Page({
         year: 2020,
         month: 3,
         day: 1,
-        todoText: '待办'
       },
       {
         year: 2018,

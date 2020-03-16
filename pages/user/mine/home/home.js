@@ -1,21 +1,41 @@
+const app = getApp();
 Component({
   options: {
     styleIsolation: 'shared'
   },
   data: {
-    avatar:'https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg',
+    avatar:'',
 
     gender:'',
 
-    name: '冰冰',  
+    name: '',  
   },
-  lifetimes: {
-    created: function() {
-      
-    }
+  created: function() {
+    this.getUSernameAndHead();
   },
     
   methods: {
+    // 获取用户头像与姓名
+    getUSernameAndHead: function () {
+      let _this = this;
+      wx.request({
+        url: 'https://api.lightingsui.com/user/select-admin-message',
+        header: app.globalData.header,
+        success: function (res) {
+          console.log(res);
+          if (res.data.data != null) {
+            _this.setData({
+              avatar: res.data.data.umHeadUrl,
+              name: res.data.data.umName,
+              gender: res.data.data == '0' ? "female" : "male"
+            })
+          }
+        },
+        fail: function (res) {
+          console.log(res)
+        }
+      })
+    },
     showModal(e) {
       this.setData({
         modalName: e.currentTarget.dataset.target

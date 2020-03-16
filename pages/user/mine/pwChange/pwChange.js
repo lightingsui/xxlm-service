@@ -9,6 +9,8 @@ Component({
 
     newPassword:'',
 
+    tnewPassword:'',
+
     //旧密码校验错误信息
     oldCheck:'',
 
@@ -29,26 +31,45 @@ Component({
   methods: {
     oldPassword: function (e) {
       this.setData({
-        oldPassword: e.detail.value
+        oldPassword: e.detail.value,
+        oldCheck:''
       })
-      console.log(this.data.oldPassword);
     },
   
     newPassword: function (e) {
       this.setData({
-        newPassword: e.detail.value
+        newPassword: e.detail.value,
+        newCheck:''
       })
-      console.log(this.data.newPassword);
     },
   
     //确认修改
     confirm: function () {
-      //校验旧密码是否正确
-  
-      //校验新密码是否符合密码设置规范
-  
-      //发送请求修改密码
-  
+
+      if(this.data.oldPassword == '') {
+        this.setData({
+          oldCheck:'请输入原密码'
+        })
+      }else {
+        if((this.data.newPassword== '')||(this.data.tnewPassword == '')) {
+          this.setData({
+            newCheck:'请输入新密码'
+          })
+        }else {
+          //请求得到用户密码，校验旧密码是否正确
+          let old ='';
+
+          if(old != this.data.oldPassword) {
+            //如果旧密码不正确则
+            this.setData({
+              oldCheck:'原密码输入错误'
+            })
+          }else {
+            //发送请求修改密码
+
+          }
+        }
+      }
     }
   }
 })

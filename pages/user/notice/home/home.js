@@ -14,6 +14,7 @@ Component({
     ],
 
     manager: false,
+    scrollTop: 0,
 
     //公告数组
     notice: [],
@@ -32,6 +33,7 @@ Component({
   },
 
   methods: {
+    
     isCard(e) {
       this.setData({
         isCard: e.detail.value

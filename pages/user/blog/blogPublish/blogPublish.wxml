@@ -71,3 +71,5 @@
   <view class='cuIcon-lightfill text-orange'></view>
   <view class='gray-text'>发表中...</view>
 </view>
+
+<tui-tips position="center" id="tui-tips-ctx"></tui-tips>
