@@ -23,7 +23,7 @@
       <input bindinput="oldPassword" value="{{oldPassword}}" placeholder="输入原密码"></input>
     </view>
 
-    <view class="padding-left text-red solid-bottom">{{oldCheck}}</view>
+    <!-- <view class="padding-left text-red solid-bottom">{{oldCheck}}</view> -->
 
     <view class="cu-form-group">
       <view class="title">新密码</view>
@@ -35,7 +35,7 @@
       <input bindinput="tnewPassword" value="{{tnewPassword}}" placeholder="新密码二次确认"></input>
     </view>
 
-    <view class="padding-left text-red solid-bottom">{{newCheck}}</view>
+    <!-- <view class="padding-left text-red solid-bottom">{{newCheck}}</view> -->
 
     <view class="cu-form-group">
       <view class="flex justify-center align-center">

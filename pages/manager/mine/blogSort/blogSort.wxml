@@ -12,7 +12,7 @@
         <input class="text-lg" bindinput="sort" value="{{sort}}" placeholder="输入分类"></input>
         <view class="flex justify-center align-center"> 
             <button class="cu-btn bg-gradual-pink margin-tb-sm round" bindtap="confirm" style="width:140rpx">
-            确定
+            添加
             </button>
         </view>
       </view>

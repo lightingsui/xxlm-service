@@ -78,7 +78,11 @@ Component({
           sign: '签退'
         })
         app.globalData.sign = '签退'
-        
+        wx.showToast({
+          title: '签到成功',
+          icon: 'none',
+          duration: 1000
+        })
         //发送请求记录签到时间
 
       } else {
@@ -86,7 +90,11 @@ Component({
           sign: '签到'
         })
         app.globalData.sign = '签到'
-
+        wx.showToast({
+          title: '签退成功',
+            icon: 'none',
+            duration: 1000,
+        })
         //发送请求记录签退时间
       }
       
