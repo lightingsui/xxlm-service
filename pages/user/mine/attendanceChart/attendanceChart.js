@@ -6,8 +6,8 @@ var canvaLineA = null;
 
 Page({
   data: {
-    startDate: '2018-12-25',
-    endDate: '2018-12-25',
+    startDate: '',
+    endDate: '',
 
     currentDate: '',
 
@@ -26,6 +26,8 @@ Page({
     }
   },
   onLoad() {
+    this.getDate();
+
     _self = this;
     this.cWidth = 400;
     this.cHeight = 300;
@@ -33,6 +35,8 @@ Page({
   },
   look: function() {
     //根据起始截止日期查询
+    console.log(this.data.endDate)
+    console.log(this.data.startDate)
   },
   startDateChange(e) {
     this.setData({
@@ -44,18 +48,44 @@ Page({
       endDate: e.detail.value
     })
   },
-  getServerData() {
-    //获取当前系统时间
-    // 调用函数时，传入new Date()参数，返回值是日期和时间
-    var time = util.formatTime(new Date());
-    console.log(time)
-    // 再通过setData更改Page()里面的data，动态更新页面的数据
+  getDate:function() {
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000;
+    var date = new Date(timestamp * 1000);
+    //获取年份
+    var Y = date.getFullYear();
+    //获取月份
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    //获取当日日期
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    // console.log(Y + "-" + M + "-" + D);
     this.setData({
-      currentDate: time
-    });
+      endDate:Y + "-" + M + "-" + D
+    })
+    //减7天的时间戳：
+    var before_timetamp = timestamp - 24 * 60 * 60 * 6;
+    //减7天的时间：
+    var n_to = before_timetamp * 1000;
+    var before_timetamp = new Date(n_to);
+    var Y_before = before_timetamp.getFullYear();
+    //年份
+    var Y_before = before_timetamp.getFullYear();
+    //月份
+    var M_before = (before_timetamp.getMonth() + 1 < 10 ? '0' + (before_timetamp.getMonth() + 1) : before_timetamp.getMonth() + 1);
+    //日期
+    var D_before = before_timetamp.getDate() < 10 ? '0' + before_timetamp.getDate() : before_timetamp.getDate();
+    // console.log(Y_before + "-" + M_before + "-" + D_before)
+    this.setData({
+      startDate:Y_before + "-" + M_before + "-" + D_before
+    })
+  },
 
+  getServerData() {
+    //查询最近一周内的数据(data 中的 endDate startDate 为当前日期，一周前日期)
+    console.log(this.data.endDate);
+    console.log(this.data.startDate);
+        
     //查询最近一周内的数据
-
 
 
     console.log(this.data.data);
