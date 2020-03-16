@@ -11,7 +11,8 @@ Page({
     infoIsShow:true,
 
     blogNum: '',
-    blogIsShow:true
+    blogIsShow:true,
+    scrollTop: 0
   },
   NavChange(e) {
     this.setData({
@@ -50,5 +51,11 @@ Page({
   // 获取未读数量
   getUnResolveCount: function() {
 
+  },
+  //页面滚动执行方式
+  onPageScroll(e) {
+    this.setData({
+      scrollTop: e.scrollTop
+    })
   }
 })

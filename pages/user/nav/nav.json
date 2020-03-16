@@ -6,6 +6,7 @@
     "information": "/pages/user/information/home/home",
     "signIn": "/pages/user/signIn/home/home",
     "blog": "/pages/user/blog/home/home",
-    "mine": "/pages/user/mine/home/home"
+    "mine": "/pages/user/mine/home/home",
+    "tui-scroll-top": "../../../../components/scroll-top/scroll-top"
   }
 }

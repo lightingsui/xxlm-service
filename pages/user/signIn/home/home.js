@@ -18,25 +18,28 @@ Component({
     range: null,
 
     msg: '正在定位中...',
-    sign: '签退',
+    sign: null,
+
+    singFlag: null
   },
   lifetimes: {
     attached: function() {
-      // 页面被展示
-      this.geta();
-      this.setData({
-        sign: app.globalData.sign
-      })
+      
     }
   },
 
   created: function() {
+    // 初始请求位置信息
+    this.getLocation();
     // 获取精度、签到经纬度
     this.getDetails();
+    // 判断签到是否过期
+    this.judgeOutOfDate();
+   
   },
 
   methods: {
-    geta: function() {
+    getLocation: function() {
       var that = this
       wx.getLocation({ //调用API得到经纬度
         type: 'gcj02',
@@ -75,23 +78,54 @@ Component({
     },
 
     signIn: function() {
-      if (this.data.sign == '签到') {
-        this.setData({
-          sign: '签退'
-        })
-        app.globalData.sign = '签退'
-
+      let _this = this;
+      if (this.data.sign == "签到") {
+      
         //发送请求记录签到时间
+        wx.request({
+          url: 'https://api.lightingsui.com/sign-in/in-out-resolve',
+          data: {
+            signType: 0
+          },
+          header: app.globalData.header,
+          success: function(res) {
+            if(res.data.data != null && res.data.data == true) {
+              wx.showToast({
+                title: '签到成功',
+                icon: 'none',
+                duration: 1000
+              })
+              _this.setData({
+                sign: '签退'
+              })
+            }
+          }
+        })
+
 
       } else {
-        this.setData({
-          sign: '签到'
-        })
-        app.globalData.sign = '签到'
 
         //发送请求记录签退时间
+        wx.request({
+          url: 'https://api.lightingsui.com/sign-in/in-out-resolve',
+          data: {
+            signType: 1
+          },
+          header: app.globalData.header,
+          success: function (res) {
+            if(res.data.data != null && res.data.data == true) {
+              _this.setData({
+                sign: '签到'
+              })
+              wx.showToast({
+                title: '签退成功',
+                icon: 'none',
+                duration: 1000,
+              })
+            }
+          }
+        })
       }
-
     },
 
     // 获取精度、签到经纬度
@@ -115,6 +149,50 @@ Component({
     //视野发生变化时触发
     regionchange(e) {
       // console.log(e.type)
+    },
+
+    // 获得当前用户签到\签退状态
+    getUserStatus: function() {
+      let _this = this;
+
+      wx.request({
+        url: 'https://api.lightingsui.com/sign-in/select-user-status',
+        header: app.globalData.header,
+        success: function(res) {
+          if(res.data.data != null) {
+            console.log("获取状态");
+            _this.setData({
+              signFlag: res.data.data
+            })
+
+            if(res.data.data == 0) {
+              _this.setData({
+                sign: "签到"
+              })
+            } else {
+              _this.setData({
+                sign: "签退"
+              })
+            }
+          }
+        }
+      })
+    },
+
+    // 判断签到过期
+    judgeOutOfDate: function() {
+      let _this = this;
+      wx.request({
+        url: 'https://api.lightingsui.com/sign-in/judge-out-of-date',
+        header: app.globalData.header,
+        success: function(res) {
+          if(res.data.data != null && res.data.data == true) {
+            // 获得当前用户签到\签退状态
+            _this.getUserStatus();
+          }
+        }
+      })
+
     }
   }
 })

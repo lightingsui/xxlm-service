@@ -1,0 +1,16 @@
+<cu-custom bgColor="bg-gradual-pink"  isBack="{{true}}">
+  <view slot="backText">返回</view>
+	<view slot="content">签到记录</view>
+</cu-custom>
+
+<view class="padding bg-white">
+  <view class="cu-timeline" wx:for="{{remark}}">
+    <view class="cu-time">{{item.date}}</view>
+    <view class="cu-item" wx:for="{{item.msg}}">
+      <view class="flex justify-start align-center" style="margin-top:15rpx">
+        <view class="text-pink">{{item.time}}</view>
+        <view class="margin-left text-black">{{item.sign}}</view>
+      </view>
+    </view>
+  </view>
+</view>

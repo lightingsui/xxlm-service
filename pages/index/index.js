@@ -46,12 +46,12 @@ Page({
    * 获取输入密码
    */
   passwordInput: function (e) {
-//     let params = {
-//       title: "操作成功",
-//       imgUrl: "/static/images/toast/check-circle.png",
-//       icon: true
-//     };
-// this.toast.show(params);
+    //     let params = {
+    //       title: "操作成功",
+    //       imgUrl: "/static/images/toast/check-circle.png",
+    //       icon: true
+    //     };
+    // this.toast.show(params);
     this.setData({
 
       password: e.detail.value
@@ -113,8 +113,8 @@ Page({
         header: {
           "content-type": "application/x-www-form-urlencoded"
         },
-        success: function(res){
-          if(res.data != null && res.data.data != null) {
+        success: function (res) {
+          if (res.data != null && res.data.data != null) {
             _this.setData({
               confirmPush: false
             });
@@ -143,7 +143,7 @@ Page({
             disabled: false
           });
         },
-        fail:function(errorMessage){
+        fail: function (errorMessage) {
           _this.setData({
             confirmPush: false
           });
@@ -162,7 +162,7 @@ Page({
       //   modelTitle: "提示",
       //   modelText: "用户名或密码错误"
       // })
-      
+
 
       // wx.redirectTo({
       //   url: '../user/nav/nav'

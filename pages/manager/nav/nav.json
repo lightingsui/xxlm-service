@@ -6,6 +6,7 @@
     "information": "/pages/user/information/home/home",
     "attendance": "/pages/manager/attendance/attendance",
     "blog": "/pages/user/blog/home/home",
-    "mine": "/pages/manager/mine/home/home"
+    "mine": "/pages/manager/mine/home/home",
+    "tui-scroll-top": "../../../../components/scroll-top/scroll-top"
   }
 }

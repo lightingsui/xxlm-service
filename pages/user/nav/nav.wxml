@@ -36,3 +36,6 @@
       我的
     </view>
   </view>
+  <tui-scroll-top scrollTop="{{scrollTop}}"></tui-scroll-top>
+
+  

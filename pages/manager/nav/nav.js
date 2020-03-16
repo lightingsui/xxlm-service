@@ -11,7 +11,8 @@ Page({
     infoIsShow:true,
 
     blogNum: '',
-    blogIsShow:true
+    blogIsShow:true,
+    scrollTop: 0
   },
   NavChange(e) {
     this.setData({
@@ -43,6 +44,13 @@ Page({
       })
     }
   },
+
+  //页面滚动执行方式
+  onPageScroll(e) {
+    this.setData({
+      scrollTop: e.scrollTop
+    })
+  }
 
   // data: {
   //   motto: 'Hello World',
