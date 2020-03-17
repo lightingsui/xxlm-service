@@ -1,61 +1,79 @@
 // pages/user/signIn/remark/remark.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    remark:[
-      {
-        date:'06-17',
-        msg:[
-          {
-            time:'10:00',
-            sign:'签到成功'
-          },
-          {
-            time:'12:00',
-            sign:'签退成功'
-          },
-          {
-            time:'14:00',
-            sign:'签到成功'
-          },
-          {
-            time:'17:00',
-            sign:'签退成功'
-          },
-        ]
-      },
-      {
-        date:'06-18',
-        msg:[
-          {
-            time:'10:00',
-            sign:'签到成功'
-          },
-          {
-            time:'12:00',
-            sign:'签退成功'
-          },
-          {
-            time:'14:00',
-            sign:'签到成功'
-          },
-          {
-            time:'17:00',
-            sign:'签退成功'
-          },
-        ]
-      }
-    ]
+    remark:[],
+    scrollTop: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.judgeOutOfDate();
+  },
 
+  //页面滚动执行方式
+  onPageScroll(e) {
+    this.setData({
+      scrollTop: e.scrollTop
+    })
+  },
+
+  // 判断签到过期
+  judgeOutOfDate: function () {
+    let _this = this;
+    wx.request({
+      url: 'https://api.lightingsui.com/sign-in/judge-out-of-date',
+      header: app.globalData.header,
+      success: function (res) {
+        if(res.data.data != null && res.data.data == true) {
+          // 加载数据
+          _this.loadData();
+        }
+      }
+    })
+
+  },
+
+  loadData: function() {
+    let _this = this;
+
+    wx.request({
+      url: 'https://api.lightingsui.com/sign-in/get-sign-details',
+      header: app.globalData.header,
+      success: function(res) {
+        if(res.data.data != null) {
+          let tempArr = [];
+          let retDate = res.data.data;
+          console.log(retDate);
+
+          for (let obj in retDate) {
+            let addResultArr = [];
+            console.log(retDate[obj]);
+
+            for (let j = 0; j < retDate[obj].length; j++) {
+              addResultArr.push({
+                time: retDate[obj][j].signTimeStr,
+                sign: retDate[obj][j].simType == 1 ? "签退成功" : "签到成功"
+              })
+            }
+            tempArr.push({
+              date: obj,
+              msg: addResultArr
+            })
+          }
+
+          _this.setData({
+            remark: tempArr
+          })
+        }
+      }
+    })
   },
 
   /**

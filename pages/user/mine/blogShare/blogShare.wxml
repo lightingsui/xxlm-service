@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-gradual-pink"  isBack="{{true}}">
   <view slot="backText">返回</view>
-	<view slot="content">博客分享</view>
+	<view slot="content">我的博客分享</view>
 </cu-custom>
 
 <view class="cu-bar search bg-white" style="position:fixed;width:100%">

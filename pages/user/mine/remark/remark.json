@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "component": true,
+  "usingComponents": {
+    "tui-scroll-top": "../../../../components/scroll-top/scroll-top"
+  }
 }

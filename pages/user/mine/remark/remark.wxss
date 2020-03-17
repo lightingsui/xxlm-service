@@ -1,1 +1,8 @@
 /* pages/user/signIn/remark/remark.wxss */
+.green-font {
+  color: green;
+}
+
+.red-font {
+  color: red;
+}

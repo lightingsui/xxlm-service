@@ -20,12 +20,9 @@ Component({
     msg: '正在定位中...',
     sign: null,
 
-    singFlag: null
-  },
-  lifetimes: {
-    attached: function() {
-      
-    }
+    singFlag: null,
+
+    lastSignDate: null
   },
 
   created: function() {
@@ -39,6 +36,7 @@ Component({
   },
 
   methods: {
+
     getLocation: function() {
       var that = this
       wx.getLocation({ //调用API得到经纬度
@@ -78,6 +76,14 @@ Component({
     },
 
     signIn: function() {
+      if (parseInt(new Date().getTime() / 1000) - parseInt(this.data.lastSignDate / 1000) < 5) {
+        wx.showToast({
+          title: '为了防止您恶意刷签到，请五秒后再试',
+          icon: 'none',
+          duration: 1000
+        })
+        return;
+      }
       let _this = this;
       if (this.data.sign == "签到") {
       
@@ -126,6 +132,9 @@ Component({
           }
         })
       }
+      this.setData({
+        lastSignDate: new Date().getTime()
+      })
     },
 
     // 获取精度、签到经纬度

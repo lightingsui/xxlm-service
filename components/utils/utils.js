@@ -15,6 +15,8 @@ const utils = {
       selector = '#tui-tips-ctx'
     } = options;
     const component = utils.getComponent(selector);
+    console.log(component);
+    console.log(options)
     if (component) {
       component.showTips(options);
     }

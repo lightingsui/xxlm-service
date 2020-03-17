@@ -11,13 +11,13 @@
     <navigator class="cu-item arrow" url="/pages/user/mine/dataShare/dataShare">
       <view class="content" hover-class="none">
         <!-- <image src="" class="png" mode="aspectFit"></image> -->
-        <text class="text-gray">资料分享</text>
+        <text class="text-gray">我的资料分享</text>
       </view>
     </navigator>
     <navigator class="cu-item arrow" url="/pages/user/mine/blogShare/blogShare">
       <view class="content" hover-class="none">
         <!-- <image src="" class="png" mode="aspectFit"></image> -->
-        <text class="text-gray">博客分享</text>
+        <text class="text-gray">我的博客分享</text>
       </view>
     </navigator>
     <navigator class="cu-item arrow" url="/pages/user/mine/remark/remark">
