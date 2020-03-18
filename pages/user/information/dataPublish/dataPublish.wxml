@@ -72,4 +72,4 @@
   <view class='gray-text'>发表中...</view>
 </view>
 
-<tui-tips position="center" id="tui-tips-ctx"></tui-tips>
+<tui-tips position="center" id="tuit-tips-ctx"></tui-tips>

@@ -12,7 +12,7 @@ const utils = {
   toast: function(options) {
     const {
       //selector = '.tui-tips-ctx'
-      selector = '#tui-tips-ctx'
+      selector = '#tuit-tips-ctx'
     } = options;
     const component = utils.getComponent(selector);
     console.log(component);

@@ -94,9 +94,9 @@
   <view class='load-progress-spinner text-green'></view>
 </view>
 
-<tui-tips position="center" id="tui-tips-ctx"></tui-tips>
+<tui-tips position="center" id="tuit-tips-ctx"></tui-tips>
 
 <view class='cu-load load-modal' wx:if="{{confirmPush}}">
   <view class='cuIcon-lightfill text-orange'></view>
-  <view class='gray-text'>登录中...</view>
+  <view class='gray-text'>登录中</view>
 </view>

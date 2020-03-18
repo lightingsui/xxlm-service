@@ -9,6 +9,7 @@ Component({
   },
   created: function() {
     this.toast = this.selectComponent("#tui-tips-ctx");
+    console.log(this.toast.show);
     this.getAllCategory();
   },
 

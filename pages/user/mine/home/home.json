@@ -1,3 +1,6 @@
 {
-  "component": true
+  "component": true,
+  "usingComponents": {
+    "tui-tips": "../../../../components/tips/tips"
+  }
 }
