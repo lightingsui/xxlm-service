@@ -19,10 +19,12 @@
       </view> 
       资料
     </view>
+
     <view class="action add-action {{PageCur=='signIn'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="signIn">
       <button class="cu-btn cuIcon-locationfill bg-green shadow"></button>
       签到
     </view>
+    
     <view class="action {{PageCur=='blog'?'text-green':'text-gray'}}" bindtap="NavChange" data-cur="blog">
       <view class="cuIcon-share">
         <view class="cu-tag badge" wx:if="{{blogIsShow}}">{{blogNum}}</view>
