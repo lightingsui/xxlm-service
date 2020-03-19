@@ -3,16 +3,6 @@
 	<view slot="content">考勤图表</view>
 </cu-custom>
 
-<view class="bg-white padding flex justify-between">
-  <view class="title text-xxl rank">日工作时长图</view>
-  <view>
-    <button class="cu-btn bg-gradual-pink round" bindtap="look" style="width:160rpx">
-    <view class="cuIcon-rankfill" style="font-size:35rpx"></view>
-    查看
-    </button>
-  </view>
-</view>
-
 <view class="cu-form-group margin-top">
 	<view class="title">起始日期</view>
 	<picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="startDateChange">

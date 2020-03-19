@@ -2,7 +2,7 @@
 	<view slot="content">考勤图表</view>
 </cu-custom>
 
-<view class="bg-white padding flex justify-between">
+<!-- <view class="bg-white padding flex justify-between">
   <view class="title text-xxl rank" style="margin-left:280rpx">排行榜</view>
   <view>
     <button class="cu-btn bg-gradual-pink round" bindtap="look" style="width:160rpx">
@@ -10,7 +10,7 @@
     查看
     </button>
   </view>
-</view>
+</view> -->
 
   
 <view class="cu-form-group margin-top">
