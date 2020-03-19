@@ -1,6 +1,5 @@
 import uCharts from '../../../../utils/u-charts.js';
 
-
 var _self;
 var canvaLineA = null;
 
@@ -13,6 +12,10 @@ Page({
 
     cWidth: '',
     cHeight: '',
+
+    mycanvasWidth:'',
+    mycanvasHeight:'',
+
     pixelRatio: 1,
     serverData: '',
     data: {
@@ -25,29 +28,45 @@ Page({
       }
     }
   },
-  onLoad() {
+  onLoad: function() {
+    console.log("加载了")
     this.getDate();
-
     _self = this;
     this.cWidth = 400;
     this.cHeight = 300;
     this.getServerData();
   },
-  look: function() {
-    //根据起始截止日期查询
-    console.log(this.data.endDate)
-    console.log(this.data.startDate)
-  },
+
+  //起始日期监听
   startDateChange(e) {
     this.setData({
       startDate: e.detail.value
     })
+    if(e.detail.value >= this.data.endDate) {
+      wx.showToast({
+        title: '请选择合理的时间段',
+        icon:'none'
+      })
+    }else {
+      //请求数据
+    }
   },
+
+  //截止日期监听
   endDateChange(e) {
     this.setData({
       endDate: e.detail.value
     })
+    if(e.detail.value <= this.data.startDate) {
+      wx.showToast({
+        title: '请选择合理的时间段',
+        icon:'none'
+      })
+    }else {
+      //请求数据
+    }
   },
+
   getDate:function() {
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000;
@@ -98,7 +117,7 @@ Page({
     //这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
     LineA.categories = this.data.data.LineA.categories;
     LineA.series = this.data.data.LineA.series;
-    _self.showLineA("canvasLineA", LineA);
+    this.showLineA("canvasLineA", LineA);
   },
 
   showLineA(canvasId, chartData) {
@@ -116,7 +135,7 @@ Page({
       pixelRatio: _self.pixelRatio,
       categories: chartData.categories,
       series: chartData.series,
-      animation: false,
+      animation: true,
       enableScroll: true, //开启图表拖拽功能
       xAxis: {
         disableGrid: false,
