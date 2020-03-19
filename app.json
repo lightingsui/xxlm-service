@@ -2,6 +2,8 @@
   "pages": [
     "pages/user/nav/nav",
     "pages/manager/nav/nav"
+    
+    
   ],
   "permission": {
     "scope.userLocation": {
