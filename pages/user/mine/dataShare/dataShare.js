@@ -1,59 +1,99 @@
+const app = getApp();
 Component({
   options: {
     styleIsolation: 'shared'
   },
   data: {
     TabCur: 0,
+    tabValue: 0,
     scrollLeft:0,
 
+    delId: null,
+
     //tab
-    tabArray: [
-      {tab: '最新'},
-      {tab: 'Java'},
-      {tab: 'Python'},
-      {tab: '前端'},
-      {tab: '数据库'},
-      {tab: '区块链'},
-      {tab: '人工智能'},
-      {tab: '移动开发'}
-    ],
+    tabArray: [],
 
     //数组
-    information: [
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-      {
-        title:'无意者 烈火焚身;以正义的烈火拔出黑暗',
-        text:'真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！',
-        link:'https://www.baidu.com',
-        author:'发表者',
-        date:'2018年12月4日'
-      },
-    ],
+    information: [],
 
   },
-  lifetimes: {
-    attached: function () {
-      
-    },
+  created: function() {
+    this.getAllCategory();
+    this.loadData();
   },
 
   methods: {
+    // 加载信息
+    loadData: function () {
+      let _this = this;
+
+      wx.request({
+        url: 'https://api.lightingsui.com/assets/select-current-user-assets',
+        header: app.globalData.header,
+        data: {
+          category: _this.data.tabValue
+        },
+        success: function (res) {
+          _this.setData({
+            information: []
+          })
+          if (res.data.data != null && res.data.data.length != 0) {
+            let tempArr = [];
+            for (let i = 0; i < res.data.data.length; i++) {
+              let obj = res.data.data[i];
+              tempArr.push({
+                id: obj.acId,
+                title: obj.acTitle,
+                text: obj.acContent,
+                link: obj.acLink == null || obj.acLink.length == 0 ? "无" : obj.acLink,
+                author: obj.assetsName,
+                date: obj.acDate
+              })
+
+            }
+
+            _this.setData({
+              information: tempArr
+            })
+          }
+        }
+      })
+    },
+    // 查询所有分类
+    getAllCategory: function () {
+      let _this = this;
+
+      wx.request({
+        url: 'https://api.lightingsui.com/assets/get-all-category',
+        success: function (res) {
+          if (res.data.data != null || res.data.data.length != 0) {
+            _this.setData({
+              tabArray: []
+            })
+            let arrTemp = [];
+            arrTemp.push({
+              tab: "全部",
+              mId: "0"
+            })
+            for (let i = 0; i < res.data.data.length; i++) {
+              let obj = res.data.data[i];
+              arrTemp.push({
+                tab: obj.assetsName,
+                mId: obj.assetsId
+              })
+            }
+
+            _this.setData({
+              tabArray: arrTemp
+            })
+          }
+        }
+      })
+    },
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,
+        tabValue: e.currentTarget.dataset.mId,
         scrollLeft: (e.currentTarget.dataset.id-1)*60
       })
   
@@ -69,13 +109,14 @@ Component({
   
     search:function() {
       wx.navigateTo({
-        url: '/pages/user/information/dataSearch/dataSearch',
+        url: '/pages/user/mine/dataSearch/dataSearch',
       })
     },
 
     showModal(e) {
       this.setData({
-        modalName: e.currentTarget.dataset.target
+        modalName: e.currentTarget.dataset.target,
+        delId: e.currentTarget.dataset.delId
       })
     },
     hideModal(e) {
@@ -90,6 +131,19 @@ Component({
       })
   
       //发送请求删除数据
+      let _this = this;
+      wx.request({
+        url: 'https://api.lightingsui.com/assets/delete-by-id',
+        data: {
+          delId: this.data.delId
+        },
+        success: function (res) {
+          if (res.data.data != null && res.data.data != false) {
+            _this.loadData();
+          }
+        }
+      })
+
     }
   }
 })

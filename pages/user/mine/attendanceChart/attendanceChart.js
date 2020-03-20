@@ -30,7 +30,7 @@ Page({
     _self = this;
     this.cWidth = 400;
     this.cHeight = 300;
-    this.getServerData();
+    this.judgeOutOfDate();
   },
 
   // 加载图表数据
@@ -87,6 +87,22 @@ Page({
     return iDays
   },
 
+  // 判断签到过期
+  judgeOutOfDate: function () {
+    let _this = this;
+    wx.request({
+      url: 'https://api.lightingsui.com/sign-in/judge-out-of-date',
+      header: app.globalData.header,
+      success: function (res) {
+        if (res.data.data != null && res.data.data == true) {
+          // 获得当前用户签到\签退状态
+          _this.getServerData();
+        }
+      }
+    })
+
+  },
+
   // 显示错误提示
   showTips: function(msg) {
     console.log(utils);
@@ -114,7 +130,7 @@ Page({
       }
       //请求数据
       console.log(this.data.endDate)
-      this.getServerData();
+      this.loadChartData();
     }
   },
 
@@ -133,7 +149,7 @@ Page({
         return;
       }
       //请求数据
-      this.getServerData();
+      this.loadChartData();
     }
   },
 
