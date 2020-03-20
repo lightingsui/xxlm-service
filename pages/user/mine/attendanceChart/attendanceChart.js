@@ -1,6 +1,6 @@
 import uCharts from '../../../../utils/u-charts.js';
-import util from '../../../../utils/util.js';
-
+const utils = require('../../../../components/utils/utils');
+const app = getApp();
 var _self;
 var canvaLineA = null;
 
@@ -13,42 +13,131 @@ Page({
 
     cWidth: '',
     cHeight: '',
+
+    mycanvasWidth: '',
+    mycanvasHeight: '',
+
     pixelRatio: 1,
     serverData: '',
     data: {
-      "LineA": {
-        "categories": ["03/07", "03/08", "03/09", "03/10", "03/11", "03/12"],
-        "series": [{
-          "name": "工作时长",
-          "data": [3, 8, 5, 7, 4, 2]
-        }]
-      }
+      LineA: null
     }
   },
-  onLoad() {
+  onLoad: function() {
+    console.log("加载了")
     this.getDate();
-
+    
     _self = this;
     this.cWidth = 400;
     this.cHeight = 300;
     this.getServerData();
   },
-  look: function() {
-    //根据起始截止日期查询
-    console.log(this.data.endDate)
-    console.log(this.data.startDate)
+
+  // 加载图表数据
+  loadChartData: function() {
+    let _this = this;
+
+    wx.request({
+      url: 'https://api.lightingsui.com/sign-in/select-user-statistics',
+      header: app.globalData.header,
+      data: {
+        startDate: _this.data.startDate,
+        endDate: _this.data.endDate
+      },
+      success: function(res) {
+        if (res.data.data != null && res.data.data.length != 0) {
+          let category = [];
+          let values = [];
+          let maxValue = 0;
+          for (let i = 0; i < res.data.data.length; i++) {
+            let obj = res.data.data[i];
+            for (let key in obj) {
+              category.push(key);
+              values.push(obj[key])
+              if(obj[key] > maxValue) {
+                maxValue = obj[key];
+              }
+            }
+          }
+
+          _this.setData({
+            LineA: {
+              "categories": category,
+              "series": [{
+                "name": "工作时长",
+                "data": values
+              }]
+            }
+          })
+          _this.showLineA("canvasLineA", _this.data.LineA, maxValue);
+        }
+      }
+    })
   },
+
+  datedifference: function (sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式 
+    var dateSpan,
+    tempDate,
+    iDays;
+    sDate1 = Date.parse(sDate1);
+    sDate2 = Date.parse(sDate2);
+    dateSpan = sDate2 - sDate1;
+    dateSpan = Math.abs(dateSpan);
+    iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+    return iDays
+  },
+
+  // 显示错误提示
+  showTips: function(msg) {
+    console.log(utils);
+    let options = {
+      msg: msg,
+      duration: 2000,
+      type: "danger"
+    };
+    utils.toast(options);
+  },
+
+  //起始日期监听
   startDateChange(e) {
     this.setData({
       startDate: e.detail.value
     })
+    if (e.detail.value >= this.data.endDate) {
+      this.showTips("开始时间必须小于结束时间");
+    } else {
+      let days = this.datedifference(this.data.startDate, this.data.endDate);
+
+      if(days > 30) {
+        this.showTips("仅可显示30天内的签到信息");
+        return;
+      }
+      //请求数据
+      console.log(this.data.endDate)
+      this.getServerData();
+    }
   },
+
+  //截止日期监听
   endDateChange(e) {
     this.setData({
       endDate: e.detail.value
     })
+    if (e.detail.value <= this.data.startDate) {
+      this.showTips("开始时间必须小于结束时间");
+    } else {
+      let days = this.datedifference(this.data.startDate, this.data.endDate);
+
+      if (days > 30) {
+        this.showTips("仅可显示30天内的签到信息");
+        return;
+      }
+      //请求数据
+      this.getServerData();
+    }
   },
-  getDate:function() {
+
+  getDate: function() {
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000;
     var date = new Date(timestamp * 1000);
@@ -60,7 +149,7 @@ Page({
     var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
     // console.log(Y + "-" + M + "-" + D);
     this.setData({
-      endDate:Y + "-" + M + "-" + D
+      endDate: Y + "-" + M + "-" + D
     })
     //减7天的时间戳：
     var before_timetamp = timestamp - 24 * 60 * 60 * 6;
@@ -76,7 +165,7 @@ Page({
     var D_before = before_timetamp.getDate() < 10 ? '0' + before_timetamp.getDate() : before_timetamp.getDate();
     // console.log(Y_before + "-" + M_before + "-" + D_before)
     this.setData({
-      startDate:Y_before + "-" + M_before + "-" + D_before
+      startDate: Y_before + "-" + M_before + "-" + D_before
     })
   },
 
@@ -84,24 +173,20 @@ Page({
     //查询最近一周内的数据(data 中的 endDate startDate 为当前日期，一周前日期)
     console.log(this.data.endDate);
     console.log(this.data.startDate);
-        
+
     //查询最近一周内的数据
 
 
     console.log(this.data.data);
     //下面这个根据需要保存后台数据，我是为了模拟更新柱状图，所以存下来了
     _self.serverData = this.data.data;
-    let LineA = {
-      categories: [],
-      series: []
-    };
+
     //这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
-    LineA.categories = this.data.data.LineA.categories;
-    LineA.series = this.data.data.LineA.series;
-    _self.showLineA("canvasLineA", LineA);
+    this.loadChartData();
+
   },
 
-  showLineA(canvasId, chartData) {
+  showLineA(canvasId, chartData, max) {
     canvaLineA = new uCharts({
       $this: _self,
       canvasId: canvasId,
@@ -116,7 +201,7 @@ Page({
       pixelRatio: _self.pixelRatio,
       categories: chartData.categories,
       series: chartData.series,
-      animation: false,
+      animation: true,
       enableScroll: true, //开启图表拖拽功能
       xAxis: {
         disableGrid: false,
@@ -131,9 +216,9 @@ Page({
       yAxis: {
         //disabled:true
         gridType: 'dash',
-        splitNumber: 10,
+        splitNumber: max <= 1 ? 1 : parseInt(max) + 1,
         min: 0,
-        max: 10,
+        max: max,
         format: (val) => {
           return val.toFixed(0)
         },

@@ -1,21 +1,26 @@
-<cu-custom bgColor="bg-gradual-pink">
-  <view slot="content">签到</view>
-</cu-custom>
+<view style="height: 90%">
+  <cu-custom bgColor="bg-gradual-pink">
+    <view slot="content">签到</view>
+  </cu-custom>
 
-<map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 810rpx;"></map>
-<tui-tips position="center" id="tui-tips-ctx"></tui-tips>
-<view class="signInBox">
-  <view class="cu-card article no-card">
-    <view class="cu-item shadow padding">
-      <view class="flex justify-between text-xl padding">
-        <view>{{msg}}</view>
-        <view class="refresh" bindtap="geta">刷新</view> 
-      </view>
-      <view class="flex justify-center padding">
-        <button class="cu-btn bg-gradual-pink lg round" style="width:690rpx" bindtap="signIn">{{sign}}</button>
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 75%;"></map>
+
+
+  <view class="cavas-cls">
+    <tui-tips position="center" id="tui-tips-ctx"></tui-tips>
+
+    <view class="signInBox">
+      <view class="cu-card article no-card">
+        <view class="cu-item shadow padding">
+          <view class="flex justify-between text-xl padding">
+            <view>{{msg}}</view>
+            <view class="refresh" bindtap="geta">刷新</view>
+          </view>
+          <view class="flex justify-center padding">
+            <button class="cu-btn bg-gradual-pink lg round" style="width:690rpx" bindtap="signIn">{{sign}}</button>
+          </view>
+        </view>
       </view>
     </view>
   </view>
 </view>
-
-

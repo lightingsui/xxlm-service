@@ -1,8 +1,10 @@
-<cu-custom bgColor="bg-gradual-pink">
-	<view slot="content">考勤图表</view>
-</cu-custom>
+<view style="height: 100px">
+  <cu-custom bgColor="bg-gradual-pink">
+    <view slot="content">考勤图表</view>
+  </cu-custom>
 
-<view class="bg-white padding flex justify-between">
+
+<!-- <view class="bg-white padding flex justify-between">
   <view class="title text-xxl rank" style="margin-left:280rpx">排行榜</view>
   <view>
     <button class="cu-btn bg-gradual-pink round" bindtap="look" style="width:160rpx">
@@ -10,28 +12,31 @@
     查看
     </button>
   </view>
-</view>
+</view> -->
 
-  
-<view class="cu-form-group margin-top">
-	<view class="title">起始日期</view>
-	<picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="startDateChange">
-		<view class="picker">
-			{{startDate}}
-		</view>
-	</picker>
-</view>
-<view class="cu-form-group">
-	<view class="title">截止日期</view>
-	<picker class="bottom-solid" mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="endDateChange">
-		<view class="picker">
-			{{endDate}}
-		</view>
-	</picker>
-</view>
 
-<view class="bg-white margin-top">
-  <canvas canvas-id="canvasColumn" id="canvasColumn" class="chart" disable-scroll="true" bindtouchstart="touchColumn" bindtouchmove="moveColumn" bindtouchend="touchEndColumn"></canvas>
-</view>
+  <view class="cu-form-group margin-top">
+    <view class="title">起始日期</view>
+    <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="startDateChange">
+      <view class="picker">
+        {{startDate}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">截止日期</view>
+    <picker class="bottom-solid" mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="endDateChange">
+      <view class="picker">
+        {{endDate}}
+      </view>
+    </picker>
+  </view>
 
-<view class="bg-white padding text-gray">注：默认显示近一周内排行榜，如果想要查看其它时间段内排行榜，请选择起始日期</view>
+  <view class="bg-white margin-top">
+    <canvas canvas-id="canvasColumn" id="canvasColumn" class="chart" disable-scroll="true" bindtouchstart="touchColumn" bindtouchmove="moveColumn" bindtouchend="touchEndColumn"></canvas>
+  </view>
+
+  <view style="margin-bottom: 100px" class="bg-white padding text-gray">
+    注：默认显示近一周内排行榜，如果想要查看其它时间段内排行榜，请选择起始日期
+  </view>
+</view>

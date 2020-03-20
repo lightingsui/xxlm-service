@@ -1,5 +1,4 @@
 import uCharts from '../../../utils/u-charts.js';
-import util from '../../../utils/util.js';
 
 var _self;
 var canvaColumn=null;
@@ -28,7 +27,6 @@ Component({
     attached: function () {
 
       this.getDate();
-
       _self = this;
       this.cWidth=400;
       this.cHeight=300;
@@ -44,11 +42,30 @@ Component({
       console.log(this.data.startDate)
     },
 
+    //起始日期监听
     startDateChange(e) {
       this.setData({
         startDate: e.detail.value
       })
+      if(e.detail.value >= this.data.endDate) {
+        wx.showToast({
+          title: '请选择合理的时间段',
+          icon:'none'
+        })
+      }else {
+        //请求数据
+      }
+      if(e.detail.value <= this.data.startDate) {
+        wx.showToast({
+          title: '请选择合理的时间段',
+          icon:'none'
+        })
+      }else {
+        //请求数据
+      }
     },
+
+    //截止日期监听
     endDateChange(e) {
       this.setData({
         endDate: e.detail.value
