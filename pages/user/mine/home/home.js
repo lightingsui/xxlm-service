@@ -17,7 +17,7 @@ Component({
 
   methods: {
     // 显示错误提示
-    showTips: function (msg) {
+    showTips: function(msg) {
       console.log(utils);
       let options = {
         msg: msg,
@@ -77,49 +77,65 @@ Component({
     //上传头像
     upload: function(e) {
       let _this = this;
+      console.log("开启上传");
       wx.chooseImage({
         count: 1, //默认9
         sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album'], //从相册选择
         success: (res) => {
+          _this.hideModal();
           wx.uploadFile({
             url: 'https://api.lightingsui.com/user/upload-user-head',
             filePath: res.tempFilePaths[0],
             name: 'file',
             header: {
-              'Content-Type': "multipart/form-data"
+              'content-type': 'multipart/form-data'
             },
-            success: function (res) {
+            success: function(res) {
+              console.log("上传成功了");
+              console.log(res.data)
+              console.log(typeof(res.data))
+              
+              let resJson =JSON.parse(res.data);
+              console.log(resJson.data)
               // 上传成功
-              if(res.data.data != null) {
+              if (resJson.data != null) {
+                console.log("xiuagi1")
+                
                 // 修改用户头像
                 wx.request({
                   url: 'https://api.lightingsui.com/user/change-user-head',
                   method: "POST",
                   data: {
-                    userHeadUrl: res.data.data
+                    userHeadUrl: resJson.data
                   },
                   header: {
                     "Cookie": app.globalData.header.Cookie,
                     "content-type": "application/x-www-form-urlencoded"
                   },
                   success: function(res) {
-                    if(res.data.data != null && res.data.data == true) {
-                      _this.hideModal();
+                    console.log(res.data);
+                    if (res.data.data != null && res.data.data == true) {
+        
                       _this.getUSernameAndHead();
                     }
+                  },
+                  fail: function(res) {
+                    console.log(res);
                   }
+                  
                 })
               }
             },
-            fail: function (res) {
+            fail: function(res) {
+              console.log(res);
               _this.hideModal();
               // 上传失败
               wx.showToast({
                 title: '图片仅支持jpg、png格式，且文件大小限制为2MB',
                 icon: "none"
               })
-            
+
             }
           })
         }

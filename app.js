@@ -20,6 +20,7 @@ App({
     header: { 'Cookie': '' },
     noticeNum:0,
     infoNum:0,
-    blogNum:9
+    blogNum:9,
+    isBackContinue: false
   }
 })

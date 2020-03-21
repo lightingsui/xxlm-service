@@ -210,7 +210,7 @@ Component({
             _this.setData({
               confirmPush: false
             })
-
+            app.globalData.isBackContinue = true;
             wx.navigateBack({
               delta: 1
             })

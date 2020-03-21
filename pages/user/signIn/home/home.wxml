@@ -14,10 +14,10 @@
         <view class="cu-item shadow padding">
           <view class="flex justify-between text-xl padding">
             <view>{{msg}}</view>
-            <view class="refresh" bindtap="geta">刷新</view>
+            <view class="refresh" bindtap="getLocation">刷新</view>
           </view>
           <view class="flex justify-center padding">
-            <button class="cu-btn bg-gradual-pink lg round" style="width:690rpx" bindtap="signIn">{{sign}}</button>
+            <button disabled="{{disabled}}" class="cu-btn {{disabled == false ? 'bg-gradual-pink' : 'bg-gradual-gray'}} lg round" style="width:690rpx" bindtap="signIn">{{sign}}</button>
           </view>
         </view>
       </view>

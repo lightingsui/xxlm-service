@@ -21,8 +21,11 @@ Component({
   pageLifetimes: {
     show: function () {
        //发送请求加载 tabArray, information 数组
-      this.getAllCategory();
-      this.getAllDetails();
+      if (app.globalData.isBackContinue) {
+        this.getAllCategory();
+        this.getAllDetails();
+        app.globalData.isBackContinue = false;
+      }
     },
   },
 

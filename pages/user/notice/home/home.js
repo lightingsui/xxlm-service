@@ -26,9 +26,11 @@ Component({
 
   pageLifetimes: {
     show: function() {
-      this.checkUserIdentify();
-      this.loadFormData();
-      
+      if (app.globalData.isBackContinue) {
+        this.checkUserIdentify();
+        this.loadFormData();
+        app.globalData.isBackContinue = false;
+      }
     }
   },
 

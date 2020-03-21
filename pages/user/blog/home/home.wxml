@@ -27,7 +27,7 @@
 
       <view class="cu-form-group"> 
         <text class="text-black text-bold infoTitle" selectable="true">{{item.title}}</text>
-        <view class="cuIcon-delete" wx:if="{{isSelf}}" bindtap="showModal" data-target="bottomModal" data-id="{{item.id}}"></view>
+        <view class="cuIcon-delete" wx:if="{{item.isSelf}}" bindtap="showModal" data-target="bottomModal" data-id="{{item.id}}"></view>
       </view>
 
       <view class="cu-form-group align-center"> 

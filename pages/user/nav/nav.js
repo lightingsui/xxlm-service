@@ -5,13 +5,13 @@ Page({
     PageCur: 'notice',
 
     noticeNum: 'notice',
-    noticeIsShow: true,
+    noticeIsShow: false,
 
     infoNum: '',
-    infoIsShow: true,
+    infoIsShow: false,
 
     blogNum: '',
-    blogIsShow: true,
+    blogIsShow: false,
     scrollTop: 0
   },
   NavChange(e) {
@@ -81,7 +81,10 @@ Page({
           _this.setData({
             noticeNum: 0,
             infoNum: obj.bcAssetsCount,
-            blogNum: obj.bcBlogCount
+            infoIsShow: true,
+            blogNum: obj.bcBlogCount,
+            blogIsShow: true
+
           })
 
           if (_this.data.noticeNum == 0) {

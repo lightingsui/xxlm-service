@@ -6,8 +6,9 @@ Component({
     styleIsolation: 'shared'
   },
   data: {
-    latitude: null,
-    longitude: null,
+    disabled: true,
+    latitude: 39.9088230000,
+    longitude: 116.3974700000,
     //签到位置中心
     latCenter: null,
     longCenter: null,
@@ -64,10 +65,12 @@ Component({
 
           if (distance < that.data.range) {
             that.setData({
+              disabled: false,
               msg: '已在考勤范围内'
             })
           } else {
             that.setData({
+              disabled: true,
               msg: '不在考勤范围内'
             })
           }
@@ -170,6 +173,7 @@ Component({
         success: function(res) {
           if(res.data.data != null) {
             console.log("获取状态");
+            console.log(res.data.data);
             _this.setData({
               signFlag: res.data.data
             })
