@@ -17,7 +17,7 @@
             <view class="refresh" bindtap="getLocation">刷新</view>
           </view>
           <view class="flex justify-center padding">
-            <button disabled="{{disabled}}" class="cu-btn {{disabled == false ? 'bg-gradual-pink' : 'bg-gradual-gray'}} lg round" style="width:690rpx" bindtap="signIn">{{sign}}</button>
+            <button  class="cu-btn  {{disabled == false ? 'bg-gradual-pink' : 'back-disabled'}} lg round" style="width:690rpx" bindtap="signIn">{{sign}}</button>
           </view>
         </view>
       </view>

@@ -1,3 +1,4 @@
+<tui-tips position="center" id="tuit-tips-ctx"></tui-tips>
 <view style="height: 100px">
   <cu-custom bgColor="bg-gradual-pink">
     <view slot="content">考勤图表</view>
@@ -17,7 +18,7 @@
 
   <view class="cu-form-group margin-top">
     <view class="title">起始日期</view>
-    <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="startDateChange">
+    <picker mode="date" value="{{date}}" start="2020-01-01" end="2025-01-01" bindchange="startDateChange">
       <view class="picker">
         {{startDate}}
       </view>
@@ -40,3 +41,4 @@
     注：默认显示近一周内排行榜，如果想要查看其它时间段内排行榜，请选择起始日期
   </view>
 </view>
+

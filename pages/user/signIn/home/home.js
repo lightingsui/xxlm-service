@@ -79,65 +79,67 @@ Component({
     },
 
     signIn: function() {
-      if (parseInt(new Date().getTime() / 1000) - parseInt(this.data.lastSignDate / 1000) < 5) {
-        wx.showToast({
-          title: '为了防止您恶意刷签到，请五秒后再试',
-          icon: 'none',
-          duration: 1000
-        })
-        return;
-      }
-      let _this = this;
-      if (this.data.sign == "签到") {
-      
-        //发送请求记录签到时间
-        wx.request({
-          url: 'https://api.lightingsui.com/sign-in/in-out-resolve',
-          data: {
-            signType: 0
-          },
-          header: app.globalData.header,
-          success: function(res) {
-            if(res.data.data != null && res.data.data == true) {
-              wx.showToast({
-                title: '签到成功',
-                icon: 'none',
-                duration: 1000
-              })
-              _this.setData({
-                sign: '签退'
-              })
+      if(!this.data.disabled) {
+        if (parseInt(new Date().getTime() / 1000) - parseInt(this.data.lastSignDate / 1000) < 5) {
+          wx.showToast({
+            title: '为了防止您恶意刷签到，请五秒后再试',
+            icon: 'none',
+            duration: 1000
+          })
+          return;
+        }
+        let _this = this;
+        if (this.data.sign == "签到") {
+
+          //发送请求记录签到时间
+          wx.request({
+            url: 'https://api.lightingsui.com/sign-in/in-out-resolve',
+            data: {
+              signType: 0
+            },
+            header: app.globalData.header,
+            success: function (res) {
+              if (res.data.data != null && res.data.data == true) {
+                wx.showToast({
+                  title: '签到成功',
+                  icon: 'none',
+                  duration: 1000
+                })
+                _this.setData({
+                  sign: '签退'
+                })
+              }
             }
-          }
-        })
+          })
 
 
-      } else {
+        } else {
 
-        //发送请求记录签退时间
-        wx.request({
-          url: 'https://api.lightingsui.com/sign-in/in-out-resolve',
-          data: {
-            signType: 1
-          },
-          header: app.globalData.header,
-          success: function (res) {
-            if(res.data.data != null && res.data.data == true) {
-              _this.setData({
-                sign: '签到'
-              })
-              wx.showToast({
-                title: '签退成功',
-                icon: 'none',
-                duration: 1000,
-              })
+          //发送请求记录签退时间
+          wx.request({
+            url: 'https://api.lightingsui.com/sign-in/in-out-resolve',
+            data: {
+              signType: 1
+            },
+            header: app.globalData.header,
+            success: function (res) {
+              if (res.data.data != null && res.data.data == true) {
+                _this.setData({
+                  sign: '签到'
+                })
+                wx.showToast({
+                  title: '签退成功',
+                  icon: 'none',
+                  duration: 1000,
+                })
+              }
             }
-          }
+          })
+        }
+        this.setData({
+          lastSignDate: new Date().getTime()
         })
       }
-      this.setData({
-        lastSignDate: new Date().getTime()
-      })
     },
 
     // 获取精度、签到经纬度

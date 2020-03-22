@@ -125,6 +125,13 @@ Component({
                   }
                   
                 })
+              } else {
+                _this.hideModal();
+                // 上传失败
+                wx.showToast({
+                  title: '图片仅支持jpg、png格式，且文件大小限制为2MB',
+                  icon: "none"
+                })
               }
             },
             fail: function(res) {

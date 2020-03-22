@@ -7,15 +7,19 @@ Page({
     noticeNum: 'notice',
     noticeIsShow: false,
 
-    infoNum: '',
+    infoNum: null,
     infoIsShow: false,
 
-    blogNum: '',
+    blogNum: null,
     blogIsShow: false,
     scrollTop: 0
   },
   NavChange(e) {
     let obj = e.currentTarget.dataset.cur;
+    this.setData({
+      infoIsShow: false,
+      blogIsShow: false
+    })
     if (obj == "information") {
       console.log("进入了")
       this.deleteUnreadAssetsCount();
@@ -79,29 +83,13 @@ Page({
         let obj = res.data.data;
         if (obj != null) {
           _this.setData({
-            noticeNum: 0,
+            noticeNum: null,
             infoNum: obj.bcAssetsCount,
-            infoIsShow: true,
+            infoIsShow: obj.bcAssetsCount == 0 ? false : true,
             blogNum: obj.bcBlogCount,
-            blogIsShow: true
+            blogIsShow: obj.bcBlogCount == 0 ? false : true
 
           })
-
-          if (_this.data.noticeNum == 0) {
-            _this.setData({
-              noticeIsShow: false
-            })
-          }
-          if (_this.data.infoNum == 0) {
-            _this.setData({
-              infoIsShow: false
-            })
-          }
-          if (_this.data.blogNum == 0) {
-            _this.setData({
-              blogIsShow: false
-            })
-          }
         }
       }
     })

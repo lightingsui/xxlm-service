@@ -1,4 +1,5 @@
 const app = getApp();
+const utils = require('../../../../components/utils/utils');
 Component({
   options: {
     styleIsolation: 'shared'
@@ -16,6 +17,16 @@ Component({
   },
 
   methods: {
+    // 显示错误提示
+    showTips: function (msg) {
+      console.log(utils);
+      let options = {
+        msg: msg,
+        duration: 2000,
+        type: "danger"
+      };
+      utils.toast(options);
+    },
     // 获取用户头像与姓名
     getUSernameAndHead: function () {
       let _this = this;
@@ -42,25 +53,99 @@ Component({
         modalName: e.currentTarget.dataset.target
       })
     },
+    logOut(e) {
+      this.setData({
+        modalName: null
+      });
+      // 请求清除session
+      wx.request({
+        url: 'https://api.lightingsui.com/user/delete-session',
+        header: app.globalData.header,
+        success: function (res) {
+          // 界面跳转
+          wx.reLaunch({
+            url: '/pages/index/index'
+          })
+        }
+      })
+    },
     hideModal(e) {
       this.setData({
         modalName: null
       })
     },
   
-     //上传头像
-     upload: function(e) {
+    //上传头像
+    upload: function (e) {
+      let _this = this;
+      console.log("开启上传");
       wx.chooseImage({
         count: 1, //默认9
         sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album'], //从相册选择
         success: (res) => {
-          this.setData({
-            avatar: res.tempFilePaths
-          })
-          this.hideModal();
+          _this.hideModal();
+          wx.uploadFile({
+            url: 'https://api.lightingsui.com/user/upload-user-head',
+            filePath: res.tempFilePaths[0],
+            name: 'file',
+            header: {
+              'content-type': 'multipart/form-data'
+            },
+            success: function (res) {
+              console.log("上传成功了");
+              console.log(res.data)
+              console.log(typeof (res.data))
 
-          //发送请求上传照片
+              let resJson = JSON.parse(res.data);
+              console.log(resJson.data)
+              // 上传成功
+              if (resJson.data != null) {
+                console.log("xiuagi1")
+
+                // 修改用户头像
+                wx.request({
+                  url: 'https://api.lightingsui.com/user/change-user-head',
+                  method: "POST",
+                  data: {
+                    userHeadUrl: resJson.data
+                  },
+                  header: {
+                    "Cookie": app.globalData.header.Cookie,
+                    "content-type": "application/x-www-form-urlencoded"
+                  },
+                  success: function (res) {
+                    console.log(res.data);
+                    if (res.data.data != null && res.data.data == true) {
+
+                      _this.getUSernameAndHead();
+                    }
+                  },
+                  fail: function (res) {
+                    console.log(res);
+                  }
+
+                })
+              } else {
+                _this.hideModal();
+                // 上传失败
+                wx.showToast({
+                  title: '图片仅支持jpg、png格式，且文件大小限制为2MB',
+                  icon: "none"
+                })
+              }
+            },
+            fail: function (res) {
+              console.log(res);
+              _this.hideModal();
+              // 上传失败
+              wx.showToast({
+                title: '图片仅支持jpg、png格式，且文件大小限制为2MB',
+                icon: "none"
+              })
+
+            }
+          })
         }
       });
     },

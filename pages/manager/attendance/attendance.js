@@ -1,4 +1,5 @@
 import uCharts from '../../../utils/u-charts.js';
+const app = getApp();
 
 var _self;
 var canvaColumn=null;
@@ -10,6 +11,7 @@ Component({
   data: {
     startDate: '',
     endDate: '',
+    curDate: '',
 
     cWidth:'',
     cHeight:'',
@@ -36,6 +38,58 @@ Component({
   },
 
   methods: {
+    // 加载数据
+    loadDate: function() {
+      let _this = this;
+
+      wx.request({
+        url: 'https://api.lightingsui.com/sign-in/select-all-user-statistics',
+        data: {
+          startDate: _this.data.startDate,
+          endDate: _this.data.endDate
+        },
+        success: function(res) {
+          if(res.data.data != null) {
+            let users = [];
+            let count = [];
+            let max = 0;
+            for(let i = 0; i < res.data.data.length; i++) {
+              let obj = res.data.data[i];
+              users.push(obj.username);
+              count.push(obj.singInDateCount);
+
+              if (obj.singInDateCount > max) {
+                
+                max = obj.singInDateCount;
+                console.log("dayule" + max);
+              }
+            }
+
+            let userJson = {
+              "categories": users,
+              "series": [{
+                "name": "日均工作时长",
+                "data": count
+              }]
+            }
+
+            _self.showColumn("canvasColumn", userJson, max);
+          }
+        }
+      })
+    },
+
+    datedifference: function (sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式 
+      var dateSpan,
+        tempDate,
+        iDays;
+      sDate1 = Date.parse(sDate1);
+      sDate2 = Date.parse(sDate2);
+      dateSpan = sDate2 - sDate1;
+      dateSpan = Math.abs(dateSpan);
+      iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+      return iDays
+    },
     look:function() {
       //根据起始截止日期查询
       console.log(this.data.endDate)
@@ -49,19 +103,34 @@ Component({
       })
       if(e.detail.value >= this.data.endDate) {
         wx.showToast({
-          title: '请选择合理的时间段',
-          icon:'none'
+          title: '起始日期应大于截止时间',
+          icon: 'none'
         })
       }else {
+        let days = this.datedifference(this.data.startDate, this.data.endDate);
+
+        if (days > 30) {
+          wx.showToast({
+            title: '仅可显示最近30天内的签到统计信息',
+            icon: 'none'
+          })
+          return;
+        }
+
+        if (this.datedifference(this.data.curDate, this.data.startDate) > 0) {
+          wx.showToast({
+            title: '起始日期不可以大于今天',
+            icon: 'none'
+          })
+          this.setData({
+            startDate: this.data.curDate
+          })
+          return;
+        }
+
         //请求数据
-      }
-      if(e.detail.value <= this.data.startDate) {
-        wx.showToast({
-          title: '请选择合理的时间段',
-          icon:'none'
-        })
-      }else {
-        //请求数据
+        this.loadDate();
+        
       }
     },
 
@@ -70,6 +139,37 @@ Component({
       this.setData({
         endDate: e.detail.value
       })
+
+      if (e.detail.value < this.data.startDate) {
+        wx.showToast({
+          title: '起始日期应大于截止时间',
+          icon: 'none'
+        })
+      } else {
+        let days = this.datedifference(this.data.startDate, this.data.endDate);
+
+        if (days > 30) {
+          wx.showToast({
+            title: '仅可显示30天内的签到信息',
+            icon: 'none'
+          })
+          return;
+        }
+
+        if (this.datedifference(this.data.curDate, this.data.endDate) > 0) {
+          wx.showToast({
+            title: '截止日期不可以大于今天',
+            icon: 'none'
+          })
+          this.setData({
+            endDate: this.data.curDate
+          })
+          return;
+        }
+
+        //请求数据
+        this.loadDate();
+      }
     },
 
     getDate:function() {
@@ -84,7 +184,8 @@ Component({
       var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
       // console.log(Y + "-" + M + "-" + D);
       this.setData({
-        endDate:Y + "-" + M + "-" + D
+        endDate:Y + "-" + M + "-" + D,
+        curDate: Y + "-" + M + "-" + D
       })
       //减7天的时间戳：
       var before_timetamp = timestamp - 24 * 60 * 60 * 6;
@@ -111,14 +212,9 @@ Component({
 
 
       //下面这个根据需要保存后台数据，我是为了模拟更新柱状图，所以存下来了
-      _self.serverData=this.data.data;
-      let Column={categories:[],series:[]};
-      //这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
-      Column.categories=this.data.data.categories;
-      Column.series=this.data.data.series;
-      _self.showColumn("canvasColumn",Column);
+      this.loadDate();
     },
-    showColumn(canvasId,chartData){
+    showColumn(canvasId,chartData, max){
       canvaColumn=new uCharts({
         $this:_self,
         canvasId: canvasId,
@@ -144,9 +240,9 @@ Component({
         yAxis: {
           //disabled:true
           gridType:'dash',
-          splitNumber:10,
+          splitNumber: max <= 1 ? 1 : parseInt(max) + 1,
           min:0,
-          max:10,
+          max: parseInt(max) + 1,
           format:(val)=>{return val.toFixed(0)},
         },
         dataLabel: true,

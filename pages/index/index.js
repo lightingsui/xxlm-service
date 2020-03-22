@@ -13,7 +13,7 @@ Page({
     modelName: null,
     modelTitle: "",
     modelText: "",
-    userStatus: 0,
+    userStatus: 1,
     loadProgress: 0,
     CustomBar: app.globalData.CustomBar,
     disabled: false,

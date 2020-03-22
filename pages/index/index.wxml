@@ -47,12 +47,12 @@
     <view class="cu-form-group" style="background-color: rgb(242, 242, 242)">
       <radio-group bindchange="userChange">
         <text style="font-size: 13px; color:rgb(84, 84, 84)">普通用户</text>
-        <radio class="radio" value="0" style="left: 10rpx" checked></radio>
+        <radio class="radio" value="0" style="left: 10rpx" ></radio>
 
         <text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
 
         <text decode="{{true}}" style="font-size: 13px; color:rgb(84, 84, 84)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理员&nbsp;&nbsp;&nbsp;</text>
-        <radio class="radio" value="1"></radio>
+        <radio class="radio" value="1" checked></radio>
       </radio-group>
 
     </view>
