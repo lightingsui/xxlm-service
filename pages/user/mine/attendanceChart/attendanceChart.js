@@ -8,6 +8,7 @@ Page({
   data: {
     startDate: '',
     endDate: '',
+    curDate : null,
 
     currentDate: '',
 
@@ -121,7 +122,16 @@ Page({
     })
     if (e.detail.value >= this.data.endDate) {
       this.showTips("开始时间必须小于结束时间");
-    } else {
+    } else if (this.datedifference(this.data.curDate, this.data.startDate) > 0) {
+      wx.showToast({
+        title: '起始日期不可以大于今天',
+        icon: 'none'
+      })
+      this.setData({
+        startDate: this.data.curDate
+      })
+      return;
+    }else {
       let days = this.datedifference(this.data.startDate, this.data.endDate);
 
       if(days > 30) {
@@ -141,6 +151,15 @@ Page({
     })
     if (e.detail.value <= this.data.startDate) {
       this.showTips("开始时间必须小于结束时间");
+    } else if (this.datedifference(this.data.curDate, this.data.endDate) > 0) {
+      wx.showToast({
+        title: '截止日期不可以大于今天',
+        icon: 'none'
+      })
+      this.setData({
+        endDate: this.data.curDate
+      })
+      return;
     } else {
       let days = this.datedifference(this.data.startDate, this.data.endDate);
 
@@ -165,7 +184,8 @@ Page({
     var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
     // console.log(Y + "-" + M + "-" + D);
     this.setData({
-      endDate: Y + "-" + M + "-" + D
+      endDate: Y + "-" + M + "-" + D,
+      curDate: Y + "-" + M + "-" + D
     })
     //减7天的时间戳：
     var before_timetamp = timestamp - 24 * 60 * 60 * 6;

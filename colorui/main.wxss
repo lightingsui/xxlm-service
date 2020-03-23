@@ -333,8 +333,8 @@ radio.olive[checked] .wx-radio-input {
 switch.green[checked] .wx-switch-input,
 checkbox.green[checked] .wx-checkbox-input,
 checkbox[checked] .wx-checkbox-input,
-radio.green[checked] .wx-radio-input {
-	border-color: var(--green) !important;
+radio.blue[checked] .wx-radio-input {
+	border-color: var(--blue) !important;
 }
 
 switch.cyan[checked] .wx-switch-input,
@@ -429,9 +429,9 @@ switch.green[checked] .wx-switch-input,
 switch[checked] .wx-switch-input,
 checkbox.green[checked] .wx-checkbox-input,
 checkbox[checked] .wx-checkbox-input,
-radio.green[checked] .wx-radio-input,
+radio.blue[checked] .wx-radio-input,
 radio[checked] .wx-radio-input {
-	background-color: var(--green) !important;
+	background-color: var(--blue) !important;
 	color: var(--white) !important;
 }
 

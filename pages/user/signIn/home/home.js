@@ -27,8 +27,7 @@ Component({
   },
 
   created: function() {
-    // 初始请求位置信息
-    this.getLocation();
+    
     // 获取精度、签到经纬度
     this.getDetails();
     // 判断签到是否过期
@@ -43,6 +42,11 @@ Component({
       wx.getLocation({ //调用API得到经纬度
         type: 'gcj02',
         success: function(res) {
+          let locationResult = that.authorization();
+          if(locationResult == false) {
+            return;
+          }
+
           console.log(res.latitude);
           console.log(res.longitude);
           that.setData({
@@ -76,18 +80,46 @@ Component({
           }
         },
         fail: function(res) {
-          wx.getSetting({
-            success: function (res) {
-              if (!res.authSetting['scope.userLocation']) {
-                console.log("请同意定位权限")
-              } else {
-                //用户已授权，但是获取地理位置失败，提示用户去系统设置中打开定位
-                console.log("请代开GPS定位")
-              }
-            }
-          })
+          that.authorization();
         }
       })
+    },
+    //定位权限开启提示
+    authorization: function () {
+      var that = this;
+      let sInfo = wx.getSystemInfoSync();
+      // console.log(sInfo);
+      that.setData({
+        locationAuthorized: sInfo.locationAuthorized,
+        locationEnabled: sInfo.locationEnabled
+      })
+
+      //允许微信使用定位的开关
+      if (this.data.locationAuthorized == false) {
+        wx.showToast({
+          title: '请开启微信使用定位权限',
+          icon: 'none',
+          duration: 2000
+        })
+        this.setData({
+          disabled: true
+        })
+        return false;
+      } else {
+        //地理位置的系统开关(系统GPS是否打开)
+        if (this.data.locationEnabled == false) {
+          wx.showToast({
+            title: '请开启手机位置信息',
+            icon: 'none',
+            duration: 2000
+          })
+          this.setData({
+            disabled: true
+          })
+          return false;
+        }
+      }
+      return true;
     },
 
     signIn: function() {
@@ -167,6 +199,9 @@ Component({
                 latCenter: res.data.data.centerLatitude,
                 range: res.data.data.centerRange
               })
+
+              // 初始请求位置信息
+              _this.getLocation();
             }
           }
         })
