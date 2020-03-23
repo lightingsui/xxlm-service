@@ -74,6 +74,18 @@ Component({
               msg: '不在考勤范围内'
             })
           }
+        },
+        fail: function(res) {
+          wx.getSetting({
+            success: function (res) {
+              if (!res.authSetting['scope.userLocation']) {
+                console.log("请同意定位权限")
+              } else {
+                //用户已授权，但是获取地理位置失败，提示用户去系统设置中打开定位
+                console.log("请代开GPS定位")
+              }
+            }
+          })
         }
       })
     },
