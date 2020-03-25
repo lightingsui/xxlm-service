@@ -6,6 +6,7 @@ var canvaLineA = null;
 
 Page({
   data: {
+    userId: null,
     startDate: '',
     endDate: '',
     curDate : null,
@@ -25,6 +26,9 @@ Page({
     }
   },
   onLoad: function() {
+    this.setData({
+      userId: wx.getStorageSync("identity").id
+    });
     console.log("加载了")
     this.getDate();
     
@@ -40,11 +44,11 @@ Page({
     let _this = this;
 
     wx.request({
-      url: 'https://api.lightingsui.com/sign-in/select-user-statistics',
-      header: app.globalData.header,
+      url: 'https://api.lightingsui.com/sign-in/admin-select-user-statistics',
       data: {
         startDate: _this.data.startDate,
-        endDate: _this.data.endDate
+        endDate: _this.data.endDate,
+        userId: _this.data.userId
       },
       success: function(res) {
         if (res.data.data != null && res.data.data.length != 0) {
@@ -95,8 +99,10 @@ Page({
   judgeOutOfDate: function () {
     let _this = this;
     wx.request({
-      url: 'https://api.lightingsui.com/sign-in/judge-out-of-date',
-      header: app.globalData.header,
+      url: 'https://api.lightingsui.com/sign-in/judge-assign-out-of-date',
+      data: {
+        userId: _this.data.userId
+      },
       success: function (res) {
         if (res.data.data != null && res.data.data == true) {
           // 获得当前用户签到\签退状态

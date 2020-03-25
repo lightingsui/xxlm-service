@@ -1,0 +1,29 @@
+<cu-custom bgColor="bg-gradual-pink"  isBack="{{true}}">
+  <view slot="backText">返回</view>
+	<view slot="content">考勤图表</view>
+</cu-custom>
+
+<view class="cu-form-group margin-top">
+	<view class="title">起始日期</view>
+	<picker mode="date" value="{{date}}" start="2020-01-01" end="2030-01-01" bindchange="startDateChange">
+		<view class="picker">
+			{{startDate}}
+		</view>
+	</picker>
+</view>
+<view class="cu-form-group">
+	<view class="title">截止日期</view>
+	<picker class="bottom-solid" mode="date" value="{{date}}" start="2020-01-01" end="2030-01-01" bindchange="endDateChange">
+		<view class="picker">
+			{{endDate}}
+		</view>
+	</picker>
+</view>
+
+<view class="bg-white margin-top">
+	<canvas style="animation: true" canvas-id="canvasLineA" id="canvasLineA" class="chart" disable-scroll="true" bindtouchstart="touchLineA" bindtouchmove="moveLineA" bindtouchend="touchEndLineA"></canvas>
+</view>
+
+<view class="bg-white padding text-gray">注：默认显示近一周内工作时长图表，如果想要查看其它时间段内工作时长，请选择起始日期</view>
+
+<tui-tips position="center" id="tuit-tips-ctx"></tui-tips>

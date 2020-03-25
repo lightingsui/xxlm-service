@@ -9,250 +9,9 @@ Component({
     CustomBar: app.globalData.CustomBar,
     hidden: true,
 
-    list:['A','B','C','D','F','G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    list: ['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
 
-    cityList : [
-      {
-          "title":"B",
-          "lists":[
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'保定'
-            },
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'北京'
-            },
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'白银'
-            },
-          ]
-      },
-      {
-          "title":"C",
-          "lists":[
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'重庆'
-            },
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'成都'
-            },
-            {
-              "avatar":'',
-              "gender":'',
-              "name":'长沙'
-            },
-          ]
-      },
-      {
-        "title":"D",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"E",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"F",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"G",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"H",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"I",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"J",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"K",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"L",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-      {
-        "title":"M",
-        "lists":[
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'重庆'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'成都'
-          },
-          {
-            "avatar":'',
-            "gender":'',
-            "name":'长沙'
-          },
-        ]
-      },
-    ]
+    cityList : []
   },
   lifetimes: {
     attached: function () {
@@ -262,6 +21,7 @@ Component({
       })
   
       //请求cityList数组
+      this.loadAllUsersMessage();
     },
     ready: function() {
       let that = this;
@@ -279,6 +39,58 @@ Component({
   },
 
   methods: {
+    // 请求人员信息
+    loadAllUsersMessage: function() {
+      let _this = this;
+
+      wx.request({
+        url: 'https://api.lightingsui.com/user/select-all-normal-users',
+        success: function(res) {
+          if(res.data.data != null) {
+            console.log(res.data.data);
+            _this.setData({
+              cityList: []
+            })
+            let obj = res.data.data;
+            let arrTemp = [];
+            let letterArray = [];
+
+            for(let userObj in obj) {
+              let userMessage = [];
+              for(let i = 0; i < obj[userObj].length; i++) {
+                userMessage.push({
+                  "id": obj[userObj][i].userId,
+                  "avatar": obj[userObj][i].userHead,
+                  "gender": obj[userObj][i].userSex == 0 ? 'female': 'male',
+                  "name": obj[userObj][i].name
+                })
+                // let flag = false;
+                // for(let j = 0; j < letterArray.length; j++) {
+                //   if(letterArray[j] == userObj) {
+                //     flag = true;
+                //     break;
+                //   }
+                // }
+
+                // if(!flag) {
+                //   letterArray.push(userObj);
+                // }
+              }
+              arrTemp.push({
+                "title": userObj,
+                "lists": userMessage
+              });
+            }
+
+            _this.setData({
+              // list: letterArray,
+              cityList: arrTemp
+            })
+          }
+        }
+      })
+    },
+
     //获取文字信息
     getCur(e) {
       this.setData({
@@ -331,6 +143,7 @@ Component({
 
 
       var identity = {
+        id: this.data.cityList[fid].lists[sid].id,
         avatar: this.data.cityList[fid].lists[sid].avatar,
         gender:this.data.cityList[fid].lists[sid].gender,
         name:this.data.cityList[fid].lists[sid].name
@@ -338,10 +151,10 @@ Component({
 
       wx.setStorageSync("identity", identity);
 
-      // console.log(identity)
+      console.log(identity)
 
       wx.navigateTo({
-        url: '/pages/manager/mine/member/member',
+        url: '../member/home/home',
       })
     }
   }

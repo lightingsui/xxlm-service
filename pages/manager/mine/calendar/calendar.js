@@ -2,6 +2,7 @@ const app = getApp();
 import calendar from '../../../../calendar/index.js';
 Page({
   data: {
+    userId: null,
     // 此处为日历自定义配置字段
     calendarConfig: {
       multi: true, // 是否开启多选,
@@ -26,6 +27,9 @@ Page({
   },
 
   onLoad:function (options) {
+    this.setData({
+      userId: wx.getStorageSync("identity").id
+    });
     //清除未签退的记录、发送请求获取markdates数组值
     this.judgeOutOfDate();
     
@@ -39,8 +43,10 @@ Page({
   judgeOutOfDate: function () {
     let _this = this;
     wx.request({
-      url: 'https://api.lightingsui.com/sign-in/judge-out-of-date',
-      header: app.globalData.header,
+      url: 'https://api.lightingsui.com/sign-in/judge-assign-out-of-date',
+      data: {
+        userId: _this.data.userId
+      },
       success: function (res) {
         if (res.data.data != null && res.data.data == true) {
           // 加载数据
@@ -56,11 +62,11 @@ Page({
     let _this = this;
     
     wx.request({
-      url: 'https://api.lightingsui.com/sign-in/select-user-calendar',
-      header: app.globalData.header,
+      url: 'https://api.lightingsui.com/sign-in/select-assign-user-calendar',
       data: {
         year: year,
-        month: month
+        month: month,
+        userId: _this.data.userId
       },
       success: function(res) {
         _this.setData({

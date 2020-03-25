@@ -4,11 +4,12 @@ Component({
     styleIsolation: 'shared'
   },
   data: {
+    userId: null,
     TabCur: 0,
-    tabValue: null,
+    tabValue: 0,
     scrollLeft:0,
 
-    isSelf:true,
+    delId: null,
 
     //tab
     tabArray: [],
@@ -16,57 +17,48 @@ Component({
     //数组
     information: [],
 
-    delId: null
   },
-  pageLifetimes: {
-    show: function () {
-       //发送请求加载 tabArray, information 数组
-      if (app.globalData.isBackContinue) {
-        this.getAllCategory();
-        this.getAllDetails();
-        app.globalData.isBackContinue = false;
-      }
-    },
-  },
-
   created: function() {
+    this.setData({
+      userId: wx.getStorageSync("identity").id
+    })
+    console.log(this.data.id)
     this.getAllCategory();
-    this.getAllDetails();
+    this.loadData();
   },
 
   methods: {
-    // 查询所有详细信息
-    getAllDetails: function () {
+    // 加载信息
+    loadData: function () {
       let _this = this;
+
       wx.request({
-        url: 'https://api.lightingsui.com/blog/select-blog-by-category-search',
-        header: app.globalData.header,
+        url: 'https://api.lightingsui.com/assets/select-assign-assets',
         data: {
-          cId: _this.data.tabValue,
+          userId: _this.data.userId,
+          category: _this.data.tabValue
         },
         success: function (res) {
           _this.setData({
             information: []
           })
-          console.log(res.data.data);
           if (res.data.data != null && res.data.data.length != 0) {
-            
-            let arrTemp = [];
+            let tempArr = [];
             for (let i = 0; i < res.data.data.length; i++) {
               let obj = res.data.data[i];
-              arrTemp.push({
-                id: obj.bdId,
-                title: obj.bdTitle,
-                text: obj.bdContent,
-                link: obj.bdLink,
+              tempArr.push({
+                id: obj.acId,
+                title: obj.acTitle,
+                text: obj.acContent,
+                link: obj.acLink == null || obj.acLink.length == 0 ? "无" : obj.acLink,
                 author: obj.assetsName,
-                date: obj.bdDate,
-                isSelf: obj.deleteShow
-              });
+                date: obj.acDate
+              })
+
             }
 
             _this.setData({
-              information: arrTemp
+              information: tempArr
             })
           }
         }
@@ -77,9 +69,9 @@ Component({
       let _this = this;
 
       wx.request({
-        url: 'https://api.lightingsui.com/blog/get-all-category',
+        url: 'https://api.lightingsui.com/assets/get-all-category',
         success: function (res) {
-          if (res.data.data != null && res.data.data.length != 0) {
+          if (res.data.data != null || res.data.data.length != 0) {
             _this.setData({
               tabArray: []
             })
@@ -91,8 +83,8 @@ Component({
             for (let i = 0; i < res.data.data.length; i++) {
               let obj = res.data.data[i];
               arrTemp.push({
-                tab: obj.blogCName,
-                mId: obj.blogCId
+                tab: obj.assetsName,
+                mId: obj.assetsId
               })
             }
 
@@ -109,29 +101,22 @@ Component({
         tabValue: e.currentTarget.dataset.mId,
         scrollLeft: (e.currentTarget.dataset.id-1)*60
       })
-
+  
       console.log(this.data.TabCur)
-      console.log(this.data.tabValue)
       //发送请求加载 information
-      this.getAllDetails();
+      this.loadData();
     },
-
-    share:function() {
-      wx.navigateTo({
-        url: '/pages/user/blog/blogPublish/blogPublish',
-      })
-    },
-
+  
     search:function() {
       wx.navigateTo({
-        url: '/pages/user/blog/blogSearch/blogSearch',
+        url: '/pages/manager/mine/dataSearch/dataSearch',
       })
     },
 
     showModal(e) {
       this.setData({
         modalName: e.currentTarget.dataset.target,
-        delId: e.currentTarget.dataset.id
+        delId: e.currentTarget.dataset.delId
       })
     },
     hideModal(e) {
@@ -139,23 +124,22 @@ Component({
         modalName: null
       })
     },
-
+  
     infoConfirm:function(e){
       this.setData({
         modalName: null
       })
-
+  
       //发送请求删除数据
-      console.log(this.data.delId);
       let _this = this;
       wx.request({
-        url: 'https://api.lightingsui.com/blog/delete-by-id',
+        url: 'https://api.lightingsui.com/assets/delete-by-id',
         data: {
           delId: this.data.delId
         },
         success: function (res) {
           if (res.data.data != null && res.data.data != false) {
-            _this.getAllDetails();
+            _this.loadData();
           }
         }
       })

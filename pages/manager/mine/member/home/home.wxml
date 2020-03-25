@@ -1,0 +1,41 @@
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+</cu-custom>
+
+<view class="cu-card">
+  <view class="cu-item shadow flex padding" style="padding:80rpx 0 80rpx 0">
+    <view class="cu-avatar round xl" style="margin-left:50rpx; background-image:url({{identity[0].avatar}});">
+      <view class="cu-tag badge cuIcon-{{identity[0].gender}} bg-pink"></view>
+    </view>
+    <!-- <view class="content margin-left"> -->
+      <text class="text-xl" style="margin-left:50rpx"> {{identity[0].name}}</text>
+    <!-- </view> -->
+  </view>
+</view>
+
+
+<view class="cu-list menu card-menu margin-bottom-xl">
+    <view bindtap="transferTo" data-url="/pages/manager/mine/dataShare/dataShare" class="cu-item arrow" >
+      <view class="content" hover-class="none">
+        <text>资料分享</text>
+      </view>
+    </view>
+    <view  bindtap="transferTo" class="cu-item arrow" data-url="/pages/manager/mine/blogShare/blogShare">
+      <view class="content" hover-class="none">
+        <text>博客分享</text>
+      </view>
+    </view>
+
+    <view bindtap="transferTo" class="cu-item arrow" data-url="/pages/manager/mine/calendar/calendar">
+      <view class="content" hover-class="none">
+        <text>签到月历</text>
+      </view>
+    </view>
+
+    <view bindtap="transferTo" class="cu-item arrow" data-url="/pages/manager/mine/attendanceChart/attendanceChart">
+      <view class="content" hover-class="none">
+        <text>考勤图表</text>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="cu-tabbar-height"></view> -->

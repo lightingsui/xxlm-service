@@ -1,19 +1,26 @@
+const app = getApp();
 Component({
   options: {
     styleIsolation: 'shared'
   },
   data: {
+    userId: null,
     inputSearch:'',
 
-    card:false,
+    card:true,
 
     //数组
     information: [],
   },
   lifetimes: {
     attached: function () {
-      
+
     },
+  },
+  created: function() {
+    this.setData({
+      userId: wx.getStorageSync("identity").id
+    })
   },
 
   methods: {
@@ -36,30 +43,31 @@ Component({
       })
     },
 
-    searchQuest: function () {
+    searchQuest: function() {
       let _this = this;
 
       wx.request({
-        url: 'https://api.lightingsui.com/blog/search-blog-by-filed',
+        url: 'https://api.lightingsui.com/assets/select-assign-user-assets-by-cond',
         data: {
-          searchFiled: this.data.inputSearch
+          searchFiled: this.data.inputSearch,
+          userId: _this.data.userId
         },
-        success: function (res) {
+        success: function(res) {
           let arrTemp = [];
           _this.setData({
             information: []
           });
 
-          if (res.data.data != null && res.data.data.length != 0) {
-
-            for (let i = 0; i < res.data.data.length; i++) {
+          if(res.data.data != null && res.data.data.length != 0) {
+            
+            for(let i = 0; i < res.data.data.length; i++) {
               let obj = res.data.data[i];
               arrTemp.push({
-                title: obj.bdTitle,
-                text: obj.bdContent,
-                link: obj.bdLink,
+                title: obj.acTitle,
+                text: obj.acContent,
+                link: obj.acLink == null || obj.acLink == '' ? "无" : obj.acLink,
                 author: obj.assetsName,
-                date: obj.bdDate
+                date: obj.acDate
               });
             }
 

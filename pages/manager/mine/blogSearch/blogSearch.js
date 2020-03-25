@@ -1,8 +1,10 @@
+const app = getApp();
 Component({
   options: {
     styleIsolation: 'shared'
   },
   data: {
+    userId: null,
     inputSearch:'',
 
     card:false,
@@ -10,10 +12,10 @@ Component({
     //数组
     information: [],
   },
-  lifetimes: {
-    attached: function () {
-      
-    },
+  created: function() {
+    this.setData({
+      userId: wx.getStorageSync("identity").id
+    });
   },
 
   methods: {
@@ -40,10 +42,12 @@ Component({
       let _this = this;
 
       wx.request({
-        url: 'https://api.lightingsui.com/blog/search-blog-by-filed',
+        url: 'https://api.lightingsui.com/blog/select-assign-user-blog-by-cond',
         data: {
+          userId: _this.data.userId,
           searchFiled: this.data.inputSearch
         },
+        header: app.globalData.header,
         success: function (res) {
           let arrTemp = [];
           _this.setData({

@@ -61,7 +61,7 @@ Component({
       wx.request({
         url: 'https://api.lightingsui.com/blog/get-all-category',
         success: function(res) {
-          if (res.data.data != null || res.data.data.length != 0) {
+          if (res.data.data != null && res.data.data.length != 0) {
             let arrTemp = [];
             let mutilArr = [];
             for (let i = 0; i < res.data.data.length; i++) {

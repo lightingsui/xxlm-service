@@ -82,7 +82,7 @@ Component({
       wx.request({
         url: 'https://api.lightingsui.com/assets/get-all-category',
         success: function (res) {
-          if (res.data.data != null || res.data.data.length != 0) {
+          if (res.data.data != null && res.data.data.length != 0) {
             _this.setData({
               tabArray: []
             })

@@ -53,7 +53,7 @@ Component({
             information: []
           });
 
-          if(res.data.data != null || res.data.data.length != 0) {
+          if (res.data.data != null && res.data.data.length != 0) {
             
             for(let i = 0; i < res.data.data.length; i++) {
               let obj = res.data.data[i];

@@ -1,7 +1,12 @@
 {
-  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#5677FC",
+  "backgroundColorBottom": "#ffffff",
   "navigationBarTitleText": "",
+  "navigationStyle": "default",
+
   "usingComponents": {
+    "tui-icon": "../../components/icon/icon",
+    "tui-button": "../../components/button/button",
     "tui-tips": "../../components/tips/tips"
   }
 }
