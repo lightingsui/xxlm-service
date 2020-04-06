@@ -24,11 +24,11 @@ Page({
   login: function(e) {
     if (this.data.loading == false) {
       // 表单验证
-      if (this.data.username == null || this.data.username == '') {
+      if (this.data.username == null || this.data.username.length == 0 || this.data.username == '') {
         this.showTips("用户名不能为空");
         return;
       }
-      if (this.data.password == null || this.data.password == '') {
+      if (this.data.password == null || this.data.password.length == 0 || this.data.password == '') {
         this.showTips("密码不能为空");
         return;
       }
@@ -50,7 +50,7 @@ Page({
         header: {
           "content-type": "application/x-www-form-urlencoded"
         },
-        success: function (res) {
+        success: function(res) {
           if (res.data != null && res.data.data != null) {
             // 存储JSSIONID
             console.log("++++++++")
@@ -76,7 +76,7 @@ Page({
             _this.showTips(res.data.responseMessage);
           }
         },
-        fail: function (errorMessage) {
+        fail: function(errorMessage) {
           _this.setData({
             loading: false,
             loginInMsg: "登录"
@@ -89,7 +89,7 @@ Page({
         }
       })
     }
-    
+
 
     // this.setData({
     //   modalName: 'Modal'
@@ -105,7 +105,7 @@ Page({
     // })
 
   },
-  showTips: function (msg) {
+  showTips: function(msg) {
     let options = {
       msg: msg,
       duration: 2000,

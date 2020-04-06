@@ -1,7 +1,7 @@
 .tui-scroll-top {
 		width: 76rpx;
 		height: 76rpx;
-		background: rgba(216, 8, 146, .6);
+		background: rgba(216, 216, 216, 0.6);
 		border: 1rpx solid #BCBCBC;
 		display: flex;
 		align-items: center;
@@ -9,9 +9,9 @@
 		border-radius: 50%;
 		position: fixed;
 		z-index: 999999;
-		/* -webkit-transform: translateZ(0);
-		transform: translateZ(0); */
-		/* -webkit-overflow-scroll: touch; */
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0); 
+		-webkit-overflow-scroll: touch;
 	}
 
 	.tui-scroll-top-img {
