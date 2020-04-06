@@ -16,3 +16,9 @@
 .infoText {
   color:#888
 }
+
+.none-cls {
+  margin-top: 400rpx;
+  color: #a1a1a1f6;
+  font-size: 18px;
+}

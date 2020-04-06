@@ -3,7 +3,7 @@
 	<view slot="content">签到记录</view>
 </cu-custom>
 
-<view class="padding bg-white">
+<view class="{{remark.length != 0 ? 'padding' : ''}} bg-white">
   <view class="cu-timeline" wx:for="{{remark}}">
     <view style="width: auto; text-align: left" class="cu-time">{{item.date}}</view>
     <view class="cu-item" wx:for="{{item.msg}}">
@@ -14,4 +14,7 @@
     </view>
   </view>
 </view>
+<view class="none-cls flex justify-center" wx-if='{{remark.length == 0}}'>
+    暂无签到记录
+  </view>
   <tui-scroll-top scrollTop="{{scrollTop}}"></tui-scroll-top>

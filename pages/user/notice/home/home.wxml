@@ -21,6 +21,10 @@
 <view class="flex flex-direction notice-publish" wx:if="{{!manager}}">
 </view>
 
+<view class="none-cls flex justify-center" wx-if='{{notice.length == 0}}'>
+  暂无公告
+</view>
+
 <view class="noticeBox">
   <view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{notice}}">
     

@@ -21,3 +21,9 @@
   background-color: none;
   font-weight: bold;
 }
+
+.none-cls {
+  margin-top: 50%;
+  color: #a1a1a1f6;
+  font-size: 18px;
+}

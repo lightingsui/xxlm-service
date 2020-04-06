@@ -38,6 +38,19 @@ Component({
   },
 
   methods: {
+    clipboard: function (e) {
+      let text = e.currentTarget.dataset.text;
+      console.log(text);
+      wx.setClipboardData({
+        data: text,
+        success(res) {
+          wx.getClipboardData({
+            success(res) {
+            }
+          })
+        }
+      })
+    },
     // 查询所有详细信息
     getAllDetails:function() {
       let _this = this;
