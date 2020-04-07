@@ -11,7 +11,7 @@
       <view class="cu-item" data-index="{{index}}" wx:for="{{item.lists}}" wx:key wx:for-index="sitem" data-sid="{{sitem}}" bindtap="member">
         
           <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});">
-            <view class="cu-tag badge cuIcon-{{item.gender}} bg-pink"></view>
+            <view class="cu-tag badge cuIcon-{{item.gender}} {{item.gender == 'female' ? 'bg-pink' : 'bg-blue'}}"></view>
           </view>
           <view class="content">
               <text class="text-abc">{{item.name}}</text>

@@ -22,3 +22,10 @@
   color: #a1a1a1f6;
   font-size: 18px;
 }
+
+.break-line {
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
+}

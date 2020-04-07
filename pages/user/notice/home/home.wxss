@@ -24,6 +24,6 @@
 
 .none-cls {
   margin-top: 50%;
-  color: #a1a1a1f6;
+  color: #b8b8b8;
   font-size: 18px;
 }

@@ -9,6 +9,8 @@ Component({
     tabValue: 0,
     scrollLeft:0,
 
+    userName: null,
+
     //tab
     tabArray: [],
 
@@ -17,15 +19,34 @@ Component({
     //数组
     information: [],
   },
+  lifetimes: {
+    attached: function () {
+      this.setData({
+        userId: wx.getStorageSync("identity").id,
+        userName: wx.getStorageSync("identity").name
+      });
+      this.getAllCategory();
+      this.loadData();
+    }
+  },
   created: function() {
-    this.setData({
-      userId: wx.getStorageSync("identity").id
-    });
-    this.getAllCategory();
-    this.loadData();
+    
   },
 
   methods: {
+    clipboard: function (e) {
+      let text = e.currentTarget.dataset.text;
+      console.log(text);
+      wx.setClipboardData({
+        data: text,
+        success(res) {
+          wx.getClipboardData({
+            success(res) {
+            }
+          })
+        }
+      })
+    },
     // 加载信息
     loadData: function() {
       let _this = this;

@@ -5,6 +5,7 @@ Component({
   },
   data: {
     userId: null,
+    userName: '',
     TabCur: 0,
     tabValue: 0,
     scrollLeft:0,
@@ -18,16 +19,37 @@ Component({
     information: [],
 
   },
+  lifetimes: {
+    attached: function () {
+      // 在组件实例进入页面节点树时执行
+      this.setData({
+        userId: wx.getStorageSync("identity").id,
+        userName: wx.getStorageSync("identity").name
+      })
+      console.log(this.data.userId)
+      console.log(this.data.userName)
+      this.getAllCategory();
+      this.loadData();
+    }
+  },
   created: function() {
-    this.setData({
-      userId: wx.getStorageSync("identity").id
-    })
-    console.log(this.data.id)
-    this.getAllCategory();
-    this.loadData();
+   
   },
 
   methods: {
+    clipboard: function (e) {
+      let text = e.currentTarget.dataset.text;
+      console.log(text);
+      wx.setClipboardData({
+        data: text,
+        success(res) {
+          wx.getClipboardData({
+            success(res) {
+            }
+          })
+        }
+      })
+    },
     // 加载信息
     loadData: function () {
       let _this = this;
