@@ -43,7 +43,7 @@ Component({
       let options = {
         msg: msg,
         duration: 2000,
-        type: "danger"
+        type: "translucent"
       };
       utils.toast(options);
     },

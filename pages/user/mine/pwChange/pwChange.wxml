@@ -2,7 +2,7 @@
   <view slot="backText">返回</view>
 	<view slot="content">修改密码</view>
 </cu-custom>
-<tui-tips position="center" id="tuit-tips-ctx"></tui-tips>
+<tui-tips position="bottom" id="tuit-tips-ctx"></tui-tips>
 <view class="cu-card dynamic {{isCard?'no-card':''}}">
   <view class="cu-item shadow">
 

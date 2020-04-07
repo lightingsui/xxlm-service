@@ -16,14 +16,33 @@ Page({
   },
   NavChange(e) {
     let obj = e.currentTarget.dataset.cur;
-    this.setData({
-      infoIsShow: false,
-      blogIsShow: false
-    })
+    
     if (obj == "information") {
       console.log("进入了")
+      if (this.data.blogIsShow) {
+        this.setData({
+          infoIsShow: false,
+          blogIsShow: true
+        })
+      } else {
+        this.setData({
+          infoIsShow: false,
+          blogIsShow: false
+        })
+      }
       this.deleteUnreadAssetsCount();
     } else if (obj == "blog") {
+      if (this.data.infoIsShow) {
+        this.setData({
+          infoIsShow: true,
+          blogIsShow: false
+        })
+      } else {
+        this.setData({
+          infoIsShow: false,
+          blogIsShow: false
+        })
+      }
       this.deleteUnreadBlogCount();
     }
 
@@ -34,11 +53,7 @@ Page({
   },
 
   onLoad: function(options) {
-
-
     this.getUnResolveCount();
-
-
   },
 
   // 清除未读资源数量

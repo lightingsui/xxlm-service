@@ -9,7 +9,7 @@ Component({
     CustomBar: app.globalData.CustomBar,
     hidden: true,
 
-    list: ['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    list: [],
 
     cityList : []
   },
@@ -64,17 +64,17 @@ Component({
                   "gender": obj[userObj][i].userSex == 0 ? 'female': 'male',
                   "name": obj[userObj][i].name
                 })
-                // let flag = false;
-                // for(let j = 0; j < letterArray.length; j++) {
-                //   if(letterArray[j] == userObj) {
-                //     flag = true;
-                //     break;
-                //   }
-                // }
+                let flag = false;
+                for(let j = 0; j < letterArray.length; j++) {
+                  if(letterArray[j] == userObj) {
+                    flag = true;
+                    break;
+                  }
+                }
 
-                // if(!flag) {
-                //   letterArray.push(userObj);
-                // }
+                if(!flag) {
+                  letterArray.push(userObj);
+                }
               }
               arrTemp.push({
                 "title": userObj,
@@ -83,7 +83,7 @@ Component({
             }
 
             _this.setData({
-              // list: letterArray,
+              list: letterArray,
               cityList: arrTemp
             })
           }
