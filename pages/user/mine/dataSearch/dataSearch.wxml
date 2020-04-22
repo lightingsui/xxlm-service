@@ -30,7 +30,7 @@
 
       <view class="cu-form-group align-center"> 
         <!-- <textarea maxlength="-1" bindinput="textInput" value="{{item.link}}" style="height:30rpx"></textarea> -->
-        <text class="padding-top-sm padding-bottom-sm" selectable="true">{{item.link}}</text>
+        <text class="padding-top-sm padding-bottom-sm break-line" bindtap="clipboard" data-text="{{item.link}}" selectable="true">{{item.link}}</text>
       </view>
 
       <view class="cu-form-group"> 

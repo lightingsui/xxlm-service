@@ -22,6 +22,19 @@ Component({
   },
 
   methods: {
+    clipboard: function (e) {
+      let text = e.currentTarget.dataset.text;
+      console.log(text);
+      wx.setClipboardData({
+        data: text,
+        success(res) {
+          wx.getClipboardData({
+            success(res) {
+            }
+          })
+        }
+      })
+    },
     // 加载信息
     loadData: function() {
       let _this = this;

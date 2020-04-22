@@ -126,9 +126,16 @@ Page({
     console.log("++++++++++++++")
     console.log(this.data.curDate)
     if (e.detail.value >= this.data.endDate) {
-      this.showTips("开始时间必须小于结束时间");
+      wx.showToast({
+        title: '开始时间必须小于结束时间',
+        icon: 'none'
+      })
+      return;
     } else if (this.datedifference(this.data.curDate, this.data.startDate) > 0) {
-      this.showTips("起始时间须大于结束时间");
+      wx.showToast({
+        title: '起始时间须大于结束时间',
+        icon: 'none'
+      })
       this.setData({
         startDate: this.data.curDate
       })
@@ -137,7 +144,10 @@ Page({
       let days = this.datedifference(this.data.startDate, this.data.endDate);
 
       if(days > 30) {
-        this.showTips("仅可显示30天内的签到信息");
+        wx.showToast({
+          title: '仅可显示30天内的签到信息',
+          icon: 'none'
+        })
         return;
       }
       //请求数据
@@ -152,7 +162,10 @@ Page({
       endDate: e.detail.value
     })
     if (e.detail.value <= this.data.startDate) {
-      this.showTips("开始时间必须小于结束时间");
+      wx.showToast({
+        title: '开始时间必须小于结束时间',
+        icon: 'none'
+      })
     } else if (this.datedifference(this.data.curDate, this.data.endDate) > 0) {
       wx.showToast({
         title: '截止日期不可以大于今天',
@@ -166,7 +179,10 @@ Page({
       let days = this.datedifference(this.data.startDate, this.data.endDate);
 
       if (days > 30) {
-        this.showTips("仅可显示30天内的签到信息");
+        wx.showToast({
+          title: '仅可显示30天内的签到信息',
+          icon: 'none'
+        })
         return;
       }
       //请求数据

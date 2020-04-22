@@ -3,14 +3,26 @@ const utils = require('../../components/utils/utils');
 let app = getApp()
 Page({
   data: {
+    animation: false,
+    modal3: true,
     loading: false,
     loginInMsg: "登录",
     disabled: false,
     username: "",
     password: "",
-    userStatus: 1
+    userStatus: 1,
+    button3: [{
+      text: "确定",
+      type: 'red'
+    }],
   },
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    setTimeout(() => {
+      this.setData({
+        animation: true
+      })
+    }, 600)
+  },
   passwordInput: function(e) {
     this.setData({
       password: e.detail.value
@@ -20,6 +32,15 @@ Page({
     this.setData({
       username: e.detail.value
     });
+  },
+  handleClick3(e) {
+    let index = e.detail.index;
+    if (index === 0) {
+      util.toast("你点击了确定按钮")
+    }
+    this.setData({
+      modal3: false
+    })
   },
   login: function(e) {
     if (this.data.loading == false) {

@@ -9,6 +9,6 @@
 
 .none-cls {
   margin-top: 50%;
-  color: #a1a1a1f6;
+  color: #cacaca;
   font-size: 18px;
 }

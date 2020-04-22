@@ -9,7 +9,7 @@
     <view class="cu-list menu-avatar">
       <view class="cu-item">
         <view class="cu-avatar round lg" style="background-image:url({{avatar}});">
-          <view class="cu-tag badge cuIcon-{{sex}} bg-pink"></view>
+          <view class="cu-tag badge cuIcon-{{sex}} {{sex == 'female' ? 'bg-pink' : 'bg-blue'}}"></view>
         </view>
         <view class="content flex-sub">
           <view>{{name}}</view>

@@ -38,7 +38,7 @@ Component({
             _this.setData({
               avatar: res.data.data.umHeadUrl,
               name: res.data.data.umName,
-              gender: res.data.data == '0' ? "female" : "male"
+              gender: res.data.data.umSex == '0' ? "female" : "male"
             })
           }
         },

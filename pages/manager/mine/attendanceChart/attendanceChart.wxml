@@ -26,4 +26,4 @@
 
 <view class="bg-white padding text-gray">注：默认显示近一周内工作时长图表，如果想要查看其它时间段内工作时长，请选择起始日期</view>
 
-<tui-tips position="center" id="tuit-tips-ctx"></tui-tips>
+<tui-tips position="bottom" id="tuit-tips-ctx"></tui-tips>

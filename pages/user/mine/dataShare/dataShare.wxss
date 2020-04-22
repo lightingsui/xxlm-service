@@ -16,3 +16,10 @@
 .infoText {
   color:#888
 }
+
+.break-line {
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
+}
