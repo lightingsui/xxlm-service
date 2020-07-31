@@ -23,10 +23,12 @@
       </view>
       <view class="padding text-left flex justify-center" style="margin-top:-50rpx">
         <view class="content" style="width: 100%">
-          <view class="desc">
-            <text class="text-content" selectable="true">
+          <view style="margin-top: 20px" class="desc">
+            <!-- <text class="text-content" selectable="true">
             {{items[0].dText}}
-            </text>
+            </text> -->
+
+            <rich-text class="text-content" nodes="{{items[0].dText}}"></rich-text>  
           </view>
         </view>
       </view>

@@ -34,7 +34,8 @@
       </view>
       <view class="content">
         <view class="desc">
-          <view class="text-content">{{item.text}}</view>
+        <rich-text nodes="{{item.text}}"></rich-text>  
+          <!-- <view class="text-content">{{item.text}}</view> -->
           <view class="margin-top-sm flex justify-between">
             <!-- <view>{{item.author}}</view> -->
             <view class="text-gray text-df">{{item.date}}</view>
