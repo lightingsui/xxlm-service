@@ -132,6 +132,8 @@ Component({
           wx.navigateBack({
             delta: 1
           })
+
+          
         }
       })
       

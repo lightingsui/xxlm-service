@@ -95,6 +95,8 @@ Component({
             wx.navigateBack({
               delta: 1
             })
+
+            app.globalData.isBackContinue = true;
             
           }
         } 
